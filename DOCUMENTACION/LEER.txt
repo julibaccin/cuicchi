@@ -1,0 +1,34 @@
+ALTA DE CLIENTES
+
+	Permite dar de alta nuevos clientes, que no estén cargados.
+	La baja se da modificando el nombre agregando "SIN USO" adelante del nombre del cliente
+	Campos (idCliente, nombreCliente, telefono, cuit, dni, email, domicilio, cbu)
+
+ALTA DE BANCOS
+
+	Permite dar de alta nuevas compañias, que no estén cargadas.
+	La baja se da modificando el nombre agregando "SIN USO" adelante del nombre de compañia
+	Campos (nombreBanco, idBanco)
+
+ALTA DE COMPAÑIAS
+	Permite dar de alta nuevas compañias, que no estén cargadas.
+	La baja se da modificando el nombre agregando "SIN USO" adelante del nombre de compañia
+	Campos (nombreCompania, idCompania)
+
+COMPROBANTES
+
+	ALTA- Permite dar de alta 5 tipos de comprobantes
+		-Efectivo: Campos (Fecha de ingreso, Cliente, Importe, Observación)
+		-Recibo: Campos (Fecha de ingreso, Cliente, Importe, Observación, Compañia)
+		-Cheques: Campos (Fecha de ingreso, Cliente, Importe, Observación, Numero, Fecha de Pago, Banco, Observacion de Baja)
+		-Transferencia: (Fecha de ingreso, Cliente, Importe, Observación, Numero, Fecha de Pago, Banco, Observacion de Baja)
+		-Comprobantes de Retencion: (Fecha de ingreso, Cliente, Importe, Observación, Numero, Fecha de Pago, Banco, Observacion de Baja)
+
+	BAJA- Permite dar de baja los 5 tipos mencionados arriba
+-		-Efectivo: La baja es una alta con el importe en negativo
+		-Recibo: La baja es una alta con el importe en negativo
+		-Cheques: Se da de baja el cheque que se dió de alta
+		-Transferencia: se da de baja la transferencia que se dio de alta
+		-Comprobantes de Retencion: Se da de baja el comprobante de retencion que se dio de alta
+
+	CONSULTA- Permite consultar todos las Altas y Bajas, con varios filtros especificos
