@@ -1,6 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Windows.Forms
 
-Public Class clsCompania
+Public Class ClsCompania
 
     Dim mCon As SqlConnection
     Public Sub New()
@@ -10,8 +12,9 @@ Public Class clsCompania
     Public Function CrearCompania(pNombreCompania, pCuitCompania) As Integer
 
         Try
-            Dim query As New SqlCommand("paCrearCompania", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paCrearCompania", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("nombreCompania", pNombreCompania)
             query.Parameters.AddWithValue("cuitCompania", pCuitCompania)
             mCon.Open()
@@ -30,8 +33,9 @@ Public Class clsCompania
     Public Function ModificarCompania(pIdCompania, pNombreCompania, pCuitCompania) As Integer
 
         Try
-            Dim query As New SqlCommand("paModificarCompania", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paModificarCompania", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("nombreCompania", pNombreCompania)
             query.Parameters.AddWithValue("cuitCompania", pCuitCompania)
             query.Parameters.AddWithValue("idCompania", pIdCompania)
@@ -51,8 +55,9 @@ Public Class clsCompania
 
         Dim Respuesta As New ArrayList
         Try
-            Dim query As New SqlCommand("paConsultarCompanias", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarCompanias", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()
@@ -73,8 +78,9 @@ Public Class clsCompania
     Public Function ConsultarCompanias(pTabla As DataGridView) As Int16
 
         Try
-            Dim query As New SqlCommand("paConsultarCompanias", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarCompanias", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()
             mCon.Open()

@@ -1,4 +1,6 @@
-﻿Module mdlFunciones
+﻿Imports System.Windows.Forms
+
+Module mdlFunciones
 
     Public Sub SoloNumero(ev As KeyPressEventArgs)
         If Char.IsNumber(ev.KeyChar) Or Char.IsControl(ev.KeyChar) Then
@@ -25,7 +27,7 @@
 
     Public Sub LlenarComboClientes(pCombo As ComboBox)
         pCombo.Items.Clear()
-        Dim ControladorClientes As New clsClientes
+        Dim ControladorClientes As New ClsClientes
         Dim RespuestaClientes As ArrayList = ControladorClientes.ConsultarClientesCombo()
         If (RespuestaClientes IsNot Nothing) Then
             For Each item As String In RespuestaClientes
@@ -69,7 +71,7 @@
 
     Public Sub LlenarComboBancos(pCombo As ComboBox)
         pCombo.Items.Clear()
-        Dim ControladorBancos As New clsBancos
+        Dim ControladorBancos As New ClsBancos
         Dim RespuestaBancos As ArrayList = ControladorBancos.ConsultarBancos()
         If (RespuestaBancos IsNot Nothing) Then
             For Each item As String In RespuestaBancos
@@ -83,7 +85,7 @@
         Dim index As Integer
         For index = 1 To Len(strCadena)
             If (Mid$(strCadena, index, 1) Like "#") Then
-                SoloNumero = SoloNumero & Mid$(strCadena, index, 1)
+                SoloNumero &= Mid$(strCadena, index, 1)
             End If
         Next
         If SoloNumero.Length = 0 Then
@@ -97,7 +99,7 @@
         Dim index As Integer
         For index = 1 To Len(strCadena)
             If Char.IsLetter(Mid$(strCadena, index, 1)) = True Or (Mid$(strCadena, index, 1) = " ") Then
-                SoloLetra = SoloLetra & Mid$(strCadena, index, 1)
+                SoloLetra &= Mid$(strCadena, index, 1)
             End If
         Next
         SoloLetra = SoloLetra.TrimEnd(" ")

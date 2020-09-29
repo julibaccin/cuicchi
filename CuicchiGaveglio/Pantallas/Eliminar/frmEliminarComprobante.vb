@@ -1,6 +1,8 @@
-﻿Public Class frmEliminarComprobante
+﻿Imports System.Windows.Forms
 
-    Dim Control As New clsComprobantes()
+Public Class frmEliminarComprobante
+
+    Dim Control As New ClsComprobantes()
     Private Sub Eliminar_Click(sender As Object, e As EventArgs) Handles btnEliminarAltaComprobante.Click
         If txtIdAlta.Text = "" Then
             MsgBox("Ingrese el idAlta que desea eliminar")

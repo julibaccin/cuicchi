@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿Imports System.Windows.Forms
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmAltaCompania
     Inherits System.Windows.Forms.Form
 
@@ -32,6 +34,7 @@ Partial Class frmAltaCompania
         Me.DCompanias = New System.Windows.Forms.DataGridView()
         Me.txtCuitCompania = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.checkNuevaCompania = New System.Windows.Forms.CheckBox()
         CType(Me.DCompanias, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -51,7 +54,7 @@ Partial Class frmAltaCompania
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(17, 75)
+        Me.Label2.Location = New System.Drawing.Point(18, 114)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(23, 20)
@@ -63,7 +66,7 @@ Partial Class frmAltaCompania
         Me.btnModificarCompania.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnModificarCompania.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnModificarCompania.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnModificarCompania.Location = New System.Drawing.Point(21, 201)
+        Me.btnModificarCompania.Location = New System.Drawing.Point(22, 240)
         Me.btnModificarCompania.Margin = New System.Windows.Forms.Padding(4)
         Me.btnModificarCompania.Name = "btnModificarCompania"
         Me.btnModificarCompania.Size = New System.Drawing.Size(114, 34)
@@ -76,7 +79,7 @@ Partial Class frmAltaCompania
         Me.btnCargarCompania.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnCargarCompania.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCargarCompania.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCargarCompania.Location = New System.Drawing.Point(161, 201)
+        Me.btnCargarCompania.Location = New System.Drawing.Point(162, 240)
         Me.btnCargarCompania.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargarCompania.Name = "btnCargarCompania"
         Me.btnCargarCompania.Size = New System.Drawing.Size(114, 34)
@@ -88,7 +91,7 @@ Partial Class frmAltaCompania
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(17, 110)
+        Me.Label1.Location = New System.Drawing.Point(18, 149)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(65, 20)
@@ -98,14 +101,14 @@ Partial Class frmAltaCompania
         'txtIdCompania
         '
         Me.txtIdCompania.Enabled = False
-        Me.txtIdCompania.Location = New System.Drawing.Point(104, 75)
+        Me.txtIdCompania.Location = New System.Drawing.Point(105, 114)
         Me.txtIdCompania.Name = "txtIdCompania"
         Me.txtIdCompania.Size = New System.Drawing.Size(68, 20)
         Me.txtIdCompania.TabIndex = 28
         '
         'txtNombreCompania
         '
-        Me.txtNombreCompania.Location = New System.Drawing.Point(104, 110)
+        Me.txtNombreCompania.Location = New System.Drawing.Point(105, 149)
         Me.txtNombreCompania.Name = "txtNombreCompania"
         Me.txtNombreCompania.Size = New System.Drawing.Size(171, 20)
         Me.txtNombreCompania.TabIndex = 29
@@ -116,14 +119,14 @@ Partial Class frmAltaCompania
         Me.DCompanias.AllowUserToDeleteRows = False
         Me.DCompanias.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DCompanias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DCompanias.Location = New System.Drawing.Point(310, 17)
+        Me.DCompanias.Location = New System.Drawing.Point(305, 17)
         Me.DCompanias.Name = "DCompanias"
-        Me.DCompanias.Size = New System.Drawing.Size(326, 218)
+        Me.DCompanias.Size = New System.Drawing.Size(326, 257)
         Me.DCompanias.TabIndex = 30
         '
         'txtCuitCompania
         '
-        Me.txtCuitCompania.Location = New System.Drawing.Point(104, 154)
+        Me.txtCuitCompania.Location = New System.Drawing.Point(105, 193)
         Me.txtCuitCompania.Name = "txtCuitCompania"
         Me.txtCuitCompania.Size = New System.Drawing.Size(171, 20)
         Me.txtCuitCompania.TabIndex = 32
@@ -132,19 +135,30 @@ Partial Class frmAltaCompania
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(17, 154)
+        Me.Label3.Location = New System.Drawing.Point(18, 193)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(46, 20)
         Me.Label3.TabIndex = 31
         Me.Label3.Text = "CUIT"
         '
+        'checkNuevaCompania
+        '
+        Me.checkNuevaCompania.AutoSize = True
+        Me.checkNuevaCompania.Location = New System.Drawing.Point(21, 79)
+        Me.checkNuevaCompania.Name = "checkNuevaCompania"
+        Me.checkNuevaCompania.Size = New System.Drawing.Size(122, 17)
+        Me.checkNuevaCompania.TabIndex = 33
+        Me.checkNuevaCompania.Text = "NUEVA COMPAÑIA"
+        Me.checkNuevaCompania.UseVisualStyleBackColor = True
+        '
         'frmAltaCompania
         '
         Me.AcceptButton = Me.btnCargarCompania
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(643, 248)
+        Me.ClientSize = New System.Drawing.Size(643, 284)
+        Me.Controls.Add(Me.checkNuevaCompania)
         Me.Controls.Add(Me.txtCuitCompania)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.DCompanias)
@@ -174,4 +188,5 @@ Partial Class frmAltaCompania
     Friend WithEvents DCompanias As DataGridView
     Friend WithEvents txtCuitCompania As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents checkNuevaCompania As CheckBox
 End Class

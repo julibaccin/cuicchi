@@ -42,10 +42,17 @@
         Else
             MsgBox("No tiene permiso para acceder a esta pantalla, ingrese con el usuario: eliminar")
         End If
-
     End Sub
 
     Private Sub ComprobantesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComprobantesToolStripMenuItem.Click
         frmConsultarComprobantes.ShowDialog()
+    End Sub
+
+    Private Sub PlanillasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlanillasToolStripMenuItem.Click
+        frmConsultarPlanillas.ShowDialog()
+    End Sub
+
+    Private Sub REPORTESToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles REPORTESToolStripMenuItem.Click
+        frmReportes.ShowDialog()
     End Sub
 End Class

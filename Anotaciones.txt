@@ -1,0 +1,24 @@
+-Cambiar el campo de las planillas iniciovigencia, finvigencia por fechaVencimiento
+-Agregar un numero a una planillaNueva
+-Usuario que genera la planilla
+-Agregar campo de estado ACEPTADO/PENDIENTE
+
+---------------------------------------------------------------------
+
+REPORTES
+
+-MOVIMIENTOS DE COMPROBANTES EN DETERMINADO PERIODO (Entre Fechas)
+Cuanto ingreso y cuanto egreso de cada cosa
++ TOTAL DE CADA COMPROBANTE
+
+-MOVIMIENTOS DE RECIBO, Separados por la Compañia
+Cuanto ingresó y cuento egresó por cada compañia, total por compañia.
+Entre Fechas()
+Total y TotalxCompañia.
+
+
+-Cuando cargo una compañia borrar el campo txtNombreCompañia
+-PANTALLAS Alta,Comprobantes,Planillas,Cuanta de Clientes,Eliminar,Reportes
+
+
+

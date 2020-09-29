@@ -8,7 +8,7 @@ EXEC paConsultarBancos
 
 --------------------------------------------------------------------------
 
-ALTER PROCEDURE paConsultarCompanias
+CREATE PROCEDURE paConsultarCompanias
 AS   
 	SELECT * FROM Companias
 GO  
@@ -16,7 +16,7 @@ EXEC paConsultarCompanias
 
 ---------------------------------------------------------------------------
 
-ALTER PROCEDURE paConsultarClientes
+CREATE PROCEDURE paConsultarClientes
 @nombreCliente varchar(60)= ''
 AS   
 	SELECT * FROM Clientes WHERE nombreCliente like '%' + @nombreCliente +'%'
@@ -42,7 +42,7 @@ GO
 EXEC paConsultarEstados
 --------------------------------------------------------------------------
 
-ALTER PROCEDURE paConsultarComprobantes_FiltrosGenerales
+CREATE PROCEDURE paConsultarComprobantes_FiltrosGenerales
  @NombreTipoComprobante VARCHAR(20), --Listo SIEMPRE
  @fechaDesde DATE, --Listo SIEMPRE
  @fechaHasta DATE, --Listo SIEMPRE
@@ -84,7 +84,7 @@ EXEC paConsultarComprobantes_FiltrosGenerales '','2020-08-29','2020-09-01','',''
 
 
 --CONSULTA LOS SALDOS DE LOS COMPROBANTES DESDE UNA FECHA
-ALTER PROCEDURE paConsultarSaldosPorComprobante
+CREATE PROCEDURE paConsultarSaldosPorComprobante
  @fIngreso DATE
 AS   
 
@@ -97,10 +97,10 @@ ORDER BY nombreTipoComprobante
 
 
 --CONSULTA LOS CHEQUES PROXIMOS A VENCER QUE ESTEN EN ESTADO 1
-ALTER PROCEDURE paConsultarChequesProximosAVencer
+CREATE PROCEDURE paConsultarChequesProximosAVencer
 AS   
-SELECT numero as Numero_Cheque, fPago as Fecha_de_Vencimiento from AltaComprobantes AC
+SELECT numero as Numero_Cheque, DATEADD(DAY,30,fPago) as Fecha_de_Vencimiento from AltaComprobantes AC
 INNER JOIN Estados ON AC.idEstado = Estados.idEstado
-where (idTipoComprobante = 3 and AC.idEstado = 1) AND fPago >= CONVERT(char(10),GETDATE(),102)
+where (idTipoComprobante = 3 and AC.idEstado = 1) AND DATEADD(DAY,30,fPago) >= GETDATE()
 
 EXEC paConsultarChequesProximosAVencer

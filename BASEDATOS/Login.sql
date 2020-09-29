@@ -1,7 +1,6 @@
 USE CuicchiGaveglio
 
------------------PROCEDIMIENTOS ALMACENADO--------------------------------
-ALTER PROCEDURE paLogin 
+CREATE PROCEDURE paLogin 
     @nombreUsuario varchar(25),
 	@pass varchar(25)  
 AS   
@@ -9,6 +8,4 @@ AS
 GO  
 EXEC paLogin 'eliminar','admin'
 
-
-select * from clientes
 

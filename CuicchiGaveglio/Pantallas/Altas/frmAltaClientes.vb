@@ -1,5 +1,7 @@
-﻿Public Class frmAltaClientes
-    Dim Control As New clsClientes()
+﻿Imports System.Windows.Forms
+
+Public Class frmAltaClientes
+    Dim Control As New ClsClientes()
 
     Private Sub FrmAltaClientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtNombreCliente.Focus()
@@ -92,7 +94,7 @@
     End Sub
     Public Sub setearValoresCombo()
 
-        Dim ControladorClientes As New clsClientes
+        Dim ControladorClientes As New ClsClientes
         ControladorClientes.ConsultarClientes(DClientes, "")
 
     End Sub

@@ -15,5 +15,6 @@ C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmAltaBancos.resources
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmAltaClientes.resources
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmAltaCompania.resources
-C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmConsultarSaldos.resources
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmEliminarComprobante.resources
+C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmConsultarPlanillas.resources
+C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmReportes.resources

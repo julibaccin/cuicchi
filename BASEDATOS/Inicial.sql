@@ -5,6 +5,7 @@ END
 
 ----------------------------------------------------------------------------------
 USE CuicchiGaveglio
+----------------------------------------------------------------------------------
 
 CREATE TABLE TipoComprobantes 
 (
@@ -39,10 +40,7 @@ idCompania SMALLINT IDENTITY(0,1) PRIMARY KEY,
 nombreCompania varchar(60) NOT NULL,
 cuitCompania varchar(11),
 )
-
 INSERT INTO Companias (nombreCompania,cuitCompania) VALUES ('N', '')
-
-
 
 ---------------------------------------------------------------------------------
 CREATE TABLE Bancos 
@@ -50,6 +48,7 @@ CREATE TABLE Bancos
 idBanco smallint PRIMARY KEY,
 nombreBanco varchar(60) NOT NULL
 )
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (0,'N')
 ---------------------------------------------------------------------------------
 
 CREATE TABLE Estados 
@@ -101,5 +100,43 @@ CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario)
 )
 
 
+--DROP TABLE Planillas
+--DROP TABLE PlanillasPolizas
+--DROP TABLE PolizasPagos
 
+--Planillas de Polizas por cliente
+CREATE TABLE Planillas 
+(
+idCliente SMALLINT NOT NULL,
+f DATE NOT NULL,
+idUsuario tinyint NOT NULL,
+PRIMARY KEY (idCliente,f),
+CONSTRAINT fk_ClientePlanilla FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
+)
 
+CREATE TABLE PlanillasPolizas
+(
+idCliente SMALLINT NOT NULL,
+f DATE NOT NULL,
+poliza SMALLINT,
+importe INT,
+detalle VARCHAR(50),
+ref VARCHAR(30),
+titular VARCHAR(50),
+fVencimiento DATE DEFAULT NULL,
+patente VARCHAR (10) DEFAULT NULL,
+PRIMARY KEY (idCliente,f, poliza),
+CONSTRAINT fk_idCliente_fechaPlanilla FOREIGN KEY (idCliente,f) REFERENCES Planillas (idCliente,f)
+)
+
+CREATE TABLE PolizasPagos (
+
+idCliente SMALLINT,
+f DATE,
+poliza SMALLINT,
+idAlta INT,
+importeAlta INT,
+PRIMARY KEY (idCliente,f, poliza,idAlta),
+CONSTRAINT fk_poliza_Pago FOREIGN KEY (idCliente,f,poliza) REFERENCES PlanillasPolizas (idCliente,f,poliza),
+CONSTRAINT fk_poliza_idAlta FOREIGN KEY (idAlta) REFERENCES AltaComprobantes (idAlta)
+)

@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
-
-Public Class clsEstados
+Imports System.Data
+Public Class ClsEstados
     Dim mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
@@ -9,8 +9,9 @@ Public Class clsEstados
 
         Dim Respuesta As New ArrayList
         Try
-            Dim query As New SqlCommand("paConsultarEstados", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarEstados", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()

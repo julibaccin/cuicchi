@@ -1,7 +1,12 @@
-﻿Public Class frmAltaCompania
+﻿Imports System.Windows.Forms
+
+Public Class frmAltaCompania
 
     Dim Control As New clsCompania
     Private Sub FrmAltaCompania_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtCuitCompania.Enabled = False
+        txtNombreCompania.Enabled = False
+        txtIdCompania.Enabled = False
         Control.ConsultarCompanias(DCompanias)
     End Sub
 
@@ -36,5 +41,17 @@
             MsgBox("Error")
         End If
 
+    End Sub
+
+    Private Sub CheckNuevaCompania_CheckedChanged(sender As Object, e As EventArgs) Handles checkNuevaCompania.CheckedChanged
+        If checkNuevaCompania.Checked = True Then
+            txtCuitCompania.Enabled = True
+            txtNombreCompania.Enabled = True
+            txtIdCompania.Enabled = True
+        Else
+            txtCuitCompania.Enabled = False
+            txtNombreCompania.Enabled = False
+            txtIdCompania.Enabled = False
+        End If
     End Sub
 End Class

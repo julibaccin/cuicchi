@@ -1,4 +1,6 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿Imports System.Windows.Forms
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmConsultarComprobantes
     Inherits System.Windows.Forms.Form
 
@@ -86,17 +88,50 @@ Partial Class frmConsultarComprobantes
         Me.txtImporteFiltro = New System.Windows.Forms.TextBox()
         Me.cmbCompaniaCambioEstado = New System.Windows.Forms.ComboBox()
         Me.Label22 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tabComprobantes = New System.Windows.Forms.TabPage()
+        Me.tabPlanillas = New System.Windows.Forms.TabPage()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.DDetalle = New System.Windows.Forms.DataGridView()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.btnVerReporte = New System.Windows.Forms.Button()
+        Me.btnCargarPolizas = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtImporteAlta = New System.Windows.Forms.TextBox()
+        Me.txtIdAlta = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.DAltasComprobantes = New System.Windows.Forms.DataGridView()
+        Me.btnCargarPagosPoliza = New System.Windows.Forms.Button()
+        Me.txtPoliza = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.cmbFechaPlanillas = New System.Windows.Forms.ComboBox()
+        Me.DFechaPlanillaNueva = New System.Windows.Forms.DateTimePicker()
+        Me.btnCargarPlanillaNueva = New System.Windows.Forms.Button()
+        Me.DPolizasPagos = New System.Windows.Forms.DataGridView()
+        Me.pagos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataPlanillasPolizas = New System.Windows.Forms.DataGridView()
+        Me.cmbClienteP = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
         CType(Me.DComprobantes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DComprobantesBaja, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.tabComprobantes.SuspendLayout()
+        Me.tabPlanillas.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.DDetalle, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.DAltasComprobantes, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DPolizasPagos, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataPlanillasPolizas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(8, 9)
+        Me.Label1.Location = New System.Drawing.Point(14, 12)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(61, 18)
         Me.Label1.TabIndex = 0
@@ -110,17 +145,17 @@ Partial Class frmConsultarComprobantes
         Me.DComprobantes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DComprobantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DComprobantes.GridColor = System.Drawing.SystemColors.ActiveCaption
-        Me.DComprobantes.Location = New System.Drawing.Point(12, 101)
+        Me.DComprobantes.Location = New System.Drawing.Point(17, 101)
         Me.DComprobantes.Name = "DComprobantes"
         Me.DComprobantes.ReadOnly = True
-        Me.DComprobantes.Size = New System.Drawing.Size(960, 335)
+        Me.DComprobantes.Size = New System.Drawing.Size(930, 315)
         Me.DComprobantes.TabIndex = 1
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(91, 11)
+        Me.Label5.Location = New System.Drawing.Point(292, 14)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(121, 16)
         Me.Label5.TabIndex = 6
@@ -131,7 +166,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbTipoComprobanteFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbTipoComprobanteFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbTipoComprobanteFiltro.FormattingEnabled = True
-        Me.cmbTipoComprobanteFiltro.Location = New System.Drawing.Point(221, 6)
+        Me.cmbTipoComprobanteFiltro.Location = New System.Drawing.Point(422, 9)
         Me.cmbTipoComprobanteFiltro.Name = "cmbTipoComprobanteFiltro"
         Me.cmbTipoComprobanteFiltro.Size = New System.Drawing.Size(193, 21)
         Me.cmbTipoComprobanteFiltro.TabIndex = 9
@@ -140,7 +175,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.btnBuscar.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnBuscar.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnBuscar.Location = New System.Drawing.Point(11, 36)
+        Me.btnBuscar.Location = New System.Drawing.Point(13, 39)
         Me.btnBuscar.Name = "btnBuscar"
         Me.btnBuscar.Size = New System.Drawing.Size(58, 42)
         Me.btnBuscar.TabIndex = 12
@@ -155,9 +190,9 @@ Partial Class frmConsultarComprobantes
         Me.DComprobantesBaja.AllowUserToResizeRows = False
         Me.DComprobantesBaja.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DComprobantesBaja.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DComprobantesBaja.Location = New System.Drawing.Point(11, 453)
+        Me.DComprobantesBaja.Location = New System.Drawing.Point(17, 422)
         Me.DComprobantesBaja.Name = "DComprobantesBaja"
-        Me.DComprobantesBaja.Size = New System.Drawing.Size(589, 178)
+        Me.DComprobantesBaja.Size = New System.Drawing.Size(930, 192)
         Me.DComprobantesBaja.TabIndex = 14
         '
         'btnCargaCompania
@@ -408,7 +443,7 @@ Partial Class frmConsultarComprobantes
         Me.GrupoComprobantes.Controls.Add(Me.Label11)
         Me.GrupoComprobantes.Controls.Add(Me.Label12)
         Me.GrupoComprobantes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrupoComprobantes.Location = New System.Drawing.Point(993, 12)
+        Me.GrupoComprobantes.Location = New System.Drawing.Point(970, 9)
         Me.GrupoComprobantes.Name = "GrupoComprobantes"
         Me.GrupoComprobantes.Size = New System.Drawing.Size(365, 424)
         Me.GrupoComprobantes.TabIndex = 48
@@ -434,9 +469,9 @@ Partial Class frmConsultarComprobantes
         Me.DPreviaACargar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DPreviaACargar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DPreviaACargar.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.CheckColumn, Me.ColTipoComprobante, Me.ColFechaIngreso, Me.ColClientes, Me.ColCompania, Me.ColImporte, Me.ColNumero, Me.ColFechaPago, Me.ColBanco, Me.ColObservaciones})
-        Me.DPreviaACargar.Location = New System.Drawing.Point(623, 453)
+        Me.DPreviaACargar.Location = New System.Drawing.Point(953, 455)
         Me.DPreviaACargar.Name = "DPreviaACargar"
-        Me.DPreviaACargar.Size = New System.Drawing.Size(735, 205)
+        Me.DPreviaACargar.Size = New System.Drawing.Size(365, 159)
         Me.DPreviaACargar.TabIndex = 49
         '
         'CheckColumn
@@ -524,7 +559,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.btnCargar.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnCargar.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCargar.Location = New System.Drawing.Point(623, 665)
+        Me.btnCargar.Location = New System.Drawing.Point(953, 626)
         Me.btnCargar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargar.Name = "btnCargar"
         Me.btnCargar.Size = New System.Drawing.Size(201, 29)
@@ -536,24 +571,24 @@ Partial Class frmConsultarComprobantes
         '
         Me.btnCambiarEstado.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnCambiarEstado.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCambiarEstado.Location = New System.Drawing.Point(17, 646)
+        Me.btnCambiarEstado.Location = New System.Drawing.Point(16, 627)
         Me.btnCambiarEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCambiarEstado.Name = "btnCambiarEstado"
-        Me.btnCambiarEstado.Size = New System.Drawing.Size(138, 49)
+        Me.btnCambiarEstado.Size = New System.Drawing.Size(145, 30)
         Me.btnCambiarEstado.TabIndex = 51
         Me.btnCambiarEstado.Text = "Cambiar Estado"
         Me.btnCambiarEstado.UseVisualStyleBackColor = False
         '
         'DFIngresoDesdeFiltro
         '
-        Me.DFIngresoDesdeFiltro.Location = New System.Drawing.Point(221, 32)
+        Me.DFIngresoDesdeFiltro.Location = New System.Drawing.Point(422, 35)
         Me.DFIngresoDesdeFiltro.Name = "DFIngresoDesdeFiltro"
         Me.DFIngresoDesdeFiltro.Size = New System.Drawing.Size(193, 20)
         Me.DFIngresoDesdeFiltro.TabIndex = 53
         '
         'DFIngresoHastaFiltro
         '
-        Me.DFIngresoHastaFiltro.Location = New System.Drawing.Point(221, 58)
+        Me.DFIngresoHastaFiltro.Location = New System.Drawing.Point(422, 61)
         Me.DFIngresoHastaFiltro.Name = "DFIngresoHastaFiltro"
         Me.DFIngresoHastaFiltro.Size = New System.Drawing.Size(193, 20)
         Me.DFIngresoHastaFiltro.TabIndex = 54
@@ -562,7 +597,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(91, 36)
+        Me.Label13.Location = New System.Drawing.Point(292, 39)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(116, 16)
         Me.Label13.TabIndex = 55
@@ -572,7 +607,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(91, 62)
+        Me.Label14.Location = New System.Drawing.Point(292, 65)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(111, 16)
         Me.Label14.TabIndex = 56
@@ -582,7 +617,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(162, 655)
+        Me.Label2.Location = New System.Drawing.Point(174, 626)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(67, 16)
         Me.Label2.TabIndex = 57
@@ -592,7 +627,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(374, 650)
+        Me.Label15.Location = New System.Drawing.Point(383, 626)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(51, 16)
         Me.Label15.TabIndex = 58
@@ -600,11 +635,11 @@ Partial Class frmConsultarComprobantes
         '
         'txtObsBajaCambioEstado
         '
-        Me.txtObsBajaCambioEstado.Location = New System.Drawing.Point(236, 651)
+        Me.txtObsBajaCambioEstado.Location = New System.Drawing.Point(248, 626)
         Me.txtObsBajaCambioEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.txtObsBajaCambioEstado.Multiline = True
         Me.txtObsBajaCambioEstado.Name = "txtObsBajaCambioEstado"
-        Me.txtObsBajaCambioEstado.Size = New System.Drawing.Size(128, 48)
+        Me.txtObsBajaCambioEstado.Size = New System.Drawing.Size(128, 30)
         Me.txtObsBajaCambioEstado.TabIndex = 59
         '
         'cmbEstadosCambioEstado
@@ -612,7 +647,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbEstadosCambioEstado.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbEstadosCambioEstado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbEstadosCambioEstado.FormattingEnabled = True
-        Me.cmbEstadosCambioEstado.Location = New System.Drawing.Point(451, 650)
+        Me.cmbEstadosCambioEstado.Location = New System.Drawing.Point(441, 626)
         Me.cmbEstadosCambioEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbEstadosCambioEstado.Name = "cmbEstadosCambioEstado"
         Me.cmbEstadosCambioEstado.Size = New System.Drawing.Size(130, 21)
@@ -622,7 +657,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(435, 60)
+        Me.Label16.Location = New System.Drawing.Point(626, 63)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(51, 16)
         Me.Label16.TabIndex = 65
@@ -632,7 +667,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label17.AutoSize = True
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.Location = New System.Drawing.Point(435, 34)
+        Me.Label17.Location = New System.Drawing.Point(626, 37)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(70, 16)
         Me.Label17.TabIndex = 64
@@ -643,7 +678,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbClienteFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbClienteFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbClienteFiltro.FormattingEnabled = True
-        Me.cmbClienteFiltro.Location = New System.Drawing.Point(516, 4)
+        Me.cmbClienteFiltro.Location = New System.Drawing.Point(699, 9)
         Me.cmbClienteFiltro.Name = "cmbClienteFiltro"
         Me.cmbClienteFiltro.Size = New System.Drawing.Size(193, 21)
         Me.cmbClienteFiltro.TabIndex = 61
@@ -652,7 +687,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(435, 9)
+        Me.Label18.Location = New System.Drawing.Point(626, 12)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(49, 16)
         Me.Label18.TabIndex = 60
@@ -663,7 +698,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbEstadoFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbEstadoFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbEstadoFiltro.FormattingEnabled = True
-        Me.cmbEstadoFiltro.Location = New System.Drawing.Point(516, 57)
+        Me.cmbEstadoFiltro.Location = New System.Drawing.Point(699, 62)
         Me.cmbEstadoFiltro.Name = "cmbEstadoFiltro"
         Me.cmbEstadoFiltro.Size = New System.Drawing.Size(193, 21)
         Me.cmbEstadoFiltro.TabIndex = 66
@@ -673,7 +708,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbCompaniaFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCompaniaFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbCompaniaFiltro.FormattingEnabled = True
-        Me.cmbCompaniaFiltro.Location = New System.Drawing.Point(516, 29)
+        Me.cmbCompaniaFiltro.Location = New System.Drawing.Point(699, 34)
         Me.cmbCompaniaFiltro.Name = "cmbCompaniaFiltro"
         Me.cmbCompaniaFiltro.Size = New System.Drawing.Size(193, 21)
         Me.cmbCompaniaFiltro.TabIndex = 67
@@ -682,7 +717,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(757, 60)
+        Me.Label19.Location = New System.Drawing.Point(77, 70)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(53, 16)
         Me.Label19.TabIndex = 71
@@ -692,7 +727,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(757, 34)
+        Me.Label20.Location = New System.Drawing.Point(77, 44)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(56, 16)
         Me.Label20.TabIndex = 70
@@ -703,7 +738,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbUsuarioFiltro.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbUsuarioFiltro.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbUsuarioFiltro.FormattingEnabled = True
-        Me.cmbUsuarioFiltro.Location = New System.Drawing.Point(838, 2)
+        Me.cmbUsuarioFiltro.Location = New System.Drawing.Point(158, 12)
         Me.cmbUsuarioFiltro.Name = "cmbUsuarioFiltro"
         Me.cmbUsuarioFiltro.Size = New System.Drawing.Size(128, 21)
         Me.cmbUsuarioFiltro.TabIndex = 69
@@ -712,7 +747,7 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(757, 7)
+        Me.Label21.Location = New System.Drawing.Point(77, 17)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(55, 16)
         Me.Label21.TabIndex = 68
@@ -720,7 +755,7 @@ Partial Class frmConsultarComprobantes
         '
         'txtNumeroFiltro
         '
-        Me.txtNumeroFiltro.Location = New System.Drawing.Point(838, 30)
+        Me.txtNumeroFiltro.Location = New System.Drawing.Point(158, 40)
         Me.txtNumeroFiltro.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNumeroFiltro.Name = "txtNumeroFiltro"
         Me.txtNumeroFiltro.Size = New System.Drawing.Size(128, 20)
@@ -728,7 +763,7 @@ Partial Class frmConsultarComprobantes
         '
         'txtImporteFiltro
         '
-        Me.txtImporteFiltro.Location = New System.Drawing.Point(838, 58)
+        Me.txtImporteFiltro.Location = New System.Drawing.Point(158, 68)
         Me.txtImporteFiltro.Margin = New System.Windows.Forms.Padding(4)
         Me.txtImporteFiltro.Name = "txtImporteFiltro"
         Me.txtImporteFiltro.Size = New System.Drawing.Size(128, 20)
@@ -739,7 +774,7 @@ Partial Class frmConsultarComprobantes
         Me.cmbCompaniaCambioEstado.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCompaniaCambioEstado.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbCompaniaCambioEstado.FormattingEnabled = True
-        Me.cmbCompaniaCambioEstado.Location = New System.Drawing.Point(451, 674)
+        Me.cmbCompaniaCambioEstado.Location = New System.Drawing.Point(669, 626)
         Me.cmbCompaniaCambioEstado.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbCompaniaCambioEstado.Name = "cmbCompaniaCambioEstado"
         Me.cmbCompaniaCambioEstado.Size = New System.Drawing.Size(130, 21)
@@ -749,11 +784,283 @@ Partial Class frmConsultarComprobantes
         '
         Me.Label22.AutoSize = True
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(374, 679)
+        Me.Label22.Location = New System.Drawing.Point(592, 626)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(70, 16)
         Me.Label22.TabIndex = 75
         Me.Label22.Text = "Compañia"
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tabComprobantes)
+        Me.TabControl1.Controls.Add(Me.tabPlanillas)
+        Me.TabControl1.Location = New System.Drawing.Point(12, 12)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(1346, 734)
+        Me.TabControl1.TabIndex = 76
+        '
+        'tabComprobantes
+        '
+        Me.tabComprobantes.Controls.Add(Me.btnCambiarEstado)
+        Me.tabComprobantes.Controls.Add(Me.btnBuscar)
+        Me.tabComprobantes.Controls.Add(Me.Label1)
+        Me.tabComprobantes.Controls.Add(Me.txtImporteFiltro)
+        Me.tabComprobantes.Controls.Add(Me.DComprobantes)
+        Me.tabComprobantes.Controls.Add(Me.cmbCompaniaCambioEstado)
+        Me.tabComprobantes.Controls.Add(Me.txtNumeroFiltro)
+        Me.tabComprobantes.Controls.Add(Me.Label22)
+        Me.tabComprobantes.Controls.Add(Me.Label19)
+        Me.tabComprobantes.Controls.Add(Me.Label2)
+        Me.tabComprobantes.Controls.Add(Me.Label20)
+        Me.tabComprobantes.Controls.Add(Me.Label15)
+        Me.tabComprobantes.Controls.Add(Me.cmbUsuarioFiltro)
+        Me.tabComprobantes.Controls.Add(Me.txtObsBajaCambioEstado)
+        Me.tabComprobantes.Controls.Add(Me.Label21)
+        Me.tabComprobantes.Controls.Add(Me.cmbEstadosCambioEstado)
+        Me.tabComprobantes.Controls.Add(Me.cmbCompaniaFiltro)
+        Me.tabComprobantes.Controls.Add(Me.btnCargar)
+        Me.tabComprobantes.Controls.Add(Me.cmbEstadoFiltro)
+        Me.tabComprobantes.Controls.Add(Me.Label16)
+        Me.tabComprobantes.Controls.Add(Me.DPreviaACargar)
+        Me.tabComprobantes.Controls.Add(Me.Label17)
+        Me.tabComprobantes.Controls.Add(Me.DComprobantesBaja)
+        Me.tabComprobantes.Controls.Add(Me.cmbClienteFiltro)
+        Me.tabComprobantes.Controls.Add(Me.GrupoComprobantes)
+        Me.tabComprobantes.Controls.Add(Me.Label18)
+        Me.tabComprobantes.Controls.Add(Me.Label5)
+        Me.tabComprobantes.Controls.Add(Me.cmbTipoComprobanteFiltro)
+        Me.tabComprobantes.Controls.Add(Me.Label14)
+        Me.tabComprobantes.Controls.Add(Me.DFIngresoDesdeFiltro)
+        Me.tabComprobantes.Controls.Add(Me.Label13)
+        Me.tabComprobantes.Controls.Add(Me.DFIngresoHastaFiltro)
+        Me.tabComprobantes.Location = New System.Drawing.Point(4, 22)
+        Me.tabComprobantes.Name = "tabComprobantes"
+        Me.tabComprobantes.Size = New System.Drawing.Size(1338, 708)
+        Me.tabComprobantes.TabIndex = 0
+        Me.tabComprobantes.Text = "COMPROBANTES"
+        Me.tabComprobantes.UseVisualStyleBackColor = True
+        '
+        'tabPlanillas
+        '
+        Me.tabPlanillas.Controls.Add(Me.GroupBox2)
+        Me.tabPlanillas.Controls.Add(Me.lblTotal)
+        Me.tabPlanillas.Controls.Add(Me.btnVerReporte)
+        Me.tabPlanillas.Controls.Add(Me.btnCargarPolizas)
+        Me.tabPlanillas.Controls.Add(Me.GroupBox1)
+        Me.tabPlanillas.Controls.Add(Me.Label24)
+        Me.tabPlanillas.Controls.Add(Me.cmbFechaPlanillas)
+        Me.tabPlanillas.Controls.Add(Me.DFechaPlanillaNueva)
+        Me.tabPlanillas.Controls.Add(Me.btnCargarPlanillaNueva)
+        Me.tabPlanillas.Controls.Add(Me.DPolizasPagos)
+        Me.tabPlanillas.Controls.Add(Me.DataPlanillasPolizas)
+        Me.tabPlanillas.Controls.Add(Me.cmbClienteP)
+        Me.tabPlanillas.Controls.Add(Me.Label25)
+        Me.tabPlanillas.Location = New System.Drawing.Point(4, 22)
+        Me.tabPlanillas.Name = "tabPlanillas"
+        Me.tabPlanillas.Size = New System.Drawing.Size(1338, 708)
+        Me.tabPlanillas.TabIndex = 1
+        Me.tabPlanillas.Text = "PLANILLAS"
+        Me.tabPlanillas.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.DDetalle)
+        Me.GroupBox2.Location = New System.Drawing.Point(857, 44)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(385, 447)
+        Me.GroupBox2.TabIndex = 39
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "SALDO"
+        '
+        'DDetalle
+        '
+        Me.DDetalle.AllowUserToAddRows = False
+        Me.DDetalle.AllowUserToDeleteRows = False
+        Me.DDetalle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DDetalle.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable
+        Me.DDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DDetalle.Location = New System.Drawing.Point(21, 37)
+        Me.DDetalle.Name = "DDetalle"
+        Me.DDetalle.Size = New System.Drawing.Size(358, 404)
+        Me.DDetalle.TabIndex = 24
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Location = New System.Drawing.Point(491, 246)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(0, 13)
+        Me.lblTotal.TabIndex = 38
+        '
+        'btnVerReporte
+        '
+        Me.btnVerReporte.Location = New System.Drawing.Point(376, 241)
+        Me.btnVerReporte.Name = "btnVerReporte"
+        Me.btnVerReporte.Size = New System.Drawing.Size(75, 23)
+        Me.btnVerReporte.TabIndex = 37
+        Me.btnVerReporte.Text = "Ver Reporte"
+        Me.btnVerReporte.UseVisualStyleBackColor = True
+        '
+        'btnCargarPolizas
+        '
+        Me.btnCargarPolizas.Location = New System.Drawing.Point(264, 241)
+        Me.btnCargarPolizas.Name = "btnCargarPolizas"
+        Me.btnCargarPolizas.Size = New System.Drawing.Size(106, 23)
+        Me.btnCargarPolizas.TabIndex = 36
+        Me.btnCargarPolizas.Text = "Cargar Polizas"
+        Me.btnCargarPolizas.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.txtImporteAlta)
+        Me.GroupBox1.Controls.Add(Me.txtIdAlta)
+        Me.GroupBox1.Controls.Add(Me.Label23)
+        Me.GroupBox1.Controls.Add(Me.DAltasComprobantes)
+        Me.GroupBox1.Controls.Add(Me.btnCargarPagosPoliza)
+        Me.GroupBox1.Controls.Add(Me.txtPoliza)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 324)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(681, 202)
+        Me.GroupBox1.TabIndex = 35
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Cargar pago de poliza"
+        '
+        'txtImporteAlta
+        '
+        Me.txtImporteAlta.Location = New System.Drawing.Point(241, 171)
+        Me.txtImporteAlta.Name = "txtImporteAlta"
+        Me.txtImporteAlta.Size = New System.Drawing.Size(82, 20)
+        Me.txtImporteAlta.TabIndex = 22
+        '
+        'txtIdAlta
+        '
+        Me.txtIdAlta.Enabled = False
+        Me.txtIdAlta.Location = New System.Drawing.Point(113, 171)
+        Me.txtIdAlta.Name = "txtIdAlta"
+        Me.txtIdAlta.Size = New System.Drawing.Size(33, 20)
+        Me.txtIdAlta.TabIndex = 21
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(152, 176)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(83, 13)
+        Me.Label23.TabIndex = 19
+        Me.Label23.Text = "Importe utilizado"
+        '
+        'DAltasComprobantes
+        '
+        Me.DAltasComprobantes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DAltasComprobantes.Location = New System.Drawing.Point(18, 39)
+        Me.DAltasComprobantes.Name = "DAltasComprobantes"
+        Me.DAltasComprobantes.Size = New System.Drawing.Size(663, 128)
+        Me.DAltasComprobantes.TabIndex = 15
+        '
+        'btnCargarPagosPoliza
+        '
+        Me.btnCargarPagosPoliza.Location = New System.Drawing.Point(18, 171)
+        Me.btnCargarPagosPoliza.Name = "btnCargarPagosPoliza"
+        Me.btnCargarPagosPoliza.Size = New System.Drawing.Size(69, 23)
+        Me.btnCargarPagosPoliza.TabIndex = 14
+        Me.btnCargarPagosPoliza.Text = "Cargar"
+        Me.btnCargarPagosPoliza.UseVisualStyleBackColor = True
+        '
+        'txtPoliza
+        '
+        Me.txtPoliza.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.txtPoliza.Enabled = False
+        Me.txtPoliza.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPoliza.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.txtPoliza.Location = New System.Drawing.Point(124, 7)
+        Me.txtPoliza.Name = "txtPoliza"
+        Me.txtPoliza.Size = New System.Drawing.Size(57, 26)
+        Me.txtPoliza.TabIndex = 19
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(9, 86)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(102, 13)
+        Me.Label24.TabIndex = 34
+        Me.Label24.Text = "FECHA PLANILLAS"
+        '
+        'cmbFechaPlanillas
+        '
+        Me.cmbFechaPlanillas.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbFechaPlanillas.FormattingEnabled = True
+        Me.cmbFechaPlanillas.Location = New System.Drawing.Point(12, 102)
+        Me.cmbFechaPlanillas.Name = "cmbFechaPlanillas"
+        Me.cmbFechaPlanillas.Size = New System.Drawing.Size(144, 28)
+        Me.cmbFechaPlanillas.TabIndex = 33
+        '
+        'DFechaPlanillaNueva
+        '
+        Me.DFechaPlanillaNueva.Location = New System.Drawing.Point(12, 187)
+        Me.DFechaPlanillaNueva.Name = "DFechaPlanillaNueva"
+        Me.DFechaPlanillaNueva.Size = New System.Drawing.Size(144, 20)
+        Me.DFechaPlanillaNueva.TabIndex = 32
+        '
+        'btnCargarPlanillaNueva
+        '
+        Me.btnCargarPlanillaNueva.Location = New System.Drawing.Point(12, 213)
+        Me.btnCargarPlanillaNueva.Name = "btnCargarPlanillaNueva"
+        Me.btnCargarPlanillaNueva.Size = New System.Drawing.Size(144, 22)
+        Me.btnCargarPlanillaNueva.TabIndex = 31
+        Me.btnCargarPlanillaNueva.Text = "Cargar Planilla Nueva"
+        Me.btnCargarPlanillaNueva.UseVisualStyleBackColor = True
+        '
+        'DPolizasPagos
+        '
+        Me.DPolizasPagos.AllowUserToDeleteRows = False
+        Me.DPolizasPagos.AllowUserToResizeColumns = False
+        Me.DPolizasPagos.AllowUserToResizeRows = False
+        Me.DPolizasPagos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DPolizasPagos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DPolizasPagos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pagos})
+        Me.DPolizasPagos.Location = New System.Drawing.Point(709, 363)
+        Me.DPolizasPagos.Name = "DPolizasPagos"
+        Me.DPolizasPagos.Size = New System.Drawing.Size(142, 128)
+        Me.DPolizasPagos.TabIndex = 30
+        '
+        'pagos
+        '
+        Me.pagos.Frozen = True
+        Me.pagos.HeaderText = "Pagos"
+        Me.pagos.Name = "pagos"
+        Me.pagos.ReadOnly = True
+        Me.pagos.Width = 62
+        '
+        'DataPlanillasPolizas
+        '
+        Me.DataPlanillasPolizas.AllowUserToDeleteRows = False
+        Me.DataPlanillasPolizas.AllowUserToResizeColumns = False
+        Me.DataPlanillasPolizas.AllowUserToResizeRows = False
+        Me.DataPlanillasPolizas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataPlanillasPolizas.Location = New System.Drawing.Point(176, 44)
+        Me.DataPlanillasPolizas.Name = "DataPlanillasPolizas"
+        Me.DataPlanillasPolizas.Size = New System.Drawing.Size(675, 191)
+        Me.DataPlanillasPolizas.TabIndex = 29
+        '
+        'cmbClienteP
+        '
+        Me.cmbClienteP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbClienteP.FormattingEnabled = True
+        Me.cmbClienteP.Location = New System.Drawing.Point(12, 44)
+        Me.cmbClienteP.Name = "cmbClienteP"
+        Me.cmbClienteP.Size = New System.Drawing.Size(144, 28)
+        Me.cmbClienteP.TabIndex = 28
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(9, 26)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(52, 13)
+        Me.Label25.TabIndex = 27
+        Me.Label25.Text = "CLIENTE"
         '
         'frmConsultarComprobantes
         '
@@ -761,38 +1068,7 @@ Partial Class frmConsultarComprobantes
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1370, 749)
-        Me.Controls.Add(Me.cmbCompaniaCambioEstado)
-        Me.Controls.Add(Me.Label22)
-        Me.Controls.Add(Me.txtImporteFiltro)
-        Me.Controls.Add(Me.txtNumeroFiltro)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.Label20)
-        Me.Controls.Add(Me.cmbUsuarioFiltro)
-        Me.Controls.Add(Me.Label21)
-        Me.Controls.Add(Me.cmbCompaniaFiltro)
-        Me.Controls.Add(Me.cmbEstadoFiltro)
-        Me.Controls.Add(Me.Label16)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.cmbClienteFiltro)
-        Me.Controls.Add(Me.Label18)
-        Me.Controls.Add(Me.cmbEstadosCambioEstado)
-        Me.Controls.Add(Me.txtObsBajaCambioEstado)
-        Me.Controls.Add(Me.Label15)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.DFIngresoHastaFiltro)
-        Me.Controls.Add(Me.DFIngresoDesdeFiltro)
-        Me.Controls.Add(Me.btnCambiarEstado)
-        Me.Controls.Add(Me.btnCargar)
-        Me.Controls.Add(Me.DPreviaACargar)
-        Me.Controls.Add(Me.GrupoComprobantes)
-        Me.Controls.Add(Me.DComprobantesBaja)
-        Me.Controls.Add(Me.btnBuscar)
-        Me.Controls.Add(Me.cmbTipoComprobanteFiltro)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.DComprobantes)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.TabControl1)
         Me.Name = "frmConsultarComprobantes"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Consultar Comprobantes"
@@ -802,8 +1078,19 @@ Partial Class frmConsultarComprobantes
         Me.GrupoComprobantes.ResumeLayout(False)
         Me.GrupoComprobantes.PerformLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.tabComprobantes.ResumeLayout(False)
+        Me.tabComprobantes.PerformLayout()
+        Me.tabPlanillas.ResumeLayout(False)
+        Me.tabPlanillas.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        CType(Me.DDetalle, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.DAltasComprobantes, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DPolizasPagos, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataPlanillasPolizas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -871,4 +1158,28 @@ Partial Class frmConsultarComprobantes
     Friend WithEvents txtImporteFiltro As TextBox
     Friend WithEvents cmbCompaniaCambioEstado As ComboBox
     Friend WithEvents Label22 As Label
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabComprobantes As TabPage
+    Friend WithEvents tabPlanillas As TabPage
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents DDetalle As DataGridView
+    Friend WithEvents lblTotal As Label
+    Friend WithEvents btnVerReporte As Button
+    Friend WithEvents btnCargarPolizas As Button
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents txtImporteAlta As TextBox
+    Friend WithEvents txtIdAlta As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents DAltasComprobantes As DataGridView
+    Friend WithEvents btnCargarPagosPoliza As Button
+    Friend WithEvents txtPoliza As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents cmbFechaPlanillas As ComboBox
+    Friend WithEvents DFechaPlanillaNueva As DateTimePicker
+    Friend WithEvents btnCargarPlanillaNueva As Button
+    Friend WithEvents DPolizasPagos As DataGridView
+    Friend WithEvents pagos As DataGridViewTextBoxColumn
+    Friend WithEvents DataPlanillasPolizas As DataGridView
+    Friend WithEvents cmbClienteP As ComboBox
+    Friend WithEvents Label25 As Label
 End Class

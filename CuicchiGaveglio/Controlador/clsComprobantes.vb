@@ -1,6 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Windows.Forms
 
-Public Class clsComprobantes
+Public Class ClsComprobantes
 
     Dim mCon As SqlConnection
     Public Sub New()
@@ -10,8 +12,9 @@ Public Class clsComprobantes
     Public Function CrearMovimiento(pAlta As ModeloAltaComprobantes) As Integer
 
         Try
-            Dim query As New SqlCommand("paCrearAltaComprobante", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paCrearAltaComprobante", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             With query.Parameters
                 .AddWithValue("idTipoComprobante", pAlta.idTipoComprobante)
                 .AddWithValue("fIngreso", pAlta.FIngreso)
@@ -42,8 +45,9 @@ Public Class clsComprobantes
     Public Function CambiarEstado(pIdAlta As Integer, pObsBaja As String, pIdEstado As Integer, pIdCompania As Integer) As Integer
 
         Try
-            Dim query As New SqlCommand("paModificarEstadoAltaComprobante", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paModificarEstadoAltaComprobante", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             With query.Parameters
                 .AddWithValue("idAlta", pIdAlta)
                 .AddWithValue("idEstado", pIdEstado)
@@ -67,8 +71,9 @@ Public Class clsComprobantes
     Public Function EliminarMovimiento(pIdAlta As Integer) As Integer
 
         Try
-            Dim query As New SqlCommand("paEliminarAltaComprobante", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paEliminarAltaComprobante", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             With query.Parameters
                 .AddWithValue("idAlta", pIdAlta)
             End With
@@ -96,8 +101,9 @@ Public Class clsComprobantes
                                               ) As Int16
 
         Try
-            Dim query As New SqlCommand("paConsultarComprobantes_FiltrosGenerales", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarComprobantes_FiltrosGenerales", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("NombreTipoComprobante", pTipoComprobante)
             query.Parameters.AddWithValue("fechaDesde", pFechaDesde)
             query.Parameters.AddWithValue("fechaHasta", pFechaHasta)

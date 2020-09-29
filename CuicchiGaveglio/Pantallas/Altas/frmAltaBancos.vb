@@ -1,5 +1,7 @@
-﻿Public Class frmAltaBancos
-    Dim Control As New clsBancos()
+﻿Imports System.Windows.Forms
+
+Public Class frmAltaBancos
+    Dim Control As New ClsBancos()
     Private Sub limpiarCampos()
         txtNombreBanco.Text = ""
         txtNumeroBanco.Text = ""

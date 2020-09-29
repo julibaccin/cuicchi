@@ -1,6 +1,8 @@
-﻿Imports System.Data.SqlClient
+﻿Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Windows.Forms
 
-Public Class clsClientes
+Public Class ClsClientes
 
     Dim mCon As SqlConnection
     Public Sub New()
@@ -11,14 +13,17 @@ Public Class clsClientes
 
         Try
             Dim query As New SqlCommand("paCrearCliente", mCon)
-            query.CommandType = CommandType.StoredProcedure
-            query.Parameters.AddWithValue("nombreCliente", pCliente.nombreCliente)
-            query.Parameters.AddWithValue("dni", pCliente.dni)
-            query.Parameters.AddWithValue("telefono", pCliente.telefono)
-            query.Parameters.AddWithValue("cuit", pCliente.cuit)
-            query.Parameters.AddWithValue("domicilio", pCliente.domicilio)
-            query.Parameters.AddWithValue("cbu", pCliente.cbu)
-            query.Parameters.AddWithValue("email", pCliente.email)
+            With query
+                .CommandType = CommandType.StoredProcedure
+                .Parameters.AddWithValue("nombreCliente", pCliente.nombreCliente)
+                .Parameters.AddWithValue("dni", pCliente.dni)
+                .Parameters.AddWithValue("telefono", pCliente.telefono)
+                .Parameters.AddWithValue("cuit", pCliente.cuit)
+                .Parameters.AddWithValue("domicilio", pCliente.domicilio)
+                .Parameters.AddWithValue("cbu", pCliente.cbu)
+                .Parameters.AddWithValue("email", pCliente.email)
+            End With
+
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             data.Read()
@@ -34,8 +39,9 @@ Public Class clsClientes
     Public Function ModificarCliente(pCliente As ModeloCliente) As Integer
 
         Try
-            Dim query As New SqlCommand("paModificarCliente", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paModificarCliente", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("idCliente", pCliente.idCliente)
             query.Parameters.AddWithValue("nombreCliente", pCliente.nombreCliente)
             query.Parameters.AddWithValue("dni", pCliente.dni)
@@ -59,8 +65,9 @@ Public Class clsClientes
     Public Function ConsultarClientes(pTabla As DataGridView, pFiltro As String) As Int16
 
         Try
-            Dim query As New SqlCommand("paConsultarClientes", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarClientes", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("nombreCliente", pFiltro)
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()
@@ -81,8 +88,9 @@ Public Class clsClientes
     Public Function ConsultarClientesCombo() As ArrayList
         Dim Respuesta As New ArrayList
         Try
-            Dim query As New SqlCommand("paConsultarClientes", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarClientes", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()

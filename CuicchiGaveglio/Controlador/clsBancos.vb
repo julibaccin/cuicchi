@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
-Public Class clsBancos
+Imports System.Data
+Public Class ClsBancos
 
     Dim mCon As SqlConnection
     Public Sub New()
@@ -8,8 +9,9 @@ Public Class clsBancos
 
     Public Function CrearBanco(pIdBanco As Int16, pNombreBanco As String) As Integer
         Try
-            Dim query As New SqlCommand("paCrearBanco", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paCrearBanco", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("idBanco", pIdBanco)
             query.Parameters.AddWithValue("nombreBanco", pNombreBanco)
             mCon.Open()
@@ -29,8 +31,9 @@ Public Class clsBancos
 
         Dim Respuesta As New ArrayList
         Try
-            Dim query As New SqlCommand("paConsultarBancos", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarBancos", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()
@@ -50,8 +53,9 @@ Public Class clsBancos
 
         Try
             Dim Respuesta As New Object
-            Dim query As New SqlCommand("paModificarBanco", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paModificarBanco", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("idBanco", pIdBanco)
             query.Parameters.AddWithValue("nombreBanco", pNombreBanco)
             mCon.Open()

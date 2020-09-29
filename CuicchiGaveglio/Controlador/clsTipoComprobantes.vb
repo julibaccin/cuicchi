@@ -1,6 +1,6 @@
 ﻿Imports System.Data.SqlClient
-
-Public Class clsTipoComprobantes
+Imports System.Data
+Public Class ClsTipoComprobantes
     Dim mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
@@ -10,8 +10,9 @@ Public Class clsTipoComprobantes
 
         Dim Respuesta As New ArrayList
         Try
-            Dim query As New SqlCommand("paConsultarTipoComprobantes", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paConsultarTipoComprobantes", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()

@@ -26,7 +26,7 @@ AS
 GO  
 
 ------------------------------------------------------------COMPAÑIA----------------------------------------
-ALTER PROCEDURE paCrearCompania
+CREATE PROCEDURE paCrearCompania
     @nombreCompania varchar(60),
 	@cuitCompania varchar(11)
 AS   
@@ -52,7 +52,7 @@ GO
 
 ------------------------------------------------------------CLIENTES----------------------------------------
 
-ALTER PROCEDURE paCrearCliente
+CREATE PROCEDURE paCrearCliente
     @nombreCliente varchar(60),
 	@dni varchar(8),
 	@telefono varchar(20),
@@ -74,7 +74,7 @@ AS
 		END
 GO  
 
-ALTER PROCEDURE paModificarCliente
+CREATE PROCEDURE paModificarCliente
     @idCliente smallint,
 	@nombreCliente varchar(60),
 	@dni varchar(8),
@@ -88,7 +88,7 @@ AS
 	UPDATE Clientes SET nombreCliente= @nombreCliente,dni = @dni, telefono = @telefono, cuit = @cuit, domicilio = @domicilio, cbu = @CBU, email = @email WHERE idCliente = @idCliente
 GO  
 ------------------------------------------------------------COMPROBANTES----------------------------------------
-ALTER PROCEDURE paCrearAltaComprobante
+CREATE PROCEDURE paCrearAltaComprobante
 	@idTipoComprobante TINYINT,
 	@fIngreso DATE,
 	@idCliente SMALLINT,
@@ -111,7 +111,7 @@ AS
 	DELETE AltaComprobantes WHERE idAlta = @idAlta
 GO  
 
-ALTER PROCEDURE paModificarEstadoAltaComprobante
+CREATE PROCEDURE paModificarEstadoAltaComprobante
     @idAlta int,
 	@idEstado tinyint,
 	@obsBaja varchar(60),
@@ -119,3 +119,108 @@ ALTER PROCEDURE paModificarEstadoAltaComprobante
 AS   
 	UPDATE AltaComprobantes SET idEstado=@idEstado, obsBaja = @obsBaja, idCompania = @idCompania WHERE idAlta = @idAlta
 GO  
+
+
+--Planillas------------------------------------------------------------------------------------------------
+
+--Crea una Planilla
+CREATE PROCEDURE paCrearPlanilla
+    @idCliente SMALLINT,
+	@f DATE,
+	@idUsuario tinyint
+AS   
+	INSERT INTO Planillas (idCliente,f,idUsuario) VALUES (@idCliente,@f,@idUsuario)
+GO  
+
+--Llenar una PlanillaPoliza
+CREATE PROCEDURE paAgregarPolizaAPlanilla
+    @idCliente SMALLINT,
+	@f DATE,
+	@poliza SMALLINT,
+	@importe INT,
+	@detalle VARCHAR(50),
+	@ref VARCHAR(30),
+	@titular VARCHAR(50),
+	@fVencimiento DATE,
+	@patente VARCHAR(10)
+AS   
+	INSERT INTO PlanillasPolizas (idCliente,f,poliza,importe,detalle,ref,titular,fVencimiento,patente) 
+	VALUES (@idCliente,@f,@poliza,@importe,@detalle,@ref,@titular,@fVencimiento,@patente)
+GO  
+
+--Llenar una PolizaPagos
+CREATE PROCEDURE paAgregarPagoAPoliza
+    @idCliente SMALLINT,
+	@f DATE,
+	@poliza SMALLINT,
+	@idAlta INT,
+	@importeAlta INT
+AS   
+	INSERT INTO PolizasPagos(idCliente,f,poliza,idAlta,importeAlta)
+	VALUES (@idCliente,@f,@poliza,@idAlta,@importeAlta)
+GO  
+
+--Devuelve todas las planillas creadas para un cliente
+CREATE PROCEDURE paDevolverPlanillasCliente
+    @idCliente SMALLINT
+AS   
+	SELECT f FROM Planillas
+	 WHERE idCliente = @idCliente
+GO
+
+
+--Devuelve Todas las polizas de una planilla
+CREATE PROCEDURE paDevolverPolizasDePlanilla
+    @idCliente SMALLINT,
+	@f DATE
+AS   
+	SELECT poliza,importe,detalle,ref,titular,fVencimiento,patente FROM PlanillasPolizas WHERE idCliente = @idcliente AND f = @f
+GO
+
+
+--Devuelve Todos los pagos de una poliza
+CREATE PROCEDURE paDevolverPagosDePoliza
+    @idCliente SMALLINT,
+	@f DATE,
+	@poliza SMALLINT
+AS   
+	SELECT idAlta, importeAlta  FROM PolizasPagos WHERE idCliente = @idcliente AND f = @f AND poliza = @poliza
+GO
+
+
+--DEVUELVE SI EL idALTA TIENE PLATA TODAVÍA
+CREATE PROCEDURE paDevolverSobraComprobantes
+    @idCliente SMALLINT,
+	@f DATE,
+	@poliza SMALLINT
+AS   
+	SELECT PP.idAlta,SUM(importe)/COUNT(importe) as IMPORTE,SUM(importeAlta) as GASTADO FROM PolizasPagos PP
+	INNER JOIN AltaComprobantes AC ON PP.idAlta = AC.idAlta
+	WHERE PP.idCliente = 3
+	GROUP BY PP.idAlta
+GO
+
+--DEVUELVE SI EL CLIENTE TIENE SALDO A FAVOR O DEUDAS POR PLANILLA
+
+ALTER PROCEDURE paDevolverCuentaCliente
+    @idCliente SMALLINT
+AS   
+
+SELECT f, SUM(importe) as IMPORTE_PLANILLA,IsNull(
+(SELECT SUM(importeAlta) FROM PolizasPagos WHERE idCliente = @idCliente GROUP BY f),0) as IMPORTE_ABONADO
+FROM PlanillasPolizas WHERE idCliente = @idCliente GROUP BY f
+
+GO
+
+
+
+
+
+--SELECT Sum(importeAlta), SUM(DISTINCT  importe)
+--FROM PlanillasPolizas PP
+--INNER JOIN PolizasPagos PPA ON  PP.idCliente = PPA.idCliente AND PP.f = PPA.f AND PP.poliza = PPA.poliza
+--WHERE PP.idCliente = 2
+--GROUP BY PP.f
+
+
+

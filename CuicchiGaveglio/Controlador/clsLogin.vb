@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
 
-Public Class clsLogin
+Public Class ClsLogin
 
     Dim mCon As SqlConnection
     Public Sub New()
@@ -10,8 +11,9 @@ Public Class clsLogin
     Public Function Login(pUser, pPass) As Integer
 
         Try
-            Dim query As New SqlCommand("paLogin", mCon)
-            query.CommandType = CommandType.StoredProcedure
+            Dim query As New SqlCommand("paLogin", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
             query.Parameters.AddWithValue("nombreUsuario", pUser)
             query.Parameters.AddWithValue("pass", pPass)
             mCon.Open()
