@@ -24,33 +24,37 @@ Partial Class frmPrincipal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmPrincipal))
         Me.lblComun = New System.Windows.Forms.Label()
         Me.lblFecha = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.lblUsuario = New System.Windows.Forms.Label()
-        Me.MenuPrincipal = New System.Windows.Forms.MenuStrip()
         Me.SistemaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAbrirAyuda = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCerrarSesion = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AltaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAltaClientes = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAltaBancos = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompañiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComprobantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.PlanillasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EliiminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AltaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.REPORTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EliiminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DSaldosPorComprobante = New System.Windows.Forms.DataGridView()
         Me.lblAdvertencias = New System.Windows.Forms.Label()
         Me.DChequesProximosAVencer = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.MenuPrincipal.SuspendLayout()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BottomToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+        Me.TopToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+        Me.RightToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+        Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
+        Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
+        Me.MenuPrincipal = New System.Windows.Forms.MenuStrip()
         CType(Me.DSaldosPorComprobante, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DChequesProximosAVencer, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblComun
@@ -59,7 +63,7 @@ Partial Class frmPrincipal
         Me.lblComun.BackColor = System.Drawing.Color.Transparent
         Me.lblComun.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblComun.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblComun.Location = New System.Drawing.Point(630, 366)
+        Me.lblComun.Location = New System.Drawing.Point(67, 52)
         Me.lblComun.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblComun.Name = "lblComun"
         Me.lblComun.Size = New System.Drawing.Size(70, 18)
@@ -72,26 +76,12 @@ Partial Class frmPrincipal
         Me.lblFecha.BackColor = System.Drawing.Color.Transparent
         Me.lblFecha.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFecha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblFecha.Location = New System.Drawing.Point(708, 393)
+        Me.lblFecha.Location = New System.Drawing.Point(145, 80)
         Me.lblFecha.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFecha.Name = "lblFecha"
         Me.lblFecha.Size = New System.Drawing.Size(56, 18)
         Me.lblFecha.TabIndex = 5
         Me.lblFecha.Text = "Label1"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.White
-        Me.PictureBox1.ErrorImage = Nothing
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.InitialImage = Nothing
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 31)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(227, 227)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 7
-        Me.PictureBox1.TabStop = False
         '
         'lblUsuario
         '
@@ -99,24 +89,12 @@ Partial Class frmPrincipal
         Me.lblUsuario.BackColor = System.Drawing.Color.Transparent
         Me.lblUsuario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblUsuario.Location = New System.Drawing.Point(708, 366)
+        Me.lblUsuario.Location = New System.Drawing.Point(145, 52)
         Me.lblUsuario.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUsuario.Name = "lblUsuario"
         Me.lblUsuario.Size = New System.Drawing.Size(64, 18)
         Me.lblUsuario.TabIndex = 9
         Me.lblUsuario.Text = "Nombre"
-        '
-        'MenuPrincipal
-        '
-        Me.MenuPrincipal.BackColor = System.Drawing.Color.White
-        Me.MenuPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.AltaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.PlanillasToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.EliiminarToolStripMenuItem})
-        Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
-        Me.MenuPrincipal.Name = "MenuPrincipal"
-        Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
-        Me.MenuPrincipal.Size = New System.Drawing.Size(834, 31)
-        Me.MenuPrincipal.TabIndex = 11
-        Me.MenuPrincipal.Text = "MenuStrip1"
         '
         'SistemaToolStripMenuItem
         '
@@ -128,13 +106,13 @@ Partial Class frmPrincipal
         'btnAbrirAyuda
         '
         Me.btnAbrirAyuda.Name = "btnAbrirAyuda"
-        Me.btnAbrirAyuda.Size = New System.Drawing.Size(174, 26)
+        Me.btnAbrirAyuda.Size = New System.Drawing.Size(143, 22)
         Me.btnAbrirAyuda.Text = "Ayuda"
         '
         'btnCerrarSesion
         '
         Me.btnCerrarSesion.Name = "btnCerrarSesion"
-        Me.btnCerrarSesion.Size = New System.Drawing.Size(174, 26)
+        Me.btnCerrarSesion.Size = New System.Drawing.Size(143, 22)
         Me.btnCerrarSesion.Text = "Cerrar Sesión"
         '
         'AltaToolStripMenuItem
@@ -147,19 +125,19 @@ Partial Class frmPrincipal
         'btnAltaClientes
         '
         Me.btnAltaClientes.Name = "btnAltaClientes"
-        Me.btnAltaClientes.Size = New System.Drawing.Size(158, 26)
+        Me.btnAltaClientes.Size = New System.Drawing.Size(134, 22)
         Me.btnAltaClientes.Text = "Clientes"
         '
         'btnAltaBancos
         '
         Me.btnAltaBancos.Name = "btnAltaBancos"
-        Me.btnAltaBancos.Size = New System.Drawing.Size(158, 26)
+        Me.btnAltaBancos.Size = New System.Drawing.Size(134, 22)
         Me.btnAltaBancos.Text = "Bancos"
         '
         'CompañiasToolStripMenuItem
         '
         Me.CompañiasToolStripMenuItem.Name = "CompañiasToolStripMenuItem"
-        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(158, 26)
+        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.CompañiasToolStripMenuItem.Text = "Compañias"
         '
         'ComprobantesToolStripMenuItem
@@ -168,11 +146,11 @@ Partial Class frmPrincipal
         Me.ComprobantesToolStripMenuItem.Size = New System.Drawing.Size(145, 25)
         Me.ComprobantesToolStripMenuItem.Text = "COMPROBANTES"
         '
-        'PlanillasToolStripMenuItem
+        'REPORTESToolStripMenuItem
         '
-        Me.PlanillasToolStripMenuItem.Name = "PlanillasToolStripMenuItem"
-        Me.PlanillasToolStripMenuItem.Size = New System.Drawing.Size(100, 25)
-        Me.PlanillasToolStripMenuItem.Text = "PLANILLAS"
+        Me.REPORTESToolStripMenuItem.Name = "REPORTESToolStripMenuItem"
+        Me.REPORTESToolStripMenuItem.Size = New System.Drawing.Size(95, 25)
+        Me.REPORTESToolStripMenuItem.Text = "REPORTES"
         '
         'EliiminarToolStripMenuItem
         '
@@ -184,14 +162,8 @@ Partial Class frmPrincipal
         'AltaToolStripMenuItem1
         '
         Me.AltaToolStripMenuItem1.Name = "AltaToolStripMenuItem1"
-        Me.AltaToolStripMenuItem1.Size = New System.Drawing.Size(180, 26)
+        Me.AltaToolStripMenuItem1.Size = New System.Drawing.Size(95, 22)
         Me.AltaToolStripMenuItem1.Text = "Alta"
-        '
-        'REPORTESToolStripMenuItem
-        '
-        Me.REPORTESToolStripMenuItem.Name = "REPORTESToolStripMenuItem"
-        Me.REPORTESToolStripMenuItem.Size = New System.Drawing.Size(95, 25)
-        Me.REPORTESToolStripMenuItem.Text = "REPORTES"
         '
         'Label1
         '
@@ -199,7 +171,7 @@ Partial Class frmPrincipal
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(630, 393)
+        Me.Label1.Location = New System.Drawing.Point(67, 80)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 18)
@@ -214,7 +186,7 @@ Partial Class frmPrincipal
         Me.DSaldosPorComprobante.BackgroundColor = System.Drawing.Color.White
         Me.DSaldosPorComprobante.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DSaldosPorComprobante.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DSaldosPorComprobante.Location = New System.Drawing.Point(419, 62)
+        Me.DSaldosPorComprobante.Location = New System.Drawing.Point(12, 62)
         Me.DSaldosPorComprobante.Name = "DSaldosPorComprobante"
         Me.DSaldosPorComprobante.ScrollBars = System.Windows.Forms.ScrollBars.None
         Me.DSaldosPorComprobante.Size = New System.Drawing.Size(403, 196)
@@ -225,7 +197,7 @@ Partial Class frmPrincipal
         Me.lblAdvertencias.AutoSize = True
         Me.lblAdvertencias.BackColor = System.Drawing.Color.Transparent
         Me.lblAdvertencias.ForeColor = System.Drawing.Color.Maroon
-        Me.lblAdvertencias.Location = New System.Drawing.Point(60, 271)
+        Me.lblAdvertencias.Location = New System.Drawing.Point(12, 271)
         Me.lblAdvertencias.Name = "lblAdvertencias"
         Me.lblAdvertencias.Size = New System.Drawing.Size(259, 18)
         Me.lblAdvertencias.TabIndex = 17
@@ -243,7 +215,7 @@ Partial Class frmPrincipal
         Me.DChequesProximosAVencer.Location = New System.Drawing.Point(15, 292)
         Me.DChequesProximosAVencer.Name = "DChequesProximosAVencer"
         Me.DChequesProximosAVencer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.DChequesProximosAVencer.Size = New System.Drawing.Size(369, 119)
+        Me.DChequesProximosAVencer.Size = New System.Drawing.Size(400, 119)
         Me.DChequesProximosAVencer.TabIndex = 18
         '
         'Label2
@@ -251,27 +223,97 @@ Partial Class frmPrincipal
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.ForeColor = System.Drawing.Color.Maroon
-        Me.Label2.Location = New System.Drawing.Point(488, 41)
+        Me.Label2.Location = New System.Drawing.Point(12, 41)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(276, 18)
+        Me.Label2.Size = New System.Drawing.Size(74, 18)
         Me.Label2.TabIndex = 20
-        Me.Label2.Text = "SALDOS DE LOS COMPROBANTES"
+        Me.Label2.Text = "SALDOS"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CuicchiGaveglio.My.Resources.Resources.fondo
+        Me.PictureBox1.Location = New System.Drawing.Point(425, 62)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(267, 196)
+        Me.PictureBox1.TabIndex = 22
+        Me.PictureBox1.TabStop = False
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.BackColor = System.Drawing.Color.Silver
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.lblUsuario)
+        Me.GroupBox1.Controls.Add(Me.lblFecha)
+        Me.GroupBox1.Controls.Add(Me.lblComun)
+        Me.GroupBox1.Location = New System.Drawing.Point(425, 292)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(267, 119)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Sesión:"
+        '
+        'BottomToolStripPanel
+        '
+        Me.BottomToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.BottomToolStripPanel.Name = "BottomToolStripPanel"
+        Me.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.BottomToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.BottomToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'TopToolStripPanel
+        '
+        Me.TopToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.TopToolStripPanel.Name = "TopToolStripPanel"
+        Me.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.TopToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.TopToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'RightToolStripPanel
+        '
+        Me.RightToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.RightToolStripPanel.Name = "RightToolStripPanel"
+        Me.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RightToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.RightToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'LeftToolStripPanel
+        '
+        Me.LeftToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.LeftToolStripPanel.Name = "LeftToolStripPanel"
+        Me.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.LeftToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.LeftToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'ContentPanel
+        '
+        Me.ContentPanel.Size = New System.Drawing.Size(150, 175)
+        '
+        'MenuPrincipal
+        '
+        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem})
+        Me.MenuPrincipal.BackColor = System.Drawing.Color.White
+        Me.MenuPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuPrincipal.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
+        Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
+        Me.MenuPrincipal.Name = "MenuPrincipal"
+        Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
+        Me.MenuPrincipal.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.MenuPrincipal.Size = New System.Drawing.Size(719, 25)
+        Me.MenuPrincipal.TabIndex = 11
+        Me.MenuPrincipal.Text = "MenuStrip1"
         '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(834, 426)
+        Me.ClientSize = New System.Drawing.Size(719, 426)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DChequesProximosAVencer)
         Me.Controls.Add(Me.lblAdvertencias)
         Me.Controls.Add(Me.DSaldosPorComprobante)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.lblUsuario)
-        Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.lblFecha)
-        Me.Controls.Add(Me.lblComun)
         Me.Controls.Add(Me.MenuPrincipal)
         Me.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsMdiContainer = True
@@ -281,20 +323,18 @@ Partial Class frmPrincipal
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cuicchi Gaveglio"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.MenuPrincipal.ResumeLayout(False)
-        Me.MenuPrincipal.PerformLayout()
         CType(Me.DSaldosPorComprobante, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DChequesProximosAVencer, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents lblComun As Label
     Friend WithEvents lblFecha As Label
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents lblUsuario As Label
-    Friend WithEvents MenuPrincipal As MenuStrip
     Friend WithEvents SistemaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btnAbrirAyuda As ToolStripMenuItem
     Friend WithEvents btnCerrarSesion As ToolStripMenuItem
@@ -310,6 +350,13 @@ Partial Class frmPrincipal
     Friend WithEvents lblAdvertencias As Label
     Friend WithEvents DChequesProximosAVencer As DataGridView
     Friend WithEvents Label2 As Label
-    Friend WithEvents PlanillasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents REPORTESToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents BottomToolStripPanel As ToolStripPanel
+    Friend WithEvents TopToolStripPanel As ToolStripPanel
+    Friend WithEvents RightToolStripPanel As ToolStripPanel
+    Friend WithEvents LeftToolStripPanel As ToolStripPanel
+    Friend WithEvents ContentPanel As ToolStripContentPanel
+    Friend WithEvents MenuPrincipal As MenuStrip
 End Class

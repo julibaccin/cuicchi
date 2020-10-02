@@ -10,20 +10,20 @@
         Control.ConsultarSaldosPorComprobante(DSaldosPorComprobante, "2020-01-01")
         Control.ConsultarChequesProximosAVencer(DChequesProximosAVencer)
     End Sub
-    Private Sub BtnAbrirAyuda_Click(sender As Object, e As EventArgs) Handles btnAbrirAyuda.Click
+    Private Sub Ayuda(sender As Object, e As EventArgs) Handles btnAbrirAyuda.Click
         MsgBox("Para cualquier Consulta/Error comunicarse al 3462-30216 (WhatsApp) - Julian Baccin", MsgBoxStyle.Information, "Ayuda")
     End Sub
 
-    Private Sub BtnCerrarSesion_Click(sender As Object, e As EventArgs) Handles btnCerrarSesion.Click
+    Private Sub CerrarSesion(sender As Object, e As EventArgs) Handles btnCerrarSesion.Click
         frmLogin.Show()
         Me.Close()
     End Sub
 
-    Private Sub BtnAltaClientes_Click(sender As Object, e As EventArgs) Handles btnAltaClientes.Click
+    Private Sub AltaClientes(sender As Object, e As EventArgs) Handles btnAltaClientes.Click
         frmAltaClientes.ShowDialog()
     End Sub
 
-    Private Sub BtnAltaBancos_Click(sender As Object, e As EventArgs) Handles btnAltaBancos.Click
+    Private Sub AltaBancos(sender As Object, e As EventArgs) Handles btnAltaBancos.Click
         frmAltaBancos.ShowDialog()
     End Sub
 
@@ -32,11 +32,11 @@
         frmLogin.Show()
     End Sub
 
-    Private Sub CompañiasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CompañiasToolStripMenuItem.Click
+    Private Sub AltaCompanias(sender As Object, e As EventArgs) Handles CompañiasToolStripMenuItem.Click
         frmAltaCompania.ShowDialog()
     End Sub
 
-    Private Sub AltaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem1.Click
+    Private Sub EliminarAltas(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem1.Click
         If lblUsuario.Text = "eliminar" Then
             frmEliminarComprobante.ShowDialog()
         Else
@@ -48,11 +48,8 @@
         frmConsultarComprobantes.ShowDialog()
     End Sub
 
-    Private Sub PlanillasToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlanillasToolStripMenuItem.Click
-        frmConsultarPlanillas.ShowDialog()
-    End Sub
-
-    Private Sub REPORTESToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles REPORTESToolStripMenuItem.Click
+    Private Sub Reportes(sender As Object, e As EventArgs) Handles REPORTESToolStripMenuItem.Click
         frmReportes.ShowDialog()
     End Sub
+
 End Class

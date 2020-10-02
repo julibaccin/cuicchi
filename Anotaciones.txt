@@ -17,8 +17,6 @@ Entre Fechas()
 Total y TotalxCompañia.
 
 
--Cuando cargo una compañia borrar el campo txtNombreCompañia
--PANTALLAS Alta,Comprobantes,Planillas,Cuanta de Clientes,Eliminar,Reportes
 
 
 

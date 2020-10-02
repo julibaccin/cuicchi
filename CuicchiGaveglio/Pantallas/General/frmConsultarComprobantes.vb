@@ -36,11 +36,10 @@ Public Class frmConsultarComprobantes
         LlenarComboEstados(cmbEstadoFiltro)
         LlenarComboCompanias(cmbCompaniaCambioEstado)
         LlenarComboClientes(cmbClienteP)
-
     End Sub
 
     Public Sub ReiniciarForm()
-        cmbCliente.Text = ""
+        cmbClienteP.Text = ""
         cmbFechaPlanillas.Items.Clear()
         cmbFechaPlanillas.Text = ""
         DAltasComprobantes.DataSource = Nothing
@@ -57,38 +56,38 @@ Public Class frmConsultarComprobantes
 #Region "PLANILLA"
 
     Private Sub CmbCliente_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClienteP.SelectedIndexChanged
+
+        ConsultarSaldo()
+
         cmbFechaPlanillas.Items.Clear()
         cmbFechaPlanillas.Items.Add("Nueva Planilla")
         Dim respuesta As ArrayList = Control3.DevolverPlanillasCliente(ExtraerNumeros(cmbClienteP.Text))
         For Each element As Date In respuesta
             cmbFechaPlanillas.Items.Add(element.ToShortDateString)
         Next
-        Control2.ConsultarAltaComprobantes(DAltasComprobantes, "", "2020-01-01", "2080-01-01", "", "", "2020-01-01", -999999, ExtraerLetras(cmbCliente.Text), "", "")
+        Control2.ConsultarAltaComprobantes(DAltasComprobantes, "", "2020-01-01", "2080-01-01", "", "", "2020-01-01", -999999, ExtraerLetras(cmbClienteP.Text), "", "")
 
-        'ACA MIRO SI TIENE SALDO
-        Dim ControlSaldo As New ClsSaldos()
-        ControlSaldo.DevolverCuentaCliente(DDetalle, ExtraerNumeros(cmbClienteP.Text))
-
-        Dim TotalAPagar As Integer = 0
-        Dim TotalPago As Integer = 0
-        For Each Row As DataGridViewRow In DDetalle.Rows
-            TotalAPagar += Row.Cells(1).Value
-            TotalPago += Row.Cells(2).Value
-        Next
-
-        Dim Total As Integer = TotalAPagar - TotalPago
-        If Total = 0 Then
-            lblTotal.Text = "No tiene plata ni a favor, ni en contra"
-        ElseIf Total > 0 Then
-            lblTotal.Text = "Debe: " & Total & " $"
-        ElseIf Total < 0 Then
-            lblTotal.Text = "Tiene a favor: " & Total * -1 & " $"
-        End If
-
-
+        CambiarColorPlanilla()
 
     End Sub
 
+    Public Sub ConsultarSaldo()
+        'ACA MIRO SI TIENE SALDO
+        Dim ControlSaldo As New ClsSaldos()
+        Dim resp As ArrayList = ControlSaldo.DevolverCuentaCliente(ExtraerNumeros(cmbClienteP.Text))
+
+        Dim Entro As Integer = resp(0).entro
+        Dim Salio As Integer = resp(0).salio
+
+        Dim Total As Integer = Entro - Salio
+        If Total = 0 Then
+            lblTotal.Text = "No tiene plata ni a favor, ni en contra"
+        ElseIf Total < 0 Then
+            lblTotal.Text = $"Debe: {Total * -1} $"
+        ElseIf Total > 0 Then
+            lblTotal.Text = $"Tiene a favor: {Total} $"
+        End If
+    End Sub
     Private Sub DataPlanillasPolizas_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataPlanillasPolizas.CellMouseClick
         If e.RowIndex = -1 Or e.ColumnIndex = -1 _
             Or e.RowIndex = DataPlanillasPolizas.Rows.Count - 1 _
@@ -136,6 +135,9 @@ Public Class frmConsultarComprobantes
     End Sub
 
     Private Sub BtnCargarPagosPoliza_Click(sender As Object, e As EventArgs) Handles btnCargarPagosPoliza.Click
+        If txtIdAlta.Text = "" Or txtPoliza.Text = "" Or txtImporteAlta.Text = "" Or cmbCliente.Text = "" Or cmbFechaPlanillas.Text = "" Then
+            Return
+        End If
         Dim Cliente As Integer = ExtraerNumeros(cmbClienteP.Text)
         Dim Fecha As Date = cmbFechaPlanillas.Text
         If Control3.AgregarPagoAPoliza(Cliente, Fecha, txtPoliza.Text, txtIdAlta.Text, txtImporteAlta.Text) = 1 Then
@@ -157,6 +159,12 @@ Public Class frmConsultarComprobantes
         End If
         DataPlanillasPolizas.Visible = True
         DFechaPlanillaNueva.Visible = False
+
+
+        If cCopiarDatos.Checked = True Then
+            Return
+        End If
+
         Control3.DevolverPolizasDePlanilla(DataPlanillasPolizas,
                                           ExtraerNumeros(cmbClienteP.Text),
                                           cmbFechaPlanillas.Text)
@@ -166,7 +174,25 @@ Public Class frmConsultarComprobantes
         If e.RowIndex = -1 Then
             Return
         End If
+
         txtIdAlta.Text = DAltasComprobantes.Item("idAlta", e.RowIndex).Value
+    End Sub
+
+    Public Sub CambiarColorPlanilla()
+
+        'Calcula si el comprobante seleccionado tiene plata
+        For Each row As DataGridViewRow In DAltasComprobantes.Rows
+            If row.Cells.Item("idAlta").Value Is Nothing Then
+                Return
+            End If
+            Dim res = Control3.DisponibleXComprobante(row.Cells.Item("idAlta").Value)
+            If res.total - res.usado <= 0 Then
+                row.DefaultCellStyle.BackColor = Color.LightSalmon
+            Else
+                row.DefaultCellStyle.BackColor = Color.LightGreen
+            End If
+        Next
+
     End Sub
 
     Private Sub BtnCargarPolizas_Click(sender As Object, e As EventArgs) Handles btnCargarPolizas.Click
@@ -436,6 +462,9 @@ Public Class frmConsultarComprobantes
         End If
     End Sub
 
+    Private Sub BtnExportarExcel_Click(sender As Object, e As EventArgs) Handles btnExportarExcel.Click
+        ExportarExcel(New DataGrid(), "JuanManuelBelgrano", "", New Date())
+    End Sub
 #End Region
 
 End Class

@@ -179,12 +179,15 @@ GO
 
 
 --Devuelve Todos los pagos de una poliza
-CREATE PROCEDURE paDevolverPagosDePoliza
+ALTER PROCEDURE paDevolverPagosDePoliza
     @idCliente SMALLINT,
 	@f DATE,
 	@poliza SMALLINT
 AS   
-	SELECT idAlta, importeAlta  FROM PolizasPagos WHERE idCliente = @idcliente AND f = @f AND poliza = @poliza
+	SELECT nombreTipoComprobante as TIPO_COMPROBANTE, importeAlta as IMPORTE_UTILIZADO  FROM PolizasPagos PP
+	INNER JOIN AltaComprobantes AC ON PP.idAlta = AC.idAlta
+	INNER JOIN TipoComprobantes TC ON AC.idTipoComprobante = TC.idTipoComprobante
+	WHERE PP.idCliente = @idcliente AND PP.f = @f AND PP.poliza = @poliza
 GO
 
 
@@ -200,27 +203,35 @@ AS
 	GROUP BY PP.idAlta
 GO
 
---DEVUELVE SI EL CLIENTE TIENE SALDO A FAVOR O DEUDAS POR PLANILLA
+--DEVUELVE SI EL CLIENTE TIENE SALDO A FAVOR O DEUDAS
 
 ALTER PROCEDURE paDevolverCuentaCliente
     @idCliente SMALLINT
 AS   
 
-SELECT f, SUM(importe) as IMPORTE_PLANILLA,IsNull(
-(SELECT SUM(importeAlta) FROM PolizasPagos WHERE idCliente = @idCliente GROUP BY f),0) as IMPORTE_ABONADO
-FROM PlanillasPolizas WHERE idCliente = @idCliente GROUP BY f
+SELECT SUM(importe) AS ENTRA, (SELECT SUM(importeAlta) FROM PolizasPagos WHERE idCliente=@idCliente) AS SALE FROM AltaComprobantes WHERE idCliente = @idCliente
 
+GO
+
+--DEVUELVE CUANTO USA Y CUANTO TIENE DESPONIBLE DE UN COMPROBANTE
+
+CREATE PROCEDURE paDisponibleXComprobante
+    @idAlta INT
+AS   
+
+SELECT PP.idAlta, SUM(importeAlta) as USADO, (SELECT importe FROM AltaComprobantes WHERE idAlta = @idAlta) as TOTAL 
+FROM PolizasPagos PP
+WHERE idAlta = @idAlta
+GROUP BY PP.idAlta
 GO
 
 
 
 
 
---SELECT Sum(importeAlta), SUM(DISTINCT  importe)
---FROM PlanillasPolizas PP
---INNER JOIN PolizasPagos PPA ON  PP.idCliente = PPA.idCliente AND PP.f = PPA.f AND PP.poliza = PPA.poliza
---WHERE PP.idCliente = 2
---GROUP BY PP.f
+
+
+
 
 
 

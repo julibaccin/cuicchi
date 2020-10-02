@@ -71,7 +71,7 @@ Public Class ClsPlanillas
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()
-                Respuesta.Add("IdAlta: " & data.Item(0) & "  Importe: " & data.Item(1))
+                Respuesta.Add(data.Item(0) & "  Importe: " & data.Item(1))
             End While
 
             Return Respuesta
@@ -158,6 +158,27 @@ Public Class ClsPlanillas
         Finally
             mCon.Close()
         End Try
+    End Function
+
+    'Devolver Dinero disponible por comprobante
+
+    Public Function DisponibleXComprobante(pIdAlta As Integer) As Object
+        Try
+            Dim query As New SqlCommand("paDisponibleXComprobante", mCon) With {
+                .CommandType = CommandType.StoredProcedure
+            }
+            query.Parameters.AddWithValue("idAlta", pIdAlta)
+            mCon.Open()
+            Dim data As SqlDataReader = query.ExecuteReader()
+            data.Read()
+            Return New With {.usado = data.Item("USADO"), .total = data.Item("TOTAL")}
+        Catch ex As Exception
+            MsgBox("Error de sistema: " & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
     End Function
 
 End Class

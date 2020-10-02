@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-
+Imports SpreadsheetLight
 Module mdlFunciones
 
     Public Sub SoloNumero(ev As KeyPressEventArgs)
@@ -108,6 +108,21 @@ Module mdlFunciones
             SoloLetra = ""
         End If
         Return SoloLetra
+    End Function
+
+    Public Function ExportarExcel(pDataGrid As DataGrid, pNombreArchivo As String, pTitulo As String, pFecha As Date)
+        Try
+            Dim documento As New SLDocument()
+            Dim picture As New Drawing.SLPicture("C:\Users\julib\Desktop\Julian\fotosLametalica\SINOBOOM.png")
+            picture.ResizeInPercentage(50, 50)
+            documento.InsertPicture(picture)
+            documento.SaveAs($"C:\Users\julib\Desktop\Julian\{pNombreArchivo}")
+            Return 1
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return 0
+        End Try
+
     End Function
 
 End Module

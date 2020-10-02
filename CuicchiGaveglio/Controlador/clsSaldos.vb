@@ -53,24 +53,25 @@ Public Class ClsSaldos
         End Try
     End Function
 
-    Public Function DevolverCuentaCliente(pTabla As DataGridView, pIdCliente As Integer)
+    Public Function DevolverCuentaCliente(pIdCliente As Integer) As ArrayList
+        Dim respuesta As New ArrayList
         Try
             Dim query As New SqlCommand("paDevolverCuentaCliente", mCon) With {
                 .CommandType = CommandType.StoredProcedure
             }
             query.Parameters.AddWithValue("idCliente", pIdCliente)
-            Dim adaptador As New SqlDataAdapter()
-            Dim tabla As New DataTable()
             mCon.Open()
-            adaptador.SelectCommand = query
-            adaptador.Fill(tabla)
-            pTabla.DataSource = tabla
 
-            Return 1
+            Dim data As SqlDataReader = query.ExecuteReader()
+            While data.Read()
+                respuesta.Add(New With {.entro = data.Item(0), .salio = data.Item(1)})
+            End While
+
+            Return respuesta
 
         Catch ex As Exception
             MsgBox("Error de sistema: " & ex.Message)
-            Return 0
+            Return respuesta
         Finally
             mCon.Close()
         End Try
