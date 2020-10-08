@@ -87,9 +87,11 @@
     <Compile Include="Controlador\clsClientes.vb" />
     <Compile Include="Controlador\clsEstados.vb" />
     <Compile Include="Controlador\clsLogin.vb" />
+    <Compile Include="Controlador\clsPendientes.vb" />
     <Compile Include="Controlador\clsPlanillas.vb" />
     <Compile Include="Controlador\clsSaldos.vb" />
     <Compile Include="Controlador\clsTipoComprobantes.vb" />
+    <Compile Include="Controlador\ControladorReportes.vb" />
     <Compile Include="Funciones\mdlFunciones.vb" />
     <Compile Include="Modelos\ModeloAltaComprobantes.vb" />
     <Compile Include="Modelos\ModeloCliente.vb" />
@@ -117,10 +119,16 @@
     <Compile Include="Pantallas\Altas\frmAltaClientes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\General\frmConsultarComprobantes.Designer.vb">
+    <Compile Include="Pantallas\Comprobantes\frmConsultarComprobantes.Designer.vb">
       <DependentUpon>frmConsultarComprobantes.vb</DependentUpon>
     </Compile>
-    <Compile Include="Pantallas\General\frmConsultarComprobantes.vb">
+    <Compile Include="Pantallas\Comprobantes\frmConsultarComprobantes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pantallas\Planillas\frmPlanillas.Designer.vb">
+      <DependentUpon>frmPlanillas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Planillas\frmPlanillas.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Pantallas\Reportes\frmReportes.Designer.vb">
@@ -135,10 +143,10 @@
     <Compile Include="Pantallas\Eliminar\frmEliminarComprobante.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\Principal\frmLogin.vb">
+    <Compile Include="Pantallas\Login\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Pantallas\Principal\frmLogin.Designer.vb">
+    <Compile Include="Pantallas\Login\frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -169,8 +177,11 @@
     <EmbeddedResource Include="Pantallas\Altas\frmAltaClientes.resx">
       <DependentUpon>frmAltaClientes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\General\frmConsultarComprobantes.resx">
+    <EmbeddedResource Include="Pantallas\Comprobantes\frmConsultarComprobantes.resx">
       <DependentUpon>frmConsultarComprobantes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Planillas\frmPlanillas.resx">
+      <DependentUpon>frmPlanillas.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Reportes\frmReportes.resx">
       <DependentUpon>frmReportes.vb</DependentUpon>
@@ -178,7 +189,7 @@
     <EmbeddedResource Include="Pantallas\Eliminar\frmEliminarComprobante.resx">
       <DependentUpon>frmEliminarComprobante.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pantallas\Principal\frmLogin.resx">
+    <EmbeddedResource Include="Pantallas\Login\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -234,6 +245,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\fondo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\footer.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\head.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

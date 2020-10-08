@@ -27,6 +27,16 @@ CuicchiGaveglio
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
 </summary>
 </member>
+<member name="P:CuicchiGaveglio.My.Resources.Resources.footer">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:CuicchiGaveglio.My.Resources.Resources.head">
+<summary>
+  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+</summary>
+</member>
 <member name="P:CuicchiGaveglio.My.Resources.Resources.login">
 <summary>
   Busca un recurso adaptado de tipo System.Drawing.Bitmap.

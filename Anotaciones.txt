@@ -1,9 +1,3 @@
--Cambiar el campo de las planillas iniciovigencia, finvigencia por fechaVencimiento
--Agregar un numero a una planillaNueva
--Usuario que genera la planilla
--Agregar campo de estado ACEPTADO/PENDIENTE
-
----------------------------------------------------------------------
 
 REPORTES
 
@@ -15,6 +9,18 @@ Cuanto ingreso y cuanto egreso de cada cosa
 Cuanto ingresó y cuento egresó por cada compañia, total por compañia.
 Entre Fechas()
 Total y TotalxCompañia.
+
+
+-ORDEN: Tomador, Referencia, Compañia, detalle,patente, fVencimiento,Importe (sacar Titular)
+Subtotal por cada tomador y total general}
+
+Que la deuda se quede en alguna referencia
+
+
+
+
+
+
 
 
 

@@ -9,7 +9,7 @@ Public Class ClsClientes
         mCon = ObtenerConexion()
     End Sub
 
-    Public Function CrearCliente(pCliente As ModeloCliente) As Integer
+    Public Function CrearCliente(pCliente As ModeloCliente) As Int16
 
         Try
             Dim query As New SqlCommand("paCrearCliente", mCon)
@@ -23,20 +23,18 @@ Public Class ClsClientes
                 .Parameters.AddWithValue("cbu", pCliente.cbu)
                 .Parameters.AddWithValue("email", pCliente.email)
             End With
-
             mCon.Open()
-            Dim data As SqlDataReader = query.ExecuteReader()
-            data.Read()
-            Return data.Item(0)
+            query.ExecuteNonQuery()
+            Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: CrearCliente" & ex.Message)
             Return 0
         Finally
             mCon.Close()
         End Try
 
     End Function
-    Public Function ModificarCliente(pCliente As ModeloCliente) As Integer
+    Public Function ModificarCliente(pCliente As ModeloCliente) As Int16
 
         Try
             Dim query As New SqlCommand("paModificarCliente", mCon) With {
@@ -54,7 +52,7 @@ Public Class ClsClientes
             query.ExecuteNonQuery()
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ModificarCliente" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -77,7 +75,7 @@ Public Class ClsClientes
             pTabla.DataSource = tabla
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarClientes" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -98,7 +96,7 @@ Public Class ClsClientes
             End While
             Return Respuesta
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarClientesCombo" & ex.Message)
             Return Respuesta
         Finally
             mCon.Close()

@@ -88,23 +88,6 @@ AS
 	UPDATE Clientes SET nombreCliente= @nombreCliente,dni = @dni, telefono = @telefono, cuit = @cuit, domicilio = @domicilio, cbu = @CBU, email = @email WHERE idCliente = @idCliente
 GO  
 ------------------------------------------------------------COMPROBANTES----------------------------------------
-CREATE PROCEDURE paCrearAltaComprobante
-	@idTipoComprobante TINYINT,
-	@fIngreso DATE,
-	@idCliente SMALLINT,
-	@idCompania SMALLINT,
-	@obs varchar(100),
-	@numero varchar(25),
-	@idBanco smallint,
-	@importe int,
-	@fPago date,
-	@idUsuario tinyint,
-	@idEstado tinyint
-AS   
-	INSERT INTO AltaComprobantes (idTipoComprobante,fIngreso,idCliente,idCompania,obs,numero,idBanco,importe,fPago,idUsuario,idEstado,obsBaja)
-		   VALUES (@idTipoComprobante,@fIngreso,@idCliente,@idCompania,@obs,@numero,@idBanco,@importe,@fPago,@idUsuario,@idEstado,'') 
-GO
-
 CREATE PROCEDURE paEliminarAltaComprobante
     @idAlta int
 AS   
@@ -123,14 +106,6 @@ GO
 
 --Planillas------------------------------------------------------------------------------------------------
 
---Crea una Planilla
-CREATE PROCEDURE paCrearPlanilla
-    @idCliente SMALLINT,
-	@f DATE,
-	@idUsuario tinyint
-AS   
-	INSERT INTO Planillas (idCliente,f,idUsuario) VALUES (@idCliente,@f,@idUsuario)
-GO  
 
 --Llenar una PlanillaPoliza
 CREATE PROCEDURE paAgregarPolizaAPlanilla
@@ -148,34 +123,6 @@ AS
 	VALUES (@idCliente,@f,@poliza,@importe,@detalle,@ref,@titular,@fVencimiento,@patente)
 GO  
 
---Llenar una PolizaPagos
-CREATE PROCEDURE paAgregarPagoAPoliza
-    @idCliente SMALLINT,
-	@f DATE,
-	@poliza SMALLINT,
-	@idAlta INT,
-	@importeAlta INT
-AS   
-	INSERT INTO PolizasPagos(idCliente,f,poliza,idAlta,importeAlta)
-	VALUES (@idCliente,@f,@poliza,@idAlta,@importeAlta)
-GO  
-
---Devuelve todas las planillas creadas para un cliente
-CREATE PROCEDURE paDevolverPlanillasCliente
-    @idCliente SMALLINT
-AS   
-	SELECT f FROM Planillas
-	 WHERE idCliente = @idCliente
-GO
-
-
---Devuelve Todas las polizas de una planilla
-CREATE PROCEDURE paDevolverPolizasDePlanilla
-    @idCliente SMALLINT,
-	@f DATE
-AS   
-	SELECT poliza,importe,detalle,ref,titular,fVencimiento,patente FROM PlanillasPolizas WHERE idCliente = @idcliente AND f = @f
-GO
 
 
 --Devuelve Todos los pagos de una poliza
@@ -209,7 +156,7 @@ ALTER PROCEDURE paDevolverCuentaCliente
     @idCliente SMALLINT
 AS   
 
-SELECT SUM(importe) AS ENTRA, (SELECT SUM(importeAlta) FROM PolizasPagos WHERE idCliente=@idCliente) AS SALE FROM AltaComprobantes WHERE idCliente = @idCliente
+SELECT IsNull(SUM(importe),0) AS ENTRA, IsNull((SELECT SUM(importeAlta) FROM PolizasPagos WHERE idCliente=@idCliente), 0) AS SALE FROM AltaComprobantes WHERE idCliente = @idCliente
 
 GO
 
@@ -230,8 +177,6 @@ GO
 
 
 
-
-
-
-
+SELECT Sum(importe) from AltaComprobantes WHERE idCliente = 2
+SELECT SUM(importe) FROM PlanillasPolizas where idCliente = 2
 

@@ -42,7 +42,7 @@ GO
 EXEC paConsultarEstados
 --------------------------------------------------------------------------
 
-CREATE PROCEDURE paConsultarComprobantes_FiltrosGenerales
+ALTER PROCEDURE paConsultarComprobantes_FiltrosGenerales
  @NombreTipoComprobante VARCHAR(20), --Listo SIEMPRE
  @fechaDesde DATE, --Listo SIEMPRE
  @fechaHasta DATE, --Listo SIEMPRE
@@ -54,6 +54,9 @@ CREATE PROCEDURE paConsultarComprobantes_FiltrosGenerales
  @NombreCompania VARCHAR (60),
  @NombreEstado VARCHAR (25)
 AS   
+
+
+--paConsultarComprobantes_FiltrosGenerales '','2020-10-09','2020-10-09','','','2020-10-09',-99999,'','',''
 
 		SELECT fIngreso, Clientes.nombreCliente, 
 			   TipoComprobantes.nombreTipoComprobante AS Tipo_Comprobante,

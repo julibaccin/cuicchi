@@ -20,7 +20,7 @@ Public Class ClsTipoComprobantes
             End While
             Return Respuesta
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarTipoComprobantes" & ex.Message)
             Return Respuesta
         Finally
             mCon.Close()

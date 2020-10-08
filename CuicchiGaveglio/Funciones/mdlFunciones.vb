@@ -2,6 +2,67 @@
 Imports SpreadsheetLight
 Module mdlFunciones
 
+#Region "Llenar Combos"
+
+    Public Sub LlenarComboClientes(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorClientes As New ClsClientes
+        Dim RespuestaClientes As ArrayList = ControladorClientes.ConsultarClientesCombo()
+        If (RespuestaClientes IsNot Nothing) Then
+            For Each item As String In RespuestaClientes
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
+    Public Sub LlenarComboEstados(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorEstados As New ClsEstados
+        Dim RespuestaEstados As ArrayList = ControladorEstados.ConsultarEstados()
+        If (RespuestaEstados IsNot Nothing) Then
+            For Each item As String In RespuestaEstados
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
+    Public Sub LlenarComboTipoComprobantes(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorTipoComprobantes As New ClsTipoComprobantes
+        Dim RespuestaTipoComprobantes As ArrayList = ControladorTipoComprobantes.ConsultarTipoComprobantes()
+        If (RespuestaTipoComprobantes IsNot Nothing) Then
+            For Each item As String In RespuestaTipoComprobantes
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
+    Public Sub LlenarComboCompanias(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorCompania As New ClsCompania
+        Dim RespuestaCompania As ArrayList = ControladorCompania.ConsultarCompanias()
+        If (RespuestaCompania IsNot Nothing) Then
+            For Each item As String In RespuestaCompania
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
+    Public Sub LlenarComboBancos(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorBancos As New ClsBancos
+        Dim RespuestaBancos As ArrayList = ControladorBancos.ConsultarBancos()
+        If (RespuestaBancos IsNot Nothing) Then
+            For Each item As String In RespuestaBancos
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
+#End Region
+
+#Region "Filtros"
+
     Public Sub SoloNumero(ev As KeyPressEventArgs)
         If Char.IsNumber(ev.KeyChar) Or Char.IsControl(ev.KeyChar) Then
             ev.Handled = False
@@ -25,60 +86,7 @@ Module mdlFunciones
         End If
     End Sub
 
-    Public Sub LlenarComboClientes(pCombo As ComboBox)
-        pCombo.Items.Clear()
-        Dim ControladorClientes As New ClsClientes
-        Dim RespuestaClientes As ArrayList = ControladorClientes.ConsultarClientesCombo()
-        If (RespuestaClientes IsNot Nothing) Then
-            For Each item As String In RespuestaClientes
-                pCombo.Items.Add(item)
-            Next
-        End If
-    End Sub
 
-    Public Sub LlenarComboEstados(pCombo As ComboBox)
-        pCombo.Items.Clear()
-        Dim ControladorEstados As New clsEstados
-        Dim RespuestaEstados As ArrayList = ControladorEstados.ConsultarEstados()
-        If (RespuestaEstados IsNot Nothing) Then
-            For Each item As String In RespuestaEstados
-                pCombo.Items.Add(item)
-            Next
-        End If
-    End Sub
-
-    Public Sub LlenarComboTipoComprobantes(pCombo As ComboBox)
-        pCombo.Items.Clear()
-        Dim ControladorTipoComprobantes As New clsTipoComprobantes
-        Dim RespuestaTipoComprobantes As ArrayList = ControladorTipoComprobantes.ConsultarTipoComprobantes()
-        If (RespuestaTipoComprobantes IsNot Nothing) Then
-            For Each item As String In RespuestaTipoComprobantes
-                pCombo.Items.Add(item)
-            Next
-        End If
-    End Sub
-
-    Public Sub LlenarComboCompanias(pCombo As ComboBox)
-        pCombo.Items.Clear()
-        Dim ControladorCompania As New clsCompania
-        Dim RespuestaCompania As ArrayList = ControladorCompania.ConsultarCompanias()
-        If (RespuestaCompania IsNot Nothing) Then
-            For Each item As String In RespuestaCompania
-                pCombo.Items.Add(item)
-            Next
-        End If
-    End Sub
-
-    Public Sub LlenarComboBancos(pCombo As ComboBox)
-        pCombo.Items.Clear()
-        Dim ControladorBancos As New ClsBancos
-        Dim RespuestaBancos As ArrayList = ControladorBancos.ConsultarBancos()
-        If (RespuestaBancos IsNot Nothing) Then
-            For Each item As String In RespuestaBancos
-                pCombo.Items.Add(item)
-            Next
-        End If
-    End Sub
 
     Public Function ExtraerNumeros(ByVal strCadena As String) As String
         Dim SoloNumero As String = ""
@@ -110,13 +118,36 @@ Module mdlFunciones
         Return SoloLetra
     End Function
 
-    Public Function ExportarExcel(pDataGrid As DataGrid, pNombreArchivo As String, pTitulo As String, pFecha As Date)
+#End Region
+
+#Region "Exportar Excel"
+    Public Function ExportarExcel(pDataGrid As DataGridView, pTitulo As String, pFecha As Date)
         Try
+
+            Dim dialog = New SaveFileDialog()
+            dialog.ShowDialog()
+
+            If dialog.FileName = "" Then
+                Return 0
+            End If
+
             Dim documento As New SLDocument()
-            Dim picture As New Drawing.SLPicture("C:\Users\julib\Desktop\Julian\fotosLametalica\SINOBOOM.png")
+            Dim style As New SLStyle()
+            style.Font.Bold = True
+            style.Font.FontSize = 14
+            Dim picture As New Drawing.SLPicture("C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\Resources\head.jpg")
+
             picture.ResizeInPercentage(50, 50)
+
             documento.InsertPicture(picture)
-            documento.SaveAs($"C:\Users\julib\Desktop\Julian\{pNombreArchivo}")
+
+
+            Dim dt As Data.DataTable = DirectCast(pDataGrid.DataSource, Data.DataTable)
+            documento.SetRowStyle(7, style)
+
+            documento.ImportDataTable(7, 1, dt, True)
+
+            documento.SaveAs($"{dialog.FileName}.xlsx")
             Return 1
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -124,5 +155,14 @@ Module mdlFunciones
         End Try
 
     End Function
+#End Region
+
+    Public Sub EliminarFilaDataGridClickDerecho(e As DataGridViewCellMouseEventArgs, dg As DataGridView)
+        If e.RowIndex = -1 Or e.ColumnIndex = -1 Or e.Button = MouseButtons.Left Then
+            Return
+        End If
+        Dim filaEliminar As DataGridViewRow = dg.Rows(e.RowIndex)
+        dg.Rows.Remove(filaEliminar)
+    End Sub
 
 End Module

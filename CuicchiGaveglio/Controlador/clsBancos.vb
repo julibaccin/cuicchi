@@ -7,7 +7,7 @@ Public Class ClsBancos
         mCon = ObtenerConexion()
     End Sub
 
-    Public Function CrearBanco(pIdBanco As Int16, pNombreBanco As String) As Integer
+    Public Function CrearBanco(pIdBanco As Integer, pNombreBanco As String) As Integer
         Try
             Dim query As New SqlCommand("paCrearBanco", mCon) With {
                 .CommandType = CommandType.StoredProcedure
@@ -15,11 +15,10 @@ Public Class ClsBancos
             query.Parameters.AddWithValue("idBanco", pIdBanco)
             query.Parameters.AddWithValue("nombreBanco", pNombreBanco)
             mCon.Open()
-            Dim data As SqlDataReader = query.ExecuteReader()
-            data.Read()
-            Return data.Item(0)
+            query.ExecuteNonQuery()
+            Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: CrearBanco" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -41,7 +40,7 @@ Public Class ClsBancos
             End While
             Return Respuesta
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarBancos" & ex.Message)
             Return Respuesta
         Finally
             mCon.Close()
@@ -62,7 +61,7 @@ Public Class ClsBancos
             query.ExecuteNonQuery()
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ModificarBanco" & ex.Message)
             Return 0
         Finally
             mCon.Close()

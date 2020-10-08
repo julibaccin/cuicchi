@@ -8,6 +8,41 @@ Public Class ClsSaldos
         mCon = ObtenerConexion()
     End Sub
 
+
+    Public Function ConsultarSaldosPorCliente(pIdCliente As Integer) As String
+        Try
+            Dim cadena As String = "Select  IsNull((Select SUM(importe) From AltaComprobantes WHERE idCliente = @idCliente),0) as IMPORTE_FAVOR,
+	    IsNull((Select SUM(importe) From PlanillasPolizas WHERE idCliente = @idCliente),0) as IMPORTE_CONTRA"
+            Dim query As New SqlCommand(cadena, mCon)
+
+            query.Parameters.AddWithValue("idCliente", pIdCliente)
+
+            mCon.Open()
+            Dim resp = query.ExecuteReader()
+            resp.Read()
+
+            Dim total As Integer = resp.Item(0) - resp.Item(1)
+            Dim respuesta As String = ""
+
+            If total = 0 Then
+                respuesta = "El cliente tiene la cuenta en 0"
+            ElseIf total > 0 Then
+                respuesta = $"El cliente tiene a favor $ {total}"
+            ElseIf total < 0 Then
+                respuesta = $"El cliente tiene en contra {total * -1}"
+            End If
+
+            Return respuesta
+        Catch ex As Exception
+            MsgBox("Error de sistema: ConsultarSaldosPorComprobante" & ex.Message)
+            Return ""
+        Finally
+            mCon.Close()
+        End Try
+    End Function
+
+
+
     Public Function ConsultarSaldosPorComprobante(pTabla As DataGridView, pFIngreso As Date)
         Try
             Dim query As New SqlCommand("paConsultarSaldosPorComprobante", mCon) With {
@@ -24,7 +59,7 @@ Public Class ClsSaldos
             Return 1
 
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarSaldosPorComprobante" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -46,34 +81,11 @@ Public Class ClsSaldos
             Return 1
 
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarChequesProximosAVencer" & ex.Message)
             Return 0
         Finally
             mCon.Close()
         End Try
     End Function
 
-    Public Function DevolverCuentaCliente(pIdCliente As Integer) As ArrayList
-        Dim respuesta As New ArrayList
-        Try
-            Dim query As New SqlCommand("paDevolverCuentaCliente", mCon) With {
-                .CommandType = CommandType.StoredProcedure
-            }
-            query.Parameters.AddWithValue("idCliente", pIdCliente)
-            mCon.Open()
-
-            Dim data As SqlDataReader = query.ExecuteReader()
-            While data.Read()
-                respuesta.Add(New With {.entro = data.Item(0), .salio = data.Item(1)})
-            End While
-
-            Return respuesta
-
-        Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
-            Return respuesta
-        Finally
-            mCon.Close()
-        End Try
-    End Function
 End Class

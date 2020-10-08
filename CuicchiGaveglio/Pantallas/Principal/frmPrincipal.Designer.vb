@@ -31,11 +31,13 @@ Partial Class frmPrincipal
         Me.btnAbrirAyuda = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCerrarSesion = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AltaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAltaClientes = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAltaBancos = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompañiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AltaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComprobantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PLANILLASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.COMPROBANTESToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.REPORTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EliiminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -51,10 +53,12 @@ Partial Class frmPrincipal
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
         Me.MenuPrincipal = New System.Windows.Forms.MenuStrip()
+        Me.PENDIENTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DSaldosPorComprobante, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DChequesProximosAVencer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
+        Me.MenuPrincipal.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblComun
@@ -106,13 +110,13 @@ Partial Class frmPrincipal
         'btnAbrirAyuda
         '
         Me.btnAbrirAyuda.Name = "btnAbrirAyuda"
-        Me.btnAbrirAyuda.Size = New System.Drawing.Size(143, 22)
+        Me.btnAbrirAyuda.Size = New System.Drawing.Size(174, 26)
         Me.btnAbrirAyuda.Text = "Ayuda"
         '
         'btnCerrarSesion
         '
         Me.btnCerrarSesion.Name = "btnCerrarSesion"
-        Me.btnCerrarSesion.Size = New System.Drawing.Size(143, 22)
+        Me.btnCerrarSesion.Size = New System.Drawing.Size(174, 26)
         Me.btnCerrarSesion.Text = "Cerrar Sesión"
         '
         'AltaToolStripMenuItem
@@ -125,26 +129,45 @@ Partial Class frmPrincipal
         'btnAltaClientes
         '
         Me.btnAltaClientes.Name = "btnAltaClientes"
-        Me.btnAltaClientes.Size = New System.Drawing.Size(134, 22)
+        Me.btnAltaClientes.Size = New System.Drawing.Size(158, 26)
         Me.btnAltaClientes.Text = "Clientes"
         '
         'btnAltaBancos
         '
         Me.btnAltaBancos.Name = "btnAltaBancos"
-        Me.btnAltaBancos.Size = New System.Drawing.Size(134, 22)
+        Me.btnAltaBancos.Size = New System.Drawing.Size(158, 26)
         Me.btnAltaBancos.Text = "Bancos"
         '
         'CompañiasToolStripMenuItem
         '
         Me.CompañiasToolStripMenuItem.Name = "CompañiasToolStripMenuItem"
-        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(158, 26)
         Me.CompañiasToolStripMenuItem.Text = "Compañias"
+        '
+        'AltaToolStripMenuItem1
+        '
+        Me.AltaToolStripMenuItem1.Name = "AltaToolStripMenuItem1"
+        Me.AltaToolStripMenuItem1.Size = New System.Drawing.Size(107, 26)
+        Me.AltaToolStripMenuItem1.Text = "Alta"
         '
         'ComprobantesToolStripMenuItem
         '
+        Me.ComprobantesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PLANILLASToolStripMenuItem, Me.COMPROBANTESToolStripMenuItem1})
         Me.ComprobantesToolStripMenuItem.Name = "ComprobantesToolStripMenuItem"
         Me.ComprobantesToolStripMenuItem.Size = New System.Drawing.Size(145, 25)
         Me.ComprobantesToolStripMenuItem.Text = "COMPROBANTES"
+        '
+        'PLANILLASToolStripMenuItem
+        '
+        Me.PLANILLASToolStripMenuItem.Name = "PLANILLASToolStripMenuItem"
+        Me.PLANILLASToolStripMenuItem.Size = New System.Drawing.Size(203, 26)
+        Me.PLANILLASToolStripMenuItem.Text = "PLANILLAS"
+        '
+        'COMPROBANTESToolStripMenuItem1
+        '
+        Me.COMPROBANTESToolStripMenuItem1.Name = "COMPROBANTESToolStripMenuItem1"
+        Me.COMPROBANTESToolStripMenuItem1.Size = New System.Drawing.Size(203, 26)
+        Me.COMPROBANTESToolStripMenuItem1.Text = "COMPROBANTES"
         '
         'REPORTESToolStripMenuItem
         '
@@ -158,12 +181,6 @@ Partial Class frmPrincipal
         Me.EliiminarToolStripMenuItem.Name = "EliiminarToolStripMenuItem"
         Me.EliiminarToolStripMenuItem.Size = New System.Drawing.Size(92, 25)
         Me.EliiminarToolStripMenuItem.Text = "ELIMINAR"
-        '
-        'AltaToolStripMenuItem1
-        '
-        Me.AltaToolStripMenuItem1.Name = "AltaToolStripMenuItem1"
-        Me.AltaToolStripMenuItem1.Size = New System.Drawing.Size(95, 22)
-        Me.AltaToolStripMenuItem1.Text = "Alta"
         '
         'Label1
         '
@@ -290,17 +307,23 @@ Partial Class frmPrincipal
         '
         'MenuPrincipal
         '
-        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem})
         Me.MenuPrincipal.BackColor = System.Drawing.Color.White
         Me.MenuPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuPrincipal.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
+        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem, Me.PENDIENTESToolStripMenuItem})
         Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
         Me.MenuPrincipal.Name = "MenuPrincipal"
         Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
         Me.MenuPrincipal.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MenuPrincipal.Size = New System.Drawing.Size(719, 25)
+        Me.MenuPrincipal.Size = New System.Drawing.Size(719, 31)
         Me.MenuPrincipal.TabIndex = 11
         Me.MenuPrincipal.Text = "MenuStrip1"
+        '
+        'PENDIENTESToolStripMenuItem
+        '
+        Me.PENDIENTESToolStripMenuItem.Name = "PENDIENTESToolStripMenuItem"
+        Me.PENDIENTESToolStripMenuItem.Size = New System.Drawing.Size(111, 25)
+        Me.PENDIENTESToolStripMenuItem.Text = "PENDIENTES"
         '
         'frmPrincipal
         '
@@ -328,6 +351,8 @@ Partial Class frmPrincipal
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.MenuPrincipal.ResumeLayout(False)
+        Me.MenuPrincipal.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -359,4 +384,7 @@ Partial Class frmPrincipal
     Friend WithEvents LeftToolStripPanel As ToolStripPanel
     Friend WithEvents ContentPanel As ToolStripContentPanel
     Friend WithEvents MenuPrincipal As MenuStrip
+    Friend WithEvents PLANILLASToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents COMPROBANTESToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents PENDIENTESToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -10,5 +10,6 @@
     Public FPago As Date
     Public idUsuario As Integer
     Public idEstado As Integer
+    Public idEstadoOperacion As Integer
 
 End Class

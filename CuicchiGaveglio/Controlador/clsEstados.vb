@@ -19,7 +19,7 @@ Public Class ClsEstados
             End While
             Return Respuesta
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarEstados" & ex.Message)
             Return Respuesta
         Finally
             mCon.Close()

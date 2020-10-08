@@ -9,12 +9,19 @@ Public Class ClsComprobantes
         mCon = ObtenerConexion()
     End Sub
 
-    Public Function CrearMovimiento(pAlta As ModeloAltaComprobantes) As Integer
+    Public Function CrearMovimiento(pAlta As ModeloAltaComprobantes) As Int16
 
         Try
-            Dim query As New SqlCommand("paCrearAltaComprobante", mCon) With {
-                .CommandType = CommandType.StoredProcedure
-            }
+
+
+            Dim cadena As String =
+            "INSERT INTO AltaComprobantes 
+            (idTipoComprobante, fIngreso, idCliente, idCompania, obs, numero, idBanco, importe, fPago, idUsuario, idEstado, obsBaja, idEstadoOperacion)
+		    VALUES(@idTipoComprobante,@fIngreso,@idCliente,@idCompania,@obs,@numero,@idBanco,@importe,@fPago,@idUsuario,@idEstado,'',@idEstadoOperacion)
+            SELECT TOP 1 idAlta From AltaComprobantes ORDER BY idAlta DESC
+            "
+
+            Dim query As New SqlCommand(cadena, mCon)
             With query.Parameters
                 .AddWithValue("idTipoComprobante", pAlta.idTipoComprobante)
                 .AddWithValue("fIngreso", pAlta.FIngreso)
@@ -27,14 +34,15 @@ Public Class ClsComprobantes
                 .AddWithValue("idEstado", pAlta.idEstado)
                 .AddWithValue("numero", pAlta.Numero)
                 .AddWithValue("idBanco", pAlta.idBanco)
+                .AddWithValue("idEstadoOperacion", pAlta.idEstadoOperacion)
             End With
 
             mCon.Open()
-            query.ExecuteNonQuery()
-
-            Return 1
+            Dim resp = query.ExecuteReader()
+            resp.Read()
+            Return resp.Item(0)
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: CrearMovimiento" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -42,7 +50,7 @@ Public Class ClsComprobantes
 
     End Function
 
-    Public Function CambiarEstado(pIdAlta As Integer, pObsBaja As String, pIdEstado As Integer, pIdCompania As Integer) As Integer
+    Public Function CambiarEstado(pIdAlta As Integer, pObsBaja As String, pIdEstado As Integer, pIdCompania As Integer) As Int16
 
         Try
             Dim query As New SqlCommand("paModificarEstadoAltaComprobante", mCon) With {
@@ -60,7 +68,7 @@ Public Class ClsComprobantes
 
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: CambiarEstado" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -68,7 +76,7 @@ Public Class ClsComprobantes
 
     End Function
 
-    Public Function EliminarMovimiento(pIdAlta As Integer) As Integer
+    Public Function EliminarMovimiento(pIdAlta As Integer) As Int16
 
         Try
             Dim query As New SqlCommand("paEliminarAltaComprobante", mCon) With {
@@ -83,7 +91,7 @@ Public Class ClsComprobantes
 
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: EliminarMovimiento" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -124,7 +132,7 @@ Public Class ClsComprobantes
             Return 1
 
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarAltaComprobantes" & ex.Message)
             Return 0
         Finally
             mCon.Close()

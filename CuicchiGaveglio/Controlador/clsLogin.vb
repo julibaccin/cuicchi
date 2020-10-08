@@ -25,7 +25,7 @@ Public Class ClsLogin
                 Return 0
             End If
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: Login" & ex.Message)
             Return 0
         Finally
             mCon.Close()

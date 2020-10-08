@@ -76,6 +76,18 @@ INSERT INTO Usuarios (nombreUsuario,pass) VALUES ('julian','admin')
 INSERT INTO Usuarios (nombreUsuario,pass) VALUES ('eliminar','admin')
 
 ----------------------------------------------------------------------------
+
+CREATE TABLE EstadosOperacion 
+(
+idEstadoOperacion TINYINT IDENTITY(1,1) PRIMARY KEY,
+nombreEstadoOperacion varchar(25) NOT NULL
+)
+
+INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('ACEPTADO')
+INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('PENDIENTE')
+INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('RECHAZADO')
+
+----------------------------------------------------------------------------
 CREATE TABLE AltaComprobantes 
 (
 idAlta INT IDENTITY(1,1) PRIMARY KEY,
@@ -90,7 +102,7 @@ idBanco smallint NOT NULL,
 idEstado tinyint NOT NULL,
 obs varchar(100) NOT NULL,
 obsBaja varchar(100) NOT NULL,
-idUsuario tinyint NOT NULL,
+idUsuario tinyint NOT NULL
 CONSTRAINT fk_TipoComprobante FOREIGN KEY (idTipoComprobante) REFERENCES TipoComprobantes (idTipoComprobante),
 CONSTRAINT fk_Cliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
 CONSTRAINT fk_Compania FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania),
@@ -100,43 +112,77 @@ CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario)
 )
 
 
---DROP TABLE Planillas
---DROP TABLE PlanillasPolizas
---DROP TABLE PolizasPagos
-
---Planillas de Polizas por cliente
+--Planillas de Polizas por cliente DROP TABLE Planillas
 CREATE TABLE Planillas 
 (
 idCliente SMALLINT NOT NULL,
 f DATE NOT NULL,
+numeroPlanilla SMALLINT NOT NULL,
 idUsuario tinyint NOT NULL,
+idEstadoOperacion tinyint NOT NULL,
 PRIMARY KEY (idCliente,f),
 CONSTRAINT fk_ClientePlanilla FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
+CONSTRAINT fk_UsuarioPlanilla FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
+CONSTRAINT fk_EstadoOperacionPlanillas FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion)
 )
 
 CREATE TABLE PlanillasPolizas
 (
 idCliente SMALLINT NOT NULL,
 f DATE NOT NULL,
-poliza SMALLINT,
-importe INT,
-detalle VARCHAR(50),
+numeracion smallint,
+tomador varchar(30),
 ref VARCHAR(30),
-titular VARCHAR(50),
-fVencimiento DATE DEFAULT NULL,
+idCompania SMALLINT,
+detalle VARCHAR(50),
 patente VARCHAR (10) DEFAULT NULL,
-PRIMARY KEY (idCliente,f, poliza),
-CONSTRAINT fk_idCliente_fechaPlanilla FOREIGN KEY (idCliente,f) REFERENCES Planillas (idCliente,f)
+fVencimiento DATE DEFAULT NULL,
+importe INT,
+PRIMARY KEY (idCliente,f,numeracion),
+CONSTRAINT fk_idCliente_fechaPlanilla FOREIGN KEY (idCliente,f) REFERENCES Planillas (idCliente,f),
+CONSTRAINT fk_CompaniaPlanillaPoliza FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania)
 )
 
-CREATE TABLE PolizasPagos (
-
-idCliente SMALLINT,
-f DATE,
-poliza SMALLINT,
-idAlta INT,
-importeAlta INT,
-PRIMARY KEY (idCliente,f, poliza,idAlta),
-CONSTRAINT fk_poliza_Pago FOREIGN KEY (idCliente,f,poliza) REFERENCES PlanillasPolizas (idCliente,f,poliza),
-CONSTRAINT fk_poliza_idAlta FOREIGN KEY (idAlta) REFERENCES AltaComprobantes (idAlta)
+CREATE TABLE PlanillasPagos
+(
+idCliente SMALLINT NOT NULL,
+f DATE NOT NULL,
+idAlta INT NOT NULL,
+PRIMARY KEY (idCliente,f,idAlta),
+CONSTRAINT fk_Planillas_Pagos FOREIGN KEY (IdCliente, f) REFERENCES Planillas (idCliente,f),
+CONSTRAINT fk_ClientePlanillaPagos FOREIGN KEY (idAlta) REFERENCES AltaComprobantes (idAlta)
 )
+
+
+
+
+SELECT * FROM PlanillasPagos
+SELECT * FROM Planillas P
+INNER JOIN PlanillasPagos PP ON P.f = pp.f AND pp.idCliente = p.idCliente 
+
+
+
+
+--DELETE FROM AltaComprobantes
+--DELETE FROM Planillas
+--DELETE FROM PlanillasPolizas
+--DELETE FROM PlanillasPagos
+--DELETE FROM Clientes
+
+SELECT (Select SUM(importe) From AltaComprobantes WHERE idCliente = 8) as IMPORTE_FAVOR,
+	   (Select SUM(importe) From PlanillasPolizas WHERE idCliente = 8) as IMPORTE_CONTRA
+
+, SUM(PlanillasPolizas.importe) as IMPORTES_CONTRA 
+
+
+
+Select *  From PlanillasPolizas where idCliente = 8
+
+Select * From Planillas
+
+Select * From PlanillasPagos where idCliente = 8
+
+
+select * from Clientes
+
+

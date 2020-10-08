@@ -9,7 +9,7 @@ Public Class ClsCompania
         mCon = ObtenerConexion()
     End Sub
 
-    Public Function CrearCompania(pNombreCompania, pCuitCompania) As Integer
+    Public Function CrearCompania(pNombreCompania, pCuitCompania) As Int16
 
         Try
             Dim query As New SqlCommand("paCrearCompania", mCon) With {
@@ -18,11 +18,10 @@ Public Class ClsCompania
             query.Parameters.AddWithValue("nombreCompania", pNombreCompania)
             query.Parameters.AddWithValue("cuitCompania", pCuitCompania)
             mCon.Open()
-            Dim data As SqlDataReader = query.ExecuteReader()
-            data.Read()
-            Return data.Item(0)
+            query.ExecuteNonQuery()
+            Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: CrearCompania" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -30,7 +29,7 @@ Public Class ClsCompania
 
     End Function
 
-    Public Function ModificarCompania(pIdCompania, pNombreCompania, pCuitCompania) As Integer
+    Public Function ModificarCompania(pIdCompania, pNombreCompania, pCuitCompania) As Int16
 
         Try
             Dim query As New SqlCommand("paModificarCompania", mCon) With {
@@ -43,7 +42,7 @@ Public Class ClsCompania
             query.ExecuteNonQuery()
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ModificarCompania" & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -66,7 +65,7 @@ Public Class ClsCompania
             Return Respuesta
 
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarCompanias" & ex.Message)
             Return Respuesta
         Finally
             mCon.Close()
@@ -89,7 +88,7 @@ Public Class ClsCompania
             pTabla.DataSource = tabla
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: " & ex.Message)
+            MsgBox("Error de sistema: ConsultarCompanias" & ex.Message)
             Return 0
         Finally
             mCon.Close()

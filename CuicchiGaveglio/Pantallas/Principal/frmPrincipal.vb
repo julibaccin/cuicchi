@@ -44,12 +44,17 @@
         End If
     End Sub
 
-    Private Sub ComprobantesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ComprobantesToolStripMenuItem.Click
-        frmConsultarComprobantes.ShowDialog()
-    End Sub
 
     Private Sub Reportes(sender As Object, e As EventArgs) Handles REPORTESToolStripMenuItem.Click
         frmReportes.ShowDialog()
+    End Sub
+
+    Private Sub PLANILLASToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PLANILLASToolStripMenuItem.Click
+        frmPlanillas.Show()
+    End Sub
+
+    Private Sub COMPROBANTESToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles COMPROBANTESToolStripMenuItem1.Click
+        frmConsultarComprobantes.Show()
     End Sub
 
 End Class

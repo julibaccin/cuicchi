@@ -21,3 +21,4 @@ C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\bin\Debug\SpreadsheetLigh
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\bin\Debug\SpreadsheetLight.xml
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.vbproj.CopyComplete
 C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmPlanillas.resources

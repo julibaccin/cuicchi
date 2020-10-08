@@ -7,7 +7,11 @@
 
 SELECT * FROM 
 AltaComprobantes
---WHERE (fIngreso >= fDesde AND fIngreso<= fHasta) 
+WHERE (fIngreso >= '2020-01-01' AND fIngreso<= '2020-10-05') 
+ORDER BY fIngreso, idTipoComprobante
+
+SELECT * FROM AltaComprobantes
+WHERE (fIngreso >= '6/9/2020' AND fIngreso<= '5/10/2020')
 ORDER BY fIngreso, idTipoComprobante
 
 --MOVIMIENTOS DE RECIBO, Separados por la Compañia
