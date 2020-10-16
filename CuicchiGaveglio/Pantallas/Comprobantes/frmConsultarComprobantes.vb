@@ -1,5 +1,6 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
+Imports CapaDatos
 
 Public Class frmConsultarComprobantes
 
@@ -36,7 +37,7 @@ Public Class frmConsultarComprobantes
     End Sub
 
     Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        Dim Respuesta = Control.ConsultarAltaComprobantes(DComprobantes, ExtraerLetras(cmbTipoComprobanteFiltro.Text),
+        Dim Respuesta = Control.ConsultarComprobantes(DComprobantes, ExtraerLetras(cmbTipoComprobanteFiltro.Text),
                                                           DFIngresoDesdeFiltro.Value, DFIngresoHastaFiltro.Value,
                                                           txtNumeroFiltro.Text, ExtraerLetras(cmbUsuarioFiltro.Text), Date.Now(),
                                                           txtImporteFiltro.Text,
@@ -214,6 +215,8 @@ Public Class frmConsultarComprobantes
             Return
         End If
 
+
+
         DPreviaACargar.Rows.Add(cmbTipoComprobante.Text, DFechaIngreso.Value,
                                 cmbCliente.Text, cmbCompania.Text, txtImporte.Text,
                                 txtNumero.Text, DFechaPago.Value,
@@ -226,17 +229,17 @@ Public Class frmConsultarComprobantes
         Dim Respuesta As Int16
         If DPreviaACargar.Rows.Count > 0 Then
             For Each Fila As DataGridViewRow In DPreviaACargar.Rows
-                Dim objAlta As New ModeloAltaComprobantes
+                Dim objAlta As New ModeloComprobante
                 With objAlta
                     .idTipoComprobante = ExtraerNumeros(Fila.Cells("tipoComprobante").Value)
                     .FIngreso = Fila.Cells("fIngreso").Value
                     .idCliente = ExtraerNumeros(Fila.Cells("Cliente").Value)
-                    .idCompania = ExtraerNumeros(Fila.Cells("Compania").Value)
+                    .IdCompania = If(ExtraerNumeros(Fila.Cells("Compania").Value), 0)
                     .Importe = Fila.Cells("importe").Value
-                    .Numero = Fila.Cells("numero").Value
+                    .Numero = If(Fila.Cells("numero").Value, "")
                     .FPago = Fila.Cells("fpago").Value
-                    .idBanco = ExtraerNumeros(Fila.Cells("Banco").Value)
-                    .Obs = Fila.Cells("obs").Value
+                    .IdBanco = If(ExtraerNumeros(Fila.Cells("Banco").Value), 0)
+                    .Obs = If(Fila.Cells("obs").Value, "")
                     .idUsuario = frmLogin.idUsuario
                     .idEstado = 1
                     .idEstadoOperacion = 1

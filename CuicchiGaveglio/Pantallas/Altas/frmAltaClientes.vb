@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms
+Imports CapaDatos
 
 Public Class frmAltaClientes
     Dim Control As New ClsClientes()

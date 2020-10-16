@@ -41,7 +41,7 @@ Partial Class frmPrincipal
         Me.REPORTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EliiminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DSaldosPorComprobante = New System.Windows.Forms.DataGridView()
+        Me.DPendientes = New System.Windows.Forms.DataGridView()
         Me.lblAdvertencias = New System.Windows.Forms.Label()
         Me.DChequesProximosAVencer = New System.Windows.Forms.DataGridView()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -53,12 +53,14 @@ Partial Class frmPrincipal
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
         Me.MenuPrincipal = New System.Windows.Forms.MenuStrip()
-        Me.PENDIENTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        CType(Me.DSaldosPorComprobante, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DRechazados = New System.Windows.Forms.DataGridView()
+        Me.Label3 = New System.Windows.Forms.Label()
+        CType(Me.DPendientes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DChequesProximosAVencer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.MenuPrincipal.SuspendLayout()
+        CType(Me.DRechazados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblComun
@@ -195,19 +197,19 @@ Partial Class frmPrincipal
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "Fecha:"
         '
-        'DSaldosPorComprobante
+        'DPendientes
         '
-        Me.DSaldosPorComprobante.AllowUserToAddRows = False
-        Me.DSaldosPorComprobante.AllowUserToDeleteRows = False
-        Me.DSaldosPorComprobante.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.DSaldosPorComprobante.BackgroundColor = System.Drawing.Color.White
-        Me.DSaldosPorComprobante.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.DSaldosPorComprobante.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DSaldosPorComprobante.Location = New System.Drawing.Point(12, 62)
-        Me.DSaldosPorComprobante.Name = "DSaldosPorComprobante"
-        Me.DSaldosPorComprobante.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.DSaldosPorComprobante.Size = New System.Drawing.Size(403, 196)
-        Me.DSaldosPorComprobante.TabIndex = 15
+        Me.DPendientes.AllowUserToAddRows = False
+        Me.DPendientes.AllowUserToDeleteRows = False
+        Me.DPendientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DPendientes.BackgroundColor = System.Drawing.Color.White
+        Me.DPendientes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DPendientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DPendientes.Location = New System.Drawing.Point(12, 62)
+        Me.DPendientes.Name = "DPendientes"
+        Me.DPendientes.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.DPendientes.Size = New System.Drawing.Size(403, 196)
+        Me.DPendientes.TabIndex = 15
         '
         'lblAdvertencias
         '
@@ -242,9 +244,9 @@ Partial Class frmPrincipal
         Me.Label2.ForeColor = System.Drawing.Color.Maroon
         Me.Label2.Location = New System.Drawing.Point(12, 41)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(74, 18)
+        Me.Label2.Size = New System.Drawing.Size(109, 18)
         Me.Label2.TabIndex = 20
-        Me.Label2.Text = "SALDOS"
+        Me.Label2.Text = "PENDIENTES"
         '
         'PictureBox1
         '
@@ -310,33 +312,54 @@ Partial Class frmPrincipal
         Me.MenuPrincipal.BackColor = System.Drawing.Color.White
         Me.MenuPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuPrincipal.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem, Me.PENDIENTESToolStripMenuItem})
+        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem})
         Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
         Me.MenuPrincipal.Name = "MenuPrincipal"
         Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
         Me.MenuPrincipal.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MenuPrincipal.Size = New System.Drawing.Size(719, 31)
+        Me.MenuPrincipal.Size = New System.Drawing.Size(1008, 31)
         Me.MenuPrincipal.TabIndex = 11
         Me.MenuPrincipal.Text = "MenuStrip1"
         '
-        'PENDIENTESToolStripMenuItem
+        'DRechazados
         '
-        Me.PENDIENTESToolStripMenuItem.Name = "PENDIENTESToolStripMenuItem"
-        Me.PENDIENTESToolStripMenuItem.Size = New System.Drawing.Size(111, 25)
-        Me.PENDIENTESToolStripMenuItem.Text = "PENDIENTES"
+        Me.DRechazados.AllowUserToAddRows = False
+        Me.DRechazados.AllowUserToDeleteRows = False
+        Me.DRechazados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.DRechazados.BackgroundColor = System.Drawing.Color.White
+        Me.DRechazados.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.DRechazados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DRechazados.Location = New System.Drawing.Point(698, 62)
+        Me.DRechazados.Name = "DRechazados"
+        Me.DRechazados.ScrollBars = System.Windows.Forms.ScrollBars.None
+        Me.DRechazados.Size = New System.Drawing.Size(298, 196)
+        Me.DRechazados.TabIndex = 25
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.BackColor = System.Drawing.Color.Transparent
+        Me.Label3.ForeColor = System.Drawing.Color.Maroon
+        Me.Label3.Location = New System.Drawing.Point(695, 41)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(119, 18)
+        Me.Label3.TabIndex = 26
+        Me.Label3.Text = "RECHAZADOS"
         '
         'frmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(719, 426)
+        Me.ClientSize = New System.Drawing.Size(1008, 426)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.DRechazados)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DChequesProximosAVencer)
         Me.Controls.Add(Me.lblAdvertencias)
-        Me.Controls.Add(Me.DSaldosPorComprobante)
+        Me.Controls.Add(Me.DPendientes)
         Me.Controls.Add(Me.MenuPrincipal)
         Me.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.IsMdiContainer = True
@@ -346,13 +369,14 @@ Partial Class frmPrincipal
         Me.Name = "frmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cuicchi Gaveglio"
-        CType(Me.DSaldosPorComprobante, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DPendientes, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DChequesProximosAVencer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.MenuPrincipal.ResumeLayout(False)
         Me.MenuPrincipal.PerformLayout()
+        CType(Me.DRechazados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -371,7 +395,7 @@ Partial Class frmPrincipal
     Friend WithEvents CompañiasToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents EliiminarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AltaToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents DSaldosPorComprobante As DataGridView
+    Friend WithEvents DPendientes As DataGridView
     Friend WithEvents lblAdvertencias As Label
     Friend WithEvents DChequesProximosAVencer As DataGridView
     Friend WithEvents Label2 As Label
@@ -386,5 +410,6 @@ Partial Class frmPrincipal
     Friend WithEvents MenuPrincipal As MenuStrip
     Friend WithEvents PLANILLASToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents COMPROBANTESToolStripMenuItem1 As ToolStripMenuItem
-    Friend WithEvents PENDIENTESToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DRechazados As DataGridView
+    Friend WithEvents Label3 As Label
 End Class

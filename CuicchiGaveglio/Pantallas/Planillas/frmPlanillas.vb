@@ -1,4 +1,5 @@
 ﻿Imports System.Windows.Forms
+Imports CapaDatos
 
 Public Class frmPlanillas
 
@@ -11,6 +12,21 @@ Public Class frmPlanillas
     End Sub
 
     Public Sub setearValoresCombo()
+        rbAceptar.Visible = False
+        rbRechazar.Visible = False
+        btnCambioEstadoPlanilla.Visible = False
+        If frmLogin.idRol = 1 Then
+            rbAceptar.Visible = True
+            rbRechazar.Visible = True
+            btnCambioEstadoPlanilla.Visible = True
+        Else
+            rbAceptar.Visible = False
+            rbRechazar.Visible = False
+            btnCambioEstadoPlanilla.Visible = False
+        End If
+        DFechaIngreso.Value = Date.Now()
+        DFechaPago.Value = Date.Now()
+        DFechaPlanillaNueva.Value = Date.Now()
         LlenarComboClientes(cmbClienteP)
         LlenarComboTipoComprobantes(cmbTipoComprobante)
         LlenarComboCompanias(cmbCompania)
@@ -47,7 +63,7 @@ Public Class frmPlanillas
         End If
 
         If PlanillasController.CrearPlanilla(ExtraerNumeros(cmbClienteP.Text) _
-                                            , DFechaPlanillaNueva.Value, 1, frmLogin.idUsuario, 2) = 0 Then
+                                            , DFechaPlanillaNueva.Value, frmLogin.idUsuario, 2) = 0 Then
             MsgBox("Ya existe una planilla para ese cliente, en esa fecha")
             Return
         End If
@@ -59,6 +75,9 @@ Public Class frmPlanillas
         If cmbFechaP.Text = "Nueva Planilla" Then
             DFechaPlanillaNueva.Visible = True
             DgPlanillaPolizas.Visible = False
+            txtEstado.Text = ""
+            txtTotal.Text = ""
+            btnModificar.Visible = False
             Return
         End If
         DgPlanillaPolizas.Visible = True
@@ -69,7 +88,7 @@ Public Class frmPlanillas
             Return
         End If
 
-        PlanillasController.DevolverPolizasDePlanilla(DgPlanillaPolizas,
+        PlanillasController.DevolverRecibosDePlanilla(DgPlanillaPolizas,
                                           ExtraerNumeros(cmbClienteP.Text),
                                           cmbFechaP.Text)
 
@@ -86,6 +105,14 @@ Public Class frmPlanillas
 
         Next
         txtTotal.Text = total
+
+        'Mostrar si la planilla está rechazada el boton modificar
+        If txtEstado.Text = "RECHAZADO" Then
+            btnModificar.Visible = True
+        Else
+            btnModificar.Visible = False
+        End If
+
     End Sub
 
     Private Sub PreCargarComprobantesAPlanilla(sender As Object, e As EventArgs) Handles btnPreCargar.Click
@@ -135,10 +162,10 @@ Public Class frmPlanillas
             Return
         End If
 
-        'Inserto todas las altas de comprobantes
+        'Inserto los comprobantes
         For Each Fila As DataGridViewRow In DPreviaACargar.Rows
 
-            Dim objAlta As New ModeloAltaComprobantes
+            Dim objAlta As New ModeloComprobante
             With objAlta
                 .idTipoComprobante = ExtraerNumeros(Fila.Cells("tipoComprobante").Value)
                 .FIngreso = Fila.Cells("fIngreso").Value
@@ -151,7 +178,7 @@ Public Class frmPlanillas
                 .Obs = Fila.Cells("obs").Value
                 .idUsuario = frmLogin.idUsuario
                 .idEstado = 1
-                .idEstadoOperacion = 1
+                .IdEstadoOperacion = 2
             End With
             Dim idAlta As Integer = ComprobantesController.CrearMovimiento(objAlta)
 
@@ -160,8 +187,8 @@ Public Class frmPlanillas
                 Return
             End If
 
-            'Cargo en la tabla PlanillaPagos
-            PlanillasController.AgregarPagoAPlanilla(ExtraerNumeros(cmbClienteP.Text), cmbFechaP.Text, idAlta)
+
+
         Next
 
         DPreviaACargar.Rows.Clear()
@@ -170,20 +197,38 @@ Public Class frmPlanillas
         LimpiarCampos()
     End Sub
 
-    Private Sub CargarPolizasAPlanilla(sender As Object, e As EventArgs) Handles btnCargarPolizas.Click
+    Private Sub CargarRecibosAPlanilla(sender As Object, e As EventArgs) Handles btnCargarPolizas.Click
 
-        'Agrega todas las polizas a la planilla correspondiente
+        Dim idCliente = ExtraerNumeros(cmbClienteP.Text)
+
+        'Agrega todos los recibos y los relaciono
         For Each row As DataGridViewRow In DgPlanillaPolizas.Rows
             If row.IsNewRow = True Then
                 Exit For
             End If
-            PlanillasController.AgregarPolizaAPlanilla(
-            ExtraerNumeros(cmbClienteP.Text), cmbFechaP.Text, row.Cells("numeracion").Value,
-            row.Cells("tomador").Value, row.Cells("ref").Value, row.Cells("idcompania").Value,
-            row.Cells("detalle").Value, row.Cells("patente").Value, row.Cells("fvencimiento").Value,
-            row.Cells("importe").Value
-            )
+            Dim alta As New ModeloComprobante()
+            alta.FIngreso = cmbFechaP.Text
+            alta.FPago = cmbFechaP.Text
+            alta.IdTipoComprobante = 4
+            alta.IdCompania = row.Cells("idCompania").Value
+            alta.IdUsuario = frmLogin.idUsuario
+            alta.Importe = row.Cells("importe").Value
+            alta.Obs = ""
+            alta.IdCliente = idCliente
+            alta.IdEstado = 1
+            alta.IdEstadoOperacion = 2
+            alta.Numero = ""
+            alta.IdBanco = 0
+
+            Dim idAlta As Integer = ComprobantesController.CrearMovimiento(alta)
+
+            PlanillasController.AgregarReciboAPlanilla(idCliente, cmbFechaP.Text, idAlta,
+                                                       row.Cells("Tomador").Value, row.Cells("Ref").Value,
+                                                       row.Cells("idCompania").Value, row.Cells("Detalle").Value,
+                                                       row.Cells("patente").Value, row.Cells("FVencimiento").Value,
+                                                       row.Cells("importe").Value)
         Next
+
 
         'Refresco los datos
         cmbFechaPChanged(sender, e)
@@ -219,5 +264,53 @@ Public Class frmPlanillas
 
     Private Sub DPreviaACargar_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DPreviaACargar.CellMouseClick
         EliminarFilaDataGridClickDerecho(e, DPreviaACargar)
+    End Sub
+
+    Private Sub BtnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
+        Dim idCliente = ExtraerNumeros(cmbClienteP.Text)
+        'Cambiar Estado de planilla a pendiente nuevamente
+        PlanillasController.CambiarEstadoPlanilla(idCliente, cmbFechaP.Text, 2)
+        'Borra todos los comprobantes y los PlanillasComprobantes
+
+        Dim data As ArrayList = PlanillasController.EliminarPlanillasComprobantes(idCliente, cmbFechaP.Text)
+
+        For Each row As Integer In data
+            ComprobantesController.EliminarComprobante(row)
+        Next
+
+        'Vuelve a cargar
+        'Agrega todos los recibos y los relaciono
+        For Each row As DataGridViewRow In DgPlanillaPolizas.Rows
+            If row.IsNewRow = True Then
+                Exit For
+            End If
+            Dim alta As New ModeloComprobante()
+            alta.FIngreso = cmbFechaP.Text
+            alta.FPago = cmbFechaP.Text
+            alta.IdTipoComprobante = 4
+            alta.IdCompania = row.Cells("idCompania").Value
+            alta.IdUsuario = frmLogin.idUsuario
+            alta.Importe = row.Cells("importe").Value
+            alta.Obs = ""
+            alta.IdCliente = idCliente
+            alta.IdEstado = 1
+            alta.IdEstadoOperacion = 2
+            alta.Numero = ""
+            alta.IdBanco = 0
+
+            Dim idAlta As Integer = ComprobantesController.CrearMovimiento(alta)
+
+            PlanillasController.AgregarReciboAPlanilla(idCliente, cmbFechaP.Text, idAlta,
+                                                       row.Cells("Tomador").Value, row.Cells("Ref").Value,
+                                                       row.Cells("idCompania").Value, row.Cells("Detalle").Value,
+                                                       row.Cells("patente").Value, row.Cells("FVencimiento").Value,
+                                                       row.Cells("importe").Value)
+        Next
+
+
+        'Refresco los datos
+        cmbFechaPChanged(sender, e)
+        MsgBox("Se agregaron correctamente las polizas a la planilla")
+
     End Sub
 End Class

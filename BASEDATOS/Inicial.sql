@@ -64,16 +64,16 @@ INSERT INTO Estados(idEstado,nombreEstado) VALUES (4,'Rechazado')
 INSERT INTO Estados(idEstado,nombreEstado) VALUES (5,'Repuesto')
 
 -----------------------------------------------------------------------------------
-
 CREATE TABLE Usuarios 
 (
 idUsuario TINYINT IDENTITY(1,1) PRIMARY KEY,
 nombreUsuario varchar(25) NOT NULL,
-pass varchar(25) NOT NULL
+pass varchar(25) NOT NULL,
+idRol tinyInt
 )
 
-INSERT INTO Usuarios (nombreUsuario,pass) VALUES ('julian','admin')
-INSERT INTO Usuarios (nombreUsuario,pass) VALUES ('eliminar','admin')
+INSERT INTO Usuarios (nombreUsuario,pass,idRol) VALUES ('julian','admin',2)
+INSERT INTO Usuarios (nombreUsuario,pass,idRol) VALUES ('ivana','admin',1)
 
 ----------------------------------------------------------------------------
 
@@ -88,27 +88,30 @@ INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('PENDIENTE')
 INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('RECHAZADO')
 
 ----------------------------------------------------------------------------
-CREATE TABLE AltaComprobantes 
+
+CREATE TABLE Comprobantes 
 (
 idAlta INT IDENTITY(1,1) PRIMARY KEY,
 idTipoComprobante TINYINT NOT NULL,
 fIngreso DATE NOT NULL,
-fPago date NOT NULL,
+fPago date,
 idCliente SMALLINT NOT NULL,
-idCompania SMALLINT NOT NULL,
+idCompania SMALLINT,
 importe int NOT NULL,
-numero varchar(25) NOT NULL,
-idBanco smallint NOT NULL,
+numero varchar(25),
+idBanco smallint,
 idEstado tinyint NOT NULL,
 obs varchar(100) NOT NULL,
-obsBaja varchar(100) NOT NULL,
-idUsuario tinyint NOT NULL
+obsBaja varchar(100),
+idUsuario tinyint NOT NULL,
+idEstadoOperacion tinyint NOT NULL,
 CONSTRAINT fk_TipoComprobante FOREIGN KEY (idTipoComprobante) REFERENCES TipoComprobantes (idTipoComprobante),
 CONSTRAINT fk_Cliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
 CONSTRAINT fk_Compania FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania),
 CONSTRAINT fk_Banco FOREIGN KEY (idBanco) REFERENCES Bancos (idBanco),
 CONSTRAINT fk_Estado FOREIGN KEY (idEstado) REFERENCES Estados (idEstado),
-CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario)
+CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
+CONSTRAINT fk_EstadoOperacionComprobantes FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion)
 )
 
 
@@ -117,72 +120,43 @@ CREATE TABLE Planillas
 (
 idCliente SMALLINT NOT NULL,
 f DATE NOT NULL,
-numeroPlanilla SMALLINT NOT NULL,
 idUsuario tinyint NOT NULL,
 idEstadoOperacion tinyint NOT NULL,
 PRIMARY KEY (idCliente,f),
 CONSTRAINT fk_ClientePlanilla FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
 CONSTRAINT fk_UsuarioPlanilla FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
-CONSTRAINT fk_EstadoOperacionPlanillas FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion)
+CONSTRAINT fk_EstadoOperacionPlanillas FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion),
 )
 
-CREATE TABLE PlanillasPolizas
+CREATE TABLE PlanillasComprobantes 
 (
 idCliente SMALLINT NOT NULL,
 f DATE NOT NULL,
-numeracion smallint,
-tomador varchar(30),
-ref VARCHAR(30),
-idCompania SMALLINT,
-detalle VARCHAR(50),
-patente VARCHAR (10) DEFAULT NULL,
-fVencimiento DATE DEFAULT NULL,
-importe INT,
-PRIMARY KEY (idCliente,f,numeracion),
-CONSTRAINT fk_idCliente_fechaPlanilla FOREIGN KEY (idCliente,f) REFERENCES Planillas (idCliente,f),
-CONSTRAINT fk_CompaniaPlanillaPoliza FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania)
-)
-
-CREATE TABLE PlanillasPagos
-(
-idCliente SMALLINT NOT NULL,
-f DATE NOT NULL,
-idAlta INT NOT NULL,
+idAlta INT,
+Tomador VARCHAR(25),
+Ref VARCHAR (25), 
+idCompania INT,
+Detalle VARCHAR(50) ,
+Patente VARCHAR(20),
+FVencimiento DATE,
+Importe INT
 PRIMARY KEY (idCliente,f,idAlta),
-CONSTRAINT fk_Planillas_Pagos FOREIGN KEY (IdCliente, f) REFERENCES Planillas (idCliente,f),
-CONSTRAINT fk_ClientePlanillaPagos FOREIGN KEY (idAlta) REFERENCES AltaComprobantes (idAlta)
+CONSTRAINT fk_PlanillaCliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
+CONSTRAINT fk_idAltaPlanilla FOREIGN KEY (idAlta) REFERENCES Comprobantes (idAlta)
 )
 
+CREATE TABLE Roles 
+(
+idRol tinyint IDENTITY (1,1) PRIMARY KEY,
+nombreRol  varchar(20) NOT NULL
+)
+INSERT INTO Roles VALUES ('Administrador')
+INSERT INTO Roles VALUES ('Usuario')
 
 
+select * From PlanillasComprobantes
+select * from Comprobantes
 
-SELECT * FROM PlanillasPagos
-SELECT * FROM Planillas P
-INNER JOIN PlanillasPagos PP ON P.f = pp.f AND pp.idCliente = p.idCliente 
-
-
-
-
---DELETE FROM AltaComprobantes
---DELETE FROM Planillas
---DELETE FROM PlanillasPolizas
---DELETE FROM PlanillasPagos
---DELETE FROM Clientes
-
-SELECT (Select SUM(importe) From AltaComprobantes WHERE idCliente = 8) as IMPORTE_FAVOR,
-	   (Select SUM(importe) From PlanillasPolizas WHERE idCliente = 8) as IMPORTE_CONTRA
-
-, SUM(PlanillasPolizas.importe) as IMPORTES_CONTRA 
-
-
-
-Select *  From PlanillasPolizas where idCliente = 8
-
-Select * From Planillas
-
-Select * From PlanillasPagos where idCliente = 8
-
-
-select * from Clientes
-
-
+DELETE FROM Comprobantes
+DELETE FROM Planillas
+DELETE FROM PlanillasComprobantes

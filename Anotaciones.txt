@@ -1,28 +1,35 @@
-
-REPORTES
-
--MOVIMIENTOS DE COMPROBANTES EN DETERMINADO PERIODO (Entre Fechas)
-Cuanto ingreso y cuanto egreso de cada cosa
-+ TOTAL DE CADA COMPROBANTE
-
--MOVIMIENTOS DE RECIBO, Separados por la Compañia
-Cuanto ingresó y cuento egresó por cada compañia, total por compañia.
-Entre Fechas()
-Total y TotalxCompañia.
+1- Filtrar por que fecha? de pago o inicial? (Tanto en reportes, como en comprobantes busqueda)
 
 
--ORDEN: Tomador, Referencia, Compañia, detalle,patente, fVencimiento,Importe (sacar Titular)
-Subtotal por cada tomador y total general}
-
-Que la deuda se quede en alguna referencia
+2-Mostrar pendientes?
 
 
+3- 2 reportes- movimiento Comprobantes (por fechas)
+
+		C	DE PESOS INGRESADO
+		SUMATORIA DE PESOS EGRESADOS
+
+		SALDO DE ESE RANGO
+
+		SALDO TOTAL
+
+		TOTAL
+
+--------------------------
+               movimiento recibos (agrupados por compañia y filtrados por fecha, tambien mostrar total) 
+
+Cantidad de recibos que se dieron de alta por compañia | baja | saldo fecha consultada | saldo total
+
+COMPAÑIAS
+alianc
+prevencion art
+otras
+la segunda
+sancos
+rio uruguay seguros
 
 
-
-
-
-
-
-
+4- Planilla: la primera parte son todos recibos (Todos van a nombre del cliente | no del tomador)
+   Si una planilla es rechazada, tiene que aparecer y se puede modificar para volver a estar a pendiente (solo se va a poder modificar si esta rechazada)
+ 
 

@@ -1,8 +1,9 @@
 ﻿Imports System.Windows.Forms
+Imports CapaDatos
 
 Public Class frmAltaCompania
 
-    Dim Control As New clsCompania
+    Dim Control As New ClsCompania
     Private Sub FrmAltaCompania_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtCuitCompania.Enabled = False
         txtNombreCompania.Enabled = False

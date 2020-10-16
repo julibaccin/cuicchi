@@ -1,98 +1,7 @@
 USE CuicchiGaveglio
 -----------ABMs-------------------
 
-------------------------------------------------------------BANCOS----------------------------------------
-CREATE PROCEDURE paCrearBanco
-    @idBanco smallint,
-	@nombreBanco varchar(60)
-AS   
-	IF (SELECT COUNT(idBanco) FROM Bancos WHERE idBanco = @idBanco) = 1	 
-		BEGIN
-    		SELECT 0 as 'Resultado';
-		END
-	ELSE
-		BEGIN
-			INSERT INTO Bancos (idbanco,nombreBanco) VALUES (@idBanco,@nombreBanco);
-		SELECT 1 as 'Resultado';
-		END
-GO  
-
-CREATE PROCEDURE paModificarBanco
-    @idBanco smallint,
-	@nombreBanco varchar(60)
-
-AS   
-	UPDATE Bancos SET nombreBanco = @nombreBanco WHERE idBanco = @idBanco
-GO  
-
-------------------------------------------------------------COMPAÑIA----------------------------------------
-CREATE PROCEDURE paCrearCompania
-    @nombreCompania varchar(60),
-	@cuitCompania varchar(11)
-AS   
-	IF (SELECT COUNT(nombreCompania) FROM Companias WHERE nombreCompania = @nombreCompania) = 1	 
-		BEGIN
-    		SELECT 0 as 'Resultado';
-		END
-	ELSE
-		BEGIN
-			INSERT INTO Companias (nombreCompania,cuitCompania) VALUES (@nombreCompania,@cuitCompania)
-		SELECT 1 as 'Resultado';
-		END
-GO
-
-CREATE PROCEDURE paModificarCompania
-    @idCompania smallint,
-	@nombreCompania varchar(60),
-	@cuitCompania varchar(11)
-
-AS   
-	UPDATE Companias SET nombreCompania = @nombreCompania, cuitCompania = @cuitCompania WHERE idCompania = @idCompania
-GO 
-
-------------------------------------------------------------CLIENTES----------------------------------------
-
-CREATE PROCEDURE paCrearCliente
-    @nombreCliente varchar(60),
-	@dni varchar(8),
-	@telefono varchar(20),
-	@cuit varchar(11),
-	@domicilio varchar(60),
-	@CBU varchar(22),
-	@email varchar(60)
-
-AS   
-	IF (SELECT COUNT(dni) FROM Clientes WHERE nombreCliente = @nombreCliente) = 1	 
-		BEGIN
-    		SELECT 0 as 'Resultado';
-		END
-	ELSE
-		BEGIN
-			INSERT INTO Clientes(nombreCliente,dni,telefono,cuit,domicilio,cbu,email) VALUES
-			(@nombreCliente,@dni,@telefono,@cuit,@domicilio,@cbu,@email);
-		SELECT 1 as 'Resultado';
-		END
-GO  
-
-CREATE PROCEDURE paModificarCliente
-    @idCliente smallint,
-	@nombreCliente varchar(60),
-	@dni varchar(8),
-	@telefono varchar(20),
-	@cuit varchar(11),
-	@domicilio varchar(60),
-	@CBU varchar(22),
-	@email varchar(60)
-
-AS   
-	UPDATE Clientes SET nombreCliente= @nombreCliente,dni = @dni, telefono = @telefono, cuit = @cuit, domicilio = @domicilio, cbu = @CBU, email = @email WHERE idCliente = @idCliente
-GO  
 ------------------------------------------------------------COMPROBANTES----------------------------------------
-CREATE PROCEDURE paEliminarAltaComprobante
-    @idAlta int
-AS   
-	DELETE AltaComprobantes WHERE idAlta = @idAlta
-GO  
 
 CREATE PROCEDURE paModificarEstadoAltaComprobante
     @idAlta int,
@@ -176,7 +85,9 @@ GO
 
 
 
+select Co.nombreCompania, Sum(importe) from AltaComprobantes AC
+INNER JOIN Companias Co ON AC.idCompania = Co.idCompania
+group by Co.nombreCompania
 
-SELECT Sum(importe) from AltaComprobantes WHERE idCliente = 2
-SELECT SUM(importe) FROM PlanillasPolizas where idCliente = 2
 
+select * from AltaComprobantes WHERE fIngreso Between '2020-01-01' and '2020-12-30'

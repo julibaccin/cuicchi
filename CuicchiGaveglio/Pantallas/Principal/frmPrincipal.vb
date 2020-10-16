@@ -1,4 +1,6 @@
-﻿Public Class frmPrincipal
+﻿Imports CapaDatos
+
+Public Class frmPrincipal
 
     Private Sub FrmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LlenarDatos()
@@ -6,8 +8,9 @@
 
     Public Sub LlenarDatos()
         lblFecha.Text = DateTime.Today()
-        Dim Control As New clsSaldos()
-        Control.ConsultarSaldosPorComprobante(DSaldosPorComprobante, "2020-01-01")
+        Dim Control As New ClsSaldos()
+        Control.ConsultarPlanillasPendientes(DPendientes)
+        Control.ConsultarPlanillasRechazadas(DRechazados)
         Control.ConsultarChequesProximosAVencer(DChequesProximosAVencer)
     End Sub
     Private Sub Ayuda(sender As Object, e As EventArgs) Handles btnAbrirAyuda.Click

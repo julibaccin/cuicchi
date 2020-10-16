@@ -64,7 +64,7 @@ Partial Class frmPlanillas
         Me.Label12 = New System.Windows.Forms.Label()
         Me.DFechaPlanillaNueva = New System.Windows.Forms.DateTimePicker()
         Me.btnCargarPolizas = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GDatos = New System.Windows.Forms.GroupBox()
         Me.rbRechazar = New System.Windows.Forms.RadioButton()
         Me.rbAceptar = New System.Windows.Forms.RadioButton()
         Me.btnCambioEstadoPlanilla = New System.Windows.Forms.Button()
@@ -74,10 +74,11 @@ Partial Class frmPlanillas
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtSaldoCliente = New System.Windows.Forms.TextBox()
+        Me.btnModificar = New System.Windows.Forms.Button()
         CType(Me.DgPlanillaPolizas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox1.SuspendLayout()
+        Me.GDatos.SuspendLayout()
         Me.SuspendLayout()
         '
         'cCopiarDatos
@@ -499,24 +500,24 @@ Partial Class frmPlanillas
         Me.btnCargarPolizas.Name = "btnCargarPolizas"
         Me.btnCargarPolizas.Size = New System.Drawing.Size(117, 22)
         Me.btnCargarPolizas.TabIndex = 56
-        Me.btnCargarPolizas.Text = "Cargar Polizas"
+        Me.btnCargarPolizas.Text = "Cargar Recibos"
         Me.btnCargarPolizas.UseVisualStyleBackColor = True
         '
-        'GroupBox1
+        'GDatos
         '
-        Me.GroupBox1.Controls.Add(Me.rbRechazar)
-        Me.GroupBox1.Controls.Add(Me.rbAceptar)
-        Me.GroupBox1.Controls.Add(Me.btnCambioEstadoPlanilla)
-        Me.GroupBox1.Controls.Add(Me.txtTotal)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.txtEstado)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Location = New System.Drawing.Point(982, 30)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(148, 191)
-        Me.GroupBox1.TabIndex = 57
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Datos Planilla"
+        Me.GDatos.Controls.Add(Me.rbRechazar)
+        Me.GDatos.Controls.Add(Me.rbAceptar)
+        Me.GDatos.Controls.Add(Me.btnCambioEstadoPlanilla)
+        Me.GDatos.Controls.Add(Me.txtTotal)
+        Me.GDatos.Controls.Add(Me.Label5)
+        Me.GDatos.Controls.Add(Me.txtEstado)
+        Me.GDatos.Controls.Add(Me.Label1)
+        Me.GDatos.Location = New System.Drawing.Point(982, 30)
+        Me.GDatos.Name = "GDatos"
+        Me.GDatos.Size = New System.Drawing.Size(148, 191)
+        Me.GDatos.TabIndex = 57
+        Me.GDatos.TabStop = False
+        Me.GDatos.Text = "Datos Planilla"
         '
         'rbRechazar
         '
@@ -602,14 +603,24 @@ Partial Class frmPlanillas
         Me.txtSaldoCliente.Size = New System.Drawing.Size(195, 20)
         Me.txtSaldoCliente.TabIndex = 58
         '
+        'btnModificar
+        '
+        Me.btnModificar.Location = New System.Drawing.Point(724, 225)
+        Me.btnModificar.Name = "btnModificar"
+        Me.btnModificar.Size = New System.Drawing.Size(75, 23)
+        Me.btnModificar.TabIndex = 59
+        Me.btnModificar.Text = "Modificar"
+        Me.btnModificar.UseVisualStyleBackColor = True
+        '
         'frmPlanillas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1140, 532)
+        Me.Controls.Add(Me.btnModificar)
         Me.Controls.Add(Me.txtSaldoCliente)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.GDatos)
         Me.Controls.Add(Me.btnCargarPolizas)
         Me.Controls.Add(Me.DFechaPlanillaNueva)
         Me.Controls.Add(Me.GrupoComprobantes)
@@ -629,8 +640,8 @@ Partial Class frmPlanillas
         Me.GrupoComprobantes.ResumeLayout(False)
         Me.GrupoComprobantes.PerformLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.GDatos.ResumeLayout(False)
+        Me.GDatos.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -669,7 +680,7 @@ Partial Class frmPlanillas
     Friend WithEvents Label12 As Windows.Forms.Label
     Friend WithEvents DFechaPlanillaNueva As Windows.Forms.DateTimePicker
     Friend WithEvents btnCargarPolizas As Windows.Forms.Button
-    Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
+    Friend WithEvents GDatos As Windows.Forms.GroupBox
     Friend WithEvents txtTotal As Windows.Forms.TextBox
     Friend WithEvents Label5 As Windows.Forms.Label
     Friend WithEvents txtEstado As Windows.Forms.TextBox
@@ -688,4 +699,5 @@ Partial Class frmPlanillas
     Friend WithEvents FPago As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Banco As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Obs As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents btnModificar As Windows.Forms.Button
 End Class
