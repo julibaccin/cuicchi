@@ -3,25 +3,44 @@ Imports Microsoft.Reporting.WinForms
 
 Public Class frmReportes
 
-    Private Sub BtnReporteMovimientoComprobantes_Click(sender As Object, e As EventArgs) Handles btnReporteMovimientoComprobantes.Click
-        Me.RVComprobantes.LocalReport.DataSources.Clear()
-        Dim datos As New CapaDatos.clsReportes()
-        Dim dataTable As DataTable = datos.MovimientosComprobantes(DfDesde.Value, DfHasta.Value)
-        Me.RVComprobantes.LocalReport.DataSources.Add(New ReportDataSource("DSComprobantes", dataTable))
+    Dim reporteActivo As ReportViewer
 
-        RVComprobantes.RefreshReport()
+    Private Sub BtnReporteMovimientoComprobantes_Click(sender As Object, e As EventArgs) Handles btnReporteMovimientoComprobantes.Click
+        panelReportes.Controls.Clear()
+        reporteActivo = New ReportViewer()
+        panelReportes.Controls.Add(reporteActivo)
+        reporteActivo.Dock = Windows.Forms.DockStyle.Fill
+        reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.ReporteComprobantes.rdlc"
+        Dim datos As New CapaDatos.ClsReportes()
+        Dim dataTable As DataTable = datos.MovimientosComprobantes(DfDesde.Value, DfHasta.Value)
+        Dim Pdesde As New ReportParameter("Desde", DfDesde.Value)
+        Dim Phasta As New ReportParameter("Hasta", DfHasta.Value)
+        Dim Ptotalgeneral As New ReportParameter("Total_General", 50000)
+        reporteActivo.LocalReport.SetParameters(Pdesde)
+        reporteActivo.LocalReport.SetParameters(Phasta)
+        reporteActivo.LocalReport.SetParameters(Ptotalgeneral)
+        reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSComprobantes", dataTable))
+        reporteActivo.RefreshReport()
+        reporteActivo.Show()
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.RVRecibos.LocalReport.DataSources.Clear()
-        Dim datos As New CapaDatos.clsReportes()
-        Dim dataTable As DataTable = datos.MovimientosRecibos(DfDesde.Value, DfHasta.Value)
-        Dim Pdesde As New ReportParameter("Desde", DfDesde.Value.ToShortDateString())
-        Dim Phasta As New ReportParameter("Hasta", DfHasta.Value.ToShortDateString())
-        RVRecibos.LocalReport.SetParameters(Pdesde)
-        RVRecibos.LocalReport.SetParameters(Phasta)
-        Me.RVRecibos.LocalReport.DataSources.Add(New ReportDataSource("DSRecibos", dataTable))
 
-        RVRecibos.RefreshReport()
+    Private Sub btnRecibos(sender As Object, e As EventArgs) Handles Button1.Click
+        panelReportes.Controls.Clear()
+        reporteActivo = New ReportViewer()
+        panelReportes.Controls.Add(reporteActivo)
+        reporteActivo.Dock = Windows.Forms.DockStyle.Fill
+        reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.ReporteRecibos.rdlc"
+        Dim datos As New CapaDatos.ClsReportes()
+        Dim dataTable As DataTable = datos.MovimientosRecibos(DfDesde.Value, DfHasta.Value)
+        Dim Pdesde As New ReportParameter("Desde", DfDesde.Value)
+        Dim Phasta As New ReportParameter("Hasta", DfHasta.Value)
+        Dim Ptotalgeneral As New ReportParameter("Total_General", 50000)
+        reporteActivo.LocalReport.SetParameters(Pdesde)
+        reporteActivo.LocalReport.SetParameters(Phasta)
+        reporteActivo.LocalReport.SetParameters(Ptotalgeneral)
+        reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSRecibos", dataTable))
+        reporteActivo.RefreshReport()
+        reporteActivo.Show()
     End Sub
 End Class

@@ -343,8 +343,68 @@
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Total General: </Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.02052cm</Top>
+            <Left>11.50597cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.48237cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Total_General">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Total_General.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Total_General</rd:DefaultName>
+            <Top>3.02052cm</Top>
+            <Left>14.16473cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.32361cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>1.30208in</Height>
+        <Height>1.55208in</Height>
         <Style />
       </Body>
       <Width>7.1875in</Width>
@@ -431,7 +491,7 @@
               <Top>3.43683cm</Top>
               <Left>0.39688cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.33583cm</Width>
+              <Width>1.66216cm</Width>
               <ZIndex>3</ZIndex>
               <Style>
                 <Border>
@@ -459,9 +519,9 @@
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>3.43683cm</Top>
-              <Left>5.51758cm</Left>
+              <Left>5.22654cm</Left>
               <Height>0.6cm</Height>
-              <Width>1.41521cm</Width>
+              <Width>1.70625cm</Width>
               <ZIndex>4</ZIndex>
               <Style>
                 <Border>
@@ -489,7 +549,7 @@
               </Paragraphs>
               <rd:DefaultName>Desde</rd:DefaultName>
               <Top>3.43683cm</Top>
-              <Left>1.83855cm</Left>
+              <Left>2.23543cm</Left>
               <Height>0.6cm</Height>
               <Width>2.5cm</Width>
               <ZIndex>5</ZIndex>
@@ -511,7 +571,7 @@
           </Style>
         </PageHeader>
         <PageFooter>
-          <Height>2.59292cm</Height>
+          <Height>3.20146cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -519,7 +579,7 @@
               <Source>Embedded</Source>
               <Value>footer</Value>
               <Sizing>FitProportional</Sizing>
-              <Top>0.03528cm</Top>
+              <Top>0.7232cm</Top>
               <Left>0.39687cm</Left>
               <Height>2.10854cm</Height>
               <Width>17.50166cm</Width>
@@ -556,6 +616,10 @@
       <DataType>DateTime</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="Total_General">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -571,6 +635,11 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>Hasta</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Total_General</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

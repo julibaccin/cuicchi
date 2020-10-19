@@ -153,10 +153,3 @@ nombreRol  varchar(20) NOT NULL
 INSERT INTO Roles VALUES ('Administrador')
 INSERT INTO Roles VALUES ('Usuario')
 
-
-select * From PlanillasComprobantes
-select * from Comprobantes
-
-DELETE FROM Comprobantes
-DELETE FROM Planillas
-DELETE FROM PlanillasComprobantes

@@ -2,10 +2,10 @@
 Imports System.Data.SqlClient
 Imports System.Windows.Forms
 
-Public Class clsReportes
+Public Class ClsReportes
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub

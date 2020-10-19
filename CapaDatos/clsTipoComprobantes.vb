@@ -3,7 +3,7 @@ Imports System.Data
 Public Class ClsTipoComprobantes
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub

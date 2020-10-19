@@ -68,8 +68,8 @@ Partial Class frmPrincipal
         Me.lblComun.AutoSize = True
         Me.lblComun.BackColor = System.Drawing.Color.Transparent
         Me.lblComun.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblComun.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblComun.Location = New System.Drawing.Point(67, 52)
+        Me.lblComun.ForeColor = System.Drawing.Color.White
+        Me.lblComun.Location = New System.Drawing.Point(93, 22)
         Me.lblComun.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblComun.Name = "lblComun"
         Me.lblComun.Size = New System.Drawing.Size(70, 18)
@@ -81,8 +81,8 @@ Partial Class frmPrincipal
         Me.lblFecha.AutoSize = True
         Me.lblFecha.BackColor = System.Drawing.Color.Transparent
         Me.lblFecha.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFecha.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblFecha.Location = New System.Drawing.Point(145, 80)
+        Me.lblFecha.ForeColor = System.Drawing.Color.White
+        Me.lblFecha.Location = New System.Drawing.Point(359, 22)
         Me.lblFecha.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblFecha.Name = "lblFecha"
         Me.lblFecha.Size = New System.Drawing.Size(56, 18)
@@ -94,8 +94,8 @@ Partial Class frmPrincipal
         Me.lblUsuario.AutoSize = True
         Me.lblUsuario.BackColor = System.Drawing.Color.Transparent
         Me.lblUsuario.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.lblUsuario.Location = New System.Drawing.Point(145, 52)
+        Me.lblUsuario.ForeColor = System.Drawing.Color.White
+        Me.lblUsuario.Location = New System.Drawing.Point(171, 22)
         Me.lblUsuario.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUsuario.Name = "lblUsuario"
         Me.lblUsuario.Size = New System.Drawing.Size(64, 18)
@@ -189,8 +189,8 @@ Partial Class frmPrincipal
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(67, 80)
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(281, 22)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 18)
@@ -213,6 +213,7 @@ Partial Class frmPrincipal
         '
         'lblAdvertencias
         '
+        Me.lblAdvertencias.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblAdvertencias.AutoSize = True
         Me.lblAdvertencias.BackColor = System.Drawing.Color.Transparent
         Me.lblAdvertencias.ForeColor = System.Drawing.Color.Maroon
@@ -226,6 +227,7 @@ Partial Class frmPrincipal
         '
         Me.DChequesProximosAVencer.AllowUserToAddRows = False
         Me.DChequesProximosAVencer.AllowUserToDeleteRows = False
+        Me.DChequesProximosAVencer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DChequesProximosAVencer.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DChequesProximosAVencer.BackgroundColor = System.Drawing.Color.White
         Me.DChequesProximosAVencer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
@@ -250,6 +252,7 @@ Partial Class frmPrincipal
         '
         'PictureBox1
         '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.CuicchiGaveglio.My.Resources.Resources.fondo
         Me.PictureBox1.Location = New System.Drawing.Point(425, 62)
         Me.PictureBox1.Name = "PictureBox1"
@@ -259,14 +262,16 @@ Partial Class frmPrincipal
         '
         'GroupBox1
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.Silver
+        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.lblUsuario)
         Me.GroupBox1.Controls.Add(Me.lblFecha)
         Me.GroupBox1.Controls.Add(Me.lblComun)
-        Me.GroupBox1.Location = New System.Drawing.Point(425, 292)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox1.ForeColor = System.Drawing.Color.White
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 450)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(267, 119)
+        Me.GroupBox1.Size = New System.Drawing.Size(705, 51)
         Me.GroupBox1.TabIndex = 23
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Sesión:"
@@ -317,7 +322,7 @@ Partial Class frmPrincipal
         Me.MenuPrincipal.Name = "MenuPrincipal"
         Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
         Me.MenuPrincipal.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MenuPrincipal.Size = New System.Drawing.Size(1008, 31)
+        Me.MenuPrincipal.Size = New System.Drawing.Size(705, 31)
         Me.MenuPrincipal.TabIndex = 11
         Me.MenuPrincipal.Text = "MenuStrip1"
         '
@@ -325,22 +330,24 @@ Partial Class frmPrincipal
         '
         Me.DRechazados.AllowUserToAddRows = False
         Me.DRechazados.AllowUserToDeleteRows = False
+        Me.DRechazados.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DRechazados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DRechazados.BackgroundColor = System.Drawing.Color.White
         Me.DRechazados.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DRechazados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DRechazados.Location = New System.Drawing.Point(698, 62)
+        Me.DRechazados.Location = New System.Drawing.Point(425, 292)
         Me.DRechazados.Name = "DRechazados"
         Me.DRechazados.ScrollBars = System.Windows.Forms.ScrollBars.None
-        Me.DRechazados.Size = New System.Drawing.Size(298, 196)
+        Me.DRechazados.Size = New System.Drawing.Size(267, 119)
         Me.DRechazados.TabIndex = 25
         '
         'Label3
         '
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
         Me.Label3.ForeColor = System.Drawing.Color.Maroon
-        Me.Label3.Location = New System.Drawing.Point(695, 41)
+        Me.Label3.Location = New System.Drawing.Point(422, 271)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(119, 18)
         Me.Label3.TabIndex = 26
@@ -351,7 +358,7 @@ Partial Class frmPrincipal
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(1008, 426)
+        Me.ClientSize = New System.Drawing.Size(705, 501)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.DRechazados)
         Me.Controls.Add(Me.GroupBox1)

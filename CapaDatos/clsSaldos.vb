@@ -5,7 +5,7 @@ Imports System.Windows.Forms
 Public Class ClsSaldos
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub
@@ -76,9 +76,10 @@ Public Class ClsSaldos
 
     Public Function ConsultarChequesProximosAVencer(pTabla As DataGridView)
         Try
-            Dim query As New SqlCommand("paConsultarChequesProximosAVencer", mCon) With {
-                .CommandType = CommandType.StoredProcedure
-            }
+            Dim cadena = "SELECT numero as Numero_Cheque, DATEADD(DAY,30,fPago) as Fecha_de_Vencimiento from Comprobantes AC
+                            INNER JOIN Estados ON AC.idEstado = Estados.idEstado
+                            where (idTipoComprobante = 3 and AC.idEstado = 1) AND DATEADD(DAY,30,fPago) >= GETDATE()"
+            Dim query As New SqlCommand(cadena, mCon)
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()
             mCon.Open()

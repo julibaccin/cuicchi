@@ -4,7 +4,7 @@ Imports System.Data
 Public Class ClsLogin
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub

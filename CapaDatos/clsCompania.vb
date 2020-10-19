@@ -5,7 +5,7 @@ Imports System.Windows.Forms
 Public Class ClsCompania
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub

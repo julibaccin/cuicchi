@@ -75,16 +75,20 @@ Partial Class frmPlanillas
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtSaldoCliente = New System.Windows.Forms.TextBox()
         Me.btnModificar = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         CType(Me.DgPlanillaPolizas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GDatos.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'cCopiarDatos
         '
         Me.cCopiarDatos.AutoSize = True
-        Me.cCopiarDatos.Location = New System.Drawing.Point(11, 95)
+        Me.cCopiarDatos.Location = New System.Drawing.Point(19, 134)
         Me.cCopiarDatos.Name = "cCopiarDatos"
         Me.cCopiarDatos.Size = New System.Drawing.Size(87, 17)
         Me.cCopiarDatos.TabIndex = 53
@@ -101,7 +105,7 @@ Partial Class frmPlanillas
         '
         'btnExportarExcel
         '
-        Me.btnExportarExcel.Location = New System.Drawing.Point(860, 225)
+        Me.btnExportarExcel.Location = New System.Drawing.Point(653, 12)
         Me.btnExportarExcel.Name = "btnExportarExcel"
         Me.btnExportarExcel.Size = New System.Drawing.Size(116, 23)
         Me.btnExportarExcel.TabIndex = 51
@@ -111,7 +115,7 @@ Partial Class frmPlanillas
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(9, 45)
+        Me.Label24.Location = New System.Drawing.Point(16, 60)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(102, 13)
         Me.Label24.TabIndex = 48
@@ -121,14 +125,14 @@ Partial Class frmPlanillas
         '
         Me.cmbFechaP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbFechaP.FormattingEnabled = True
-        Me.cmbFechaP.Location = New System.Drawing.Point(11, 61)
+        Me.cmbFechaP.Location = New System.Drawing.Point(14, 89)
         Me.cmbFechaP.Name = "cmbFechaP"
         Me.cmbFechaP.Size = New System.Drawing.Size(133, 28)
         Me.cmbFechaP.TabIndex = 47
         '
         'btnCargarPlanillaNueva
         '
-        Me.btnCargarPlanillaNueva.Location = New System.Drawing.Point(11, 199)
+        Me.btnCargarPlanillaNueva.Location = New System.Drawing.Point(19, 194)
         Me.btnCargarPlanillaNueva.Name = "btnCargarPlanillaNueva"
         Me.btnCargarPlanillaNueva.Size = New System.Drawing.Size(133, 22)
         Me.btnCargarPlanillaNueva.TabIndex = 45
@@ -140,24 +144,25 @@ Partial Class frmPlanillas
         Me.DgPlanillaPolizas.AllowUserToResizeColumns = False
         Me.DgPlanillaPolizas.AllowUserToResizeRows = False
         Me.DgPlanillaPolizas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(150, 38)
+        Me.DgPlanillaPolizas.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(0, 0)
         Me.DgPlanillaPolizas.Name = "DgPlanillaPolizas"
-        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(826, 183)
+        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(1140, 532)
         Me.DgPlanillaPolizas.TabIndex = 43
         '
         'cmbClienteP
         '
         Me.cmbClienteP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbClienteP.FormattingEnabled = True
-        Me.cmbClienteP.Location = New System.Drawing.Point(66, 4)
+        Me.cmbClienteP.Location = New System.Drawing.Point(18, 26)
         Me.cmbClienteP.Name = "cmbClienteP"
-        Me.cmbClienteP.Size = New System.Drawing.Size(200, 28)
+        Me.cmbClienteP.Size = New System.Drawing.Size(134, 28)
         Me.cmbClienteP.TabIndex = 42
         '
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(8, 12)
+        Me.Label25.Location = New System.Drawing.Point(19, 5)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(52, 13)
         Me.Label25.TabIndex = 41
@@ -187,10 +192,11 @@ Partial Class frmPlanillas
         Me.GrupoComprobantes.Controls.Add(Me.Label9)
         Me.GrupoComprobantes.Controls.Add(Me.DPreviaACargar)
         Me.GrupoComprobantes.Controls.Add(Me.Label12)
+        Me.GrupoComprobantes.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.GrupoComprobantes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GrupoComprobantes.Location = New System.Drawing.Point(12, 259)
+        Me.GrupoComprobantes.Location = New System.Drawing.Point(0, 271)
         Me.GrupoComprobantes.Name = "GrupoComprobantes"
-        Me.GrupoComprobantes.Size = New System.Drawing.Size(1100, 261)
+        Me.GrupoComprobantes.Size = New System.Drawing.Size(1140, 261)
         Me.GrupoComprobantes.TabIndex = 54
         Me.GrupoComprobantes.TabStop = False
         Me.GrupoComprobantes.Text = "Ingrese un comprobante"
@@ -487,7 +493,7 @@ Partial Class frmPlanillas
         '
         Me.DFechaPlanillaNueva.CustomFormat = ""
         Me.DFechaPlanillaNueva.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DFechaPlanillaNueva.Location = New System.Drawing.Point(11, 172)
+        Me.DFechaPlanillaNueva.Location = New System.Drawing.Point(19, 167)
         Me.DFechaPlanillaNueva.Margin = New System.Windows.Forms.Padding(4)
         Me.DFechaPlanillaNueva.Name = "DFechaPlanillaNueva"
         Me.DFechaPlanillaNueva.Size = New System.Drawing.Size(99, 20)
@@ -496,9 +502,9 @@ Partial Class frmPlanillas
         '
         'btnCargarPolizas
         '
-        Me.btnCargarPolizas.Location = New System.Drawing.Point(185, 229)
+        Me.btnCargarPolizas.Location = New System.Drawing.Point(20, 14)
         Me.btnCargarPolizas.Name = "btnCargarPolizas"
-        Me.btnCargarPolizas.Size = New System.Drawing.Size(117, 22)
+        Me.btnCargarPolizas.Size = New System.Drawing.Size(92, 22)
         Me.btnCargarPolizas.TabIndex = 56
         Me.btnCargarPolizas.Text = "Cargar Recibos"
         Me.btnCargarPolizas.UseVisualStyleBackColor = True
@@ -512,9 +518,10 @@ Partial Class frmPlanillas
         Me.GDatos.Controls.Add(Me.Label5)
         Me.GDatos.Controls.Add(Me.txtEstado)
         Me.GDatos.Controls.Add(Me.Label1)
-        Me.GDatos.Location = New System.Drawing.Point(982, 30)
+        Me.GDatos.Dock = System.Windows.Forms.DockStyle.Right
+        Me.GDatos.Location = New System.Drawing.Point(992, 0)
         Me.GDatos.Name = "GDatos"
-        Me.GDatos.Size = New System.Drawing.Size(148, 191)
+        Me.GDatos.Size = New System.Drawing.Size(148, 271)
         Me.GDatos.TabIndex = 57
         Me.GDatos.TabStop = False
         Me.GDatos.Text = "Datos Planilla"
@@ -587,7 +594,7 @@ Partial Class frmPlanillas
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(334, 234)
+        Me.Label2.Location = New System.Drawing.Point(155, 19)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(89, 13)
         Me.Label2.TabIndex = 1
@@ -598,41 +605,61 @@ Partial Class frmPlanillas
         Me.txtSaldoCliente.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.txtSaldoCliente.Enabled = False
         Me.txtSaldoCliente.ForeColor = System.Drawing.Color.Black
-        Me.txtSaldoCliente.Location = New System.Drawing.Point(440, 227)
+        Me.txtSaldoCliente.Location = New System.Drawing.Point(250, 12)
         Me.txtSaldoCliente.Name = "txtSaldoCliente"
         Me.txtSaldoCliente.Size = New System.Drawing.Size(195, 20)
         Me.txtSaldoCliente.TabIndex = 58
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(724, 225)
+        Me.btnModificar.Location = New System.Drawing.Point(533, 12)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 59
         Me.btnModificar.Text = "Modificar"
         Me.btnModificar.UseVisualStyleBackColor = True
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnCargarPlanillaNueva)
+        Me.GroupBox1.Controls.Add(Me.Label25)
+        Me.GroupBox1.Controls.Add(Me.cmbClienteP)
+        Me.GroupBox1.Controls.Add(Me.cmbFechaP)
+        Me.GroupBox1.Controls.Add(Me.Label24)
+        Me.GroupBox1.Controls.Add(Me.cCopiarDatos)
+        Me.GroupBox1.Controls.Add(Me.DFechaPlanillaNueva)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(217, 271)
+        Me.GroupBox1.TabIndex = 60
+        Me.GroupBox1.TabStop = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnCargarPolizas)
+        Me.GroupBox2.Controls.Add(Me.Label2)
+        Me.GroupBox2.Controls.Add(Me.txtSaldoCliente)
+        Me.GroupBox2.Controls.Add(Me.btnModificar)
+        Me.GroupBox2.Controls.Add(Me.btnExportarExcel)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox2.Location = New System.Drawing.Point(217, 227)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(775, 44)
+        Me.GroupBox2.TabIndex = 61
+        Me.GroupBox2.TabStop = False
+        '
         'frmPlanillas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1140, 532)
-        Me.Controls.Add(Me.btnModificar)
-        Me.Controls.Add(Me.txtSaldoCliente)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.GroupBox2)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GDatos)
-        Me.Controls.Add(Me.btnCargarPolizas)
-        Me.Controls.Add(Me.DFechaPlanillaNueva)
         Me.Controls.Add(Me.GrupoComprobantes)
-        Me.Controls.Add(Me.cCopiarDatos)
         Me.Controls.Add(Me.lblTotal)
-        Me.Controls.Add(Me.btnExportarExcel)
-        Me.Controls.Add(Me.Label24)
-        Me.Controls.Add(Me.cmbFechaP)
-        Me.Controls.Add(Me.btnCargarPlanillaNueva)
         Me.Controls.Add(Me.DgPlanillaPolizas)
-        Me.Controls.Add(Me.cmbClienteP)
-        Me.Controls.Add(Me.Label25)
         Me.Name = "frmPlanillas"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmPlanillas"
@@ -642,6 +669,10 @@ Partial Class frmPlanillas
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GDatos.ResumeLayout(False)
         Me.GDatos.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -700,4 +731,6 @@ Partial Class frmPlanillas
     Friend WithEvents Banco As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Obs As Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnModificar As Windows.Forms.Button
+    Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
+    Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
 End Class

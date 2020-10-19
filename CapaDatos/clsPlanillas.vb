@@ -5,7 +5,7 @@ Imports System.Windows.Forms
 Public Class ClsPlanillas
     Inherits Conn
 
-    Dim mCon As SqlConnection
+    ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub
@@ -74,34 +74,6 @@ Public Class ClsPlanillas
         Catch ex As Exception
             MsgBox("Error de sistema: CrearPlanilla" & ex.Message)
             Return 0
-        Finally
-            mCon.Close()
-        End Try
-
-    End Function
-
-    'Devolver Dinero disponible por comprobante
-
-    Public Function DisponibleXComprobante(pIdAlta As Integer) As ArrayList
-        Dim resp As New ArrayList()
-        Try
-            Dim query As New SqlCommand("paDisponibleXComprobante", mCon) With {
-                .CommandType = CommandType.StoredProcedure
-            }
-            query.Parameters.AddWithValue("idAlta", pIdAlta)
-            mCon.Open()
-            Dim data As SqlDataReader = query.ExecuteReader()
-            Dim res As Boolean = data.Read()
-            If res = False Then
-                Return resp
-            End If
-            resp.Add(data.Item("USADO"))
-            resp.Add(data.Item("TOTAL"))
-
-            Return resp
-        Catch ex As Exception
-            MsgBox("Error de sistema: DisponibleXComprobante" & ex.Message)
-            Return resp
         Finally
             mCon.Close()
         End Try
