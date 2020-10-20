@@ -11,7 +11,7 @@ Public Class frmConsultarComprobantes
     End Sub
 
     Private Sub Cerrar_Form(sender As Object, e As EventArgs) Handles Me.Closed
-        ReiniciarForm()
+        frmPrincipal.LlenarDatos()
     End Sub
 
     Public Sub setearValoresCombo()
@@ -30,10 +30,6 @@ Public Class frmConsultarComprobantes
         LlenarComboCompanias(cmbCompaniaFiltro)
         LlenarComboEstados(cmbEstadoFiltro)
         LlenarComboCompanias(cmbCompaniaCambioEstado)
-    End Sub
-
-    Public Sub ReiniciarForm()
-        frmPrincipal.LlenarDatos()
     End Sub
 
     Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -283,5 +279,25 @@ Public Class frmConsultarComprobantes
 
     Private Sub DPreviaACargar_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DPreviaACargar.CellMouseClick
         EliminarFilaDataGridClickDerecho(e, DPreviaACargar)
+    End Sub
+
+    Private Sub CmbBanco_KeyPress(sender As Object, e As EventArgs) Handles cmbBanco.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub CmbTipoComprobante_KeyPress(sender As Object, e As EventArgs) Handles cmbTipoComprobante.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub CmbEstadosCambioEstado_KeyPress(sender As Object, e As EventArgs) Handles cmbEstadosCambioEstado.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub CmbCompaniaCambioEstado_KeyPress(sender As Object, e As EventArgs) Handles cmbCompaniaCambioEstado.KeyPress
+        SoloLetra(e)
+    End Sub
+
+    Private Sub CmbCompania_keypress(sender As Object, e As EventArgs) Handles cmbCompania.KeyPress
+        SoloLetra(e)
     End Sub
 End Class

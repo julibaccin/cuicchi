@@ -136,17 +136,11 @@ Module mdlFunciones
             Dim style As New SLStyle()
             style.Font.Bold = True
             style.Font.FontSize = 14
-            Dim picture As New Drawing.SLPicture("C:\Users\julib\Desktop\CuicchiGaveglio\CuicchiGaveglio\Resources\head.jpg")
-
-            picture.ResizeInPercentage(50, 50)
-
-            documento.InsertPicture(picture)
-
 
             Dim dt As Data.DataTable = DirectCast(pDataGrid.DataSource, Data.DataTable)
-            documento.SetRowStyle(7, style)
+            documento.SetRowStyle(1, style)
 
-            documento.ImportDataTable(7, 1, dt, True)
+            documento.ImportDataTable(1, 1, dt, True)
 
             documento.SaveAs($"{dialog.FileName}.xlsx")
             Return 1

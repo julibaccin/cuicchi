@@ -77,6 +77,7 @@ Partial Class frmPlanillas
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DgPlanillaPolizas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
         CType(Me.DPreviaACargar, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,11 +106,11 @@ Partial Class frmPlanillas
         '
         'btnExportarExcel
         '
-        Me.btnExportarExcel.Location = New System.Drawing.Point(653, 12)
+        Me.btnExportarExcel.Location = New System.Drawing.Point(713, 12)
         Me.btnExportarExcel.Name = "btnExportarExcel"
-        Me.btnExportarExcel.Size = New System.Drawing.Size(116, 23)
+        Me.btnExportarExcel.Size = New System.Drawing.Size(56, 23)
         Me.btnExportarExcel.TabIndex = 51
-        Me.btnExportarExcel.Text = "EXPORTAR EXCEL"
+        Me.btnExportarExcel.Text = "EXCEL"
         Me.btnExportarExcel.UseVisualStyleBackColor = True
         '
         'Label24
@@ -144,14 +145,15 @@ Partial Class frmPlanillas
         Me.DgPlanillaPolizas.AllowUserToResizeColumns = False
         Me.DgPlanillaPolizas.AllowUserToResizeRows = False
         Me.DgPlanillaPolizas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgPlanillaPolizas.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(0, 0)
+        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(237, 5)
         Me.DgPlanillaPolizas.Name = "DgPlanillaPolizas"
-        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(1140, 532)
+        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(737, 218)
         Me.DgPlanillaPolizas.TabIndex = 43
         '
         'cmbClienteP
         '
+        Me.cmbClienteP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbClienteP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbClienteP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbClienteP.FormattingEnabled = True
         Me.cmbClienteP.Location = New System.Drawing.Point(18, 26)
@@ -612,7 +614,7 @@ Partial Class frmPlanillas
         '
         'btnModificar
         '
-        Me.btnModificar.Location = New System.Drawing.Point(533, 12)
+        Me.btnModificar.Location = New System.Drawing.Point(478, 12)
         Me.btnModificar.Name = "btnModificar"
         Me.btnModificar.Size = New System.Drawing.Size(75, 23)
         Me.btnModificar.TabIndex = 59
@@ -637,6 +639,7 @@ Partial Class frmPlanillas
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.btnCargarPolizas)
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.txtSaldoCliente)
@@ -648,6 +651,15 @@ Partial Class frmPlanillas
         Me.GroupBox2.Size = New System.Drawing.Size(775, 44)
         Me.GroupBox2.TabIndex = 61
         Me.GroupBox2.TabStop = False
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(659, 12)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(48, 23)
+        Me.Button1.TabIndex = 60
+        Me.Button1.Text = "PDF"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'frmPlanillas
         '
@@ -733,4 +745,5 @@ Partial Class frmPlanillas
     Friend WithEvents btnModificar As Windows.Forms.Button
     Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
+    Friend WithEvents Button1 As Windows.Forms.Button
 End Class

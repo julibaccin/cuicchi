@@ -1,5 +1,7 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Data
+Imports System.Windows.Forms
 Imports CapaDatos
+Imports Microsoft.Reporting.WinForms
 
 Public Class frmPlanillas
 
@@ -68,6 +70,7 @@ Public Class frmPlanillas
             Return
         End If
         cmbFechaPChanged(sender, e)
+        cmbClientePChanged(sender, e)
         MsgBox("La planilla se guardó correctamente")
     End Sub
 
@@ -167,17 +170,17 @@ Public Class frmPlanillas
 
             Dim objAlta As New ModeloComprobante
             With objAlta
-                .idTipoComprobante = ExtraerNumeros(Fila.Cells("tipoComprobante").Value)
+                .IdTipoComprobante = ExtraerNumeros(Fila.Cells("tipoComprobante").Value)
                 .FIngreso = Fila.Cells("fIngreso").Value
-                .idCliente = ExtraerNumeros(Fila.Cells("Cliente").Value)
-                .idCompania = ExtraerNumeros(Fila.Cells("Compania").Value)
+                .IdCliente = ExtraerNumeros(Fila.Cells("Cliente").Value)
+                .IdCompania = ExtraerNumeros(Fila.Cells("Compania").Value)
                 .Importe = Fila.Cells("importe").Value
                 .Numero = Fila.Cells("numero").Value
                 .FPago = Fila.Cells("fpago").Value
-                .idBanco = ExtraerNumeros(Fila.Cells("Banco").Value)
+                .IdBanco = ExtraerNumeros(Fila.Cells("Banco").Value)
                 .Obs = Fila.Cells("obs").Value
-                .idUsuario = frmLogin.idUsuario
-                .idEstado = 1
+                .IdUsuario = frmLogin.idUsuario
+                .IdEstado = 1
                 .IdEstadoOperacion = 2
             End With
             Dim idAlta As Integer = ComprobantesController.CrearMovimiento(objAlta)
@@ -225,7 +228,8 @@ Public Class frmPlanillas
             PlanillasController.AgregarReciboAPlanilla(idCliente, cmbFechaP.Text, idAlta,
                                                        row.Cells("Tomador").Value, row.Cells("Ref").Value,
                                                        row.Cells("idCompania").Value, row.Cells("Detalle").Value,
-                                                       row.Cells("patente").Value, row.Cells("FVencimiento").Value,
+                                                       If(IsDBNull(row.Cells("patente").Value) = True, "", row.Cells("patente").Value),
+                                                       row.Cells("FVencimiento").Value,
                                                        row.Cells("importe").Value)
         Next
 
@@ -311,6 +315,52 @@ Public Class frmPlanillas
         'Refresco los datos
         cmbFechaPChanged(sender, e)
         MsgBox("Se agregaron correctamente las polizas a la planilla")
+
+    End Sub
+
+    Private Sub txtNumero_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumero.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub TxtImporte_KeyPress(sender As Object, e As EventArgs) Handles txtImporte.KeyPress
+        SoloImporte(e)
+    End Sub
+
+    Private Sub CmbBanco_KeyPress(sender As Object, e As EventArgs) Handles cmbBanco.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub CmbTipoComprobante_KeyPress(sender As Object, e As EventArgs) Handles cmbTipoComprobante.KeyPress
+        SoloNumero(e)
+    End Sub
+
+    Private Sub frmPlanillas_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        frmPrincipal.LlenarDatos()
+    End Sub
+
+    Private Sub BtnExportarExcel_Click(sender As Object, e As EventArgs) Handles btnExportarExcel.Click
+        ExportarExcel(DgPlanillaPolizas, "", "")
+    End Sub
+
+    Private Sub PDF_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        With frmReportes
+            .panelReportes.Controls.Clear()
+            .reporteActivo = New ReportViewer()
+            .panelReportes.Controls.Add(.reporteActivo)
+            .reporteActivo.Dock = Windows.Forms.DockStyle.Fill
+            .reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.Planilla.rdlc"
+            Dim datos As New CapaDatos.ClsReportes()
+            Dim dataTable As DataTable = datos.ReportePlanilla(ExtraerNumeros(cmbClienteP.Text), cmbFechaP.Text)
+            Dim Cliente As New ReportParameter("Cliente", ExtraerLetras(cmbClienteP.Text))
+            Dim Fecha_Planilla As New ReportParameter("Fecha_Planilla", cmbFechaP.Text)
+            .reporteActivo.LocalReport.SetParameters(Cliente)
+            .reporteActivo.LocalReport.SetParameters(Fecha_Planilla)
+            .reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSPlanillas", dataTable))
+            .reporteActivo.RefreshReport()
+            .Show()
+            .reporteActivo.Show()
+        End With
+
 
     End Sub
 End Class

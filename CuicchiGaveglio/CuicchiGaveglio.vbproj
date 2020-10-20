@@ -153,6 +153,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="LocalReports\Planilla.rdlc" />
     <EmbeddedResource Include="LocalReports\ReporteComprobantes.rdlc" />
     <EmbeddedResource Include="LocalReports\ReporteRecibos.rdlc" />
     <EmbeddedResource Include="Pantallas\Altas\frmAltaCompania.resx">
@@ -197,6 +198,7 @@
     </None>
     <None Include="My Project\DataSources\CapaDatos.ClsComprobantes.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloAltaComprobantes.datasource" />
+    <None Include="My Project\DataSources\CapaDatos.ModeloPlanilla.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloReporteComprobantes.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloReporteRecibos.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloReportes.datasource" />
