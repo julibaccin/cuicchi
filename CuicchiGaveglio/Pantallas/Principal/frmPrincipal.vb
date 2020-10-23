@@ -49,6 +49,9 @@ Public Class frmPrincipal
 
 
     Private Sub Reportes(sender As Object, e As EventArgs) Handles REPORTESToolStripMenuItem.Click
+        If frmLogin.idRol = 2 Then
+            Return
+        End If
         frmReportes.ShowDialog()
     End Sub
 
@@ -57,7 +60,21 @@ Public Class frmPrincipal
     End Sub
 
     Private Sub COMPROBANTESToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles COMPROBANTESToolStripMenuItem1.Click
+        If frmLogin.idRol = 2 Then
+            Return
+        End If
         frmConsultarComprobantes.Show()
     End Sub
 
+    Private Sub DPendientes_CellContentDoubleClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles DPendientes.CellContentDoubleClick
+        If e.RowIndex = -1 Or e.ColumnIndex = -1 Then
+            Return
+        End If
+
+        frmPlanillas.FrmConsultarComprobantes_Load(sender, e)
+        frmPlanillas.cmbClienteP.Text = DPendientes.Item("Cliente", e.RowIndex).Value & "|" & DPendientes.Item("idCliente", e.RowIndex).Value
+        frmPlanillas.cmbFechaP.Text = DPendientes.Item("Fecha_Planilla", e.RowIndex).Value
+        frmPlanillas.cmbFechaPChanged(sender, e)
+        frmPlanillas.Show()
+    End Sub
 End Class

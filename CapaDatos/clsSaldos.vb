@@ -53,7 +53,7 @@ Public Class ClsSaldos
 
     Public Function ConsultarPlanillasPendientes(pTabla As DataGridView)
         Try
-            Dim cadena As String = "SELECT C.nombreCliente as CLIENTE, P.f as FECHA_PLANILLA FROM Planillas P
+            Dim cadena As String = "SELECT C.nombreCliente as CLIENTE, P.f as FECHA_PLANILLA, P.idCliente FROM Planillas P
                                     INNER JOIN Clientes C ON P.idCliente = C.idCliente 
                                     WHERE idEstadoOperacion = 2"
             Dim query As New SqlCommand(cadena, mCon)

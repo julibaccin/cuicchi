@@ -60,6 +60,17 @@ Module mdlFunciones
         End If
     End Sub
 
+    Public Sub LlenarComboUsuarios(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorUsuarios As New clsUsuarios
+        Dim RespuestaUsuarios As ArrayList = ControladorUsuarios.ConsultarUsuarios()
+        If (RespuestaUsuarios IsNot Nothing) Then
+            For Each item As String In RespuestaUsuarios
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
+
 #End Region
 
 #Region "Filtros"
@@ -122,7 +133,7 @@ Module mdlFunciones
 #End Region
 
 #Region "Exportar Excel"
-    Public Function ExportarExcel(pDataGrid As DataGridView, pTitulo As String, pFecha As Date)
+    Public Function ExportarExcel(pDataGrid As DataGridView)
         Try
 
             Dim dialog = New SaveFileDialog()
@@ -159,5 +170,29 @@ Module mdlFunciones
         Dim filaEliminar As DataGridViewRow = dg.Rows(e.RowIndex)
         dg.Rows.Remove(filaEliminar)
     End Sub
+
+    Public Function ComprobarSiValorExisteCombo(combos As List(Of ComboBox)) As Int16
+
+        For Each combo As ComboBox In combos
+
+            Dim contador = 0
+
+            For Each i As String In combo.Items
+                If i = combo.Text Then
+                    contador = 1
+                ElseIf combo.Text = "" Then
+                    contador = 1
+                End If
+            Next
+
+            If contador <> 1 Then
+                Return 0
+            End If
+
+        Next
+
+        Return 1
+
+    End Function
 
 End Module

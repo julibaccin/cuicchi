@@ -119,7 +119,6 @@ Public Class frmConsultarComprobantes
         txtNumero.Text = ""
         txtObservaciones.Text = ""
         cmbBanco.Text = ""
-        cmbCliente.Text = ""
         cmbTipoComprobante.Text = ""
         cmbCompania.Text = ""
         cmbTipoComprobante.Focus()
@@ -130,15 +129,27 @@ Public Class frmConsultarComprobantes
     End Sub
 
     Public Sub HabilitarDesabilitarCamposSegunTipoComprobante(pTipoComprobante As Integer)
-        If pTipoComprobante = 1 Then
+        Dim tComprobante = ExtraerLetras(cmbTipoComprobante.Text)
+        If tComprobante = "Efectivo" Then
+            DFechaPago.Enabled = False
             txtNumero.Enabled = False
-            txtNumero.Text = ""
             cmbBanco.Enabled = False
-            cmbBanco.Text = ""
-            cmbCompania.Enabled = False
-            cmbCompania.Text = ""
-        Else
+            cmbCompania.Enabled = True
+        ElseIf tComprobante = "Recibo" Then
+            DFechaPago.Enabled = False
+            txtNumero.Enabled = False
+            cmbBanco.Enabled = False
+            cmbCompania.Enabled = True
+        ElseIf tComprobante = "Cheque" Then
+            DFechaPago.Enabled = True
             txtNumero.Enabled = True
+            cmbBanco.Enabled = True
+            cmbCompania.Enabled = False
+        ElseIf tComprobante = "Comprobante de Retencion" Then
+
+        ElseIf tComprobante = "Transferencia" Then
+            DFechaPago.Enabled = False
+            txtNumero.Enabled = False
             cmbBanco.Enabled = True
             cmbCompania.Enabled = True
         End If
@@ -151,23 +162,6 @@ Public Class frmConsultarComprobantes
 
     Private Sub txtNumero_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumero.KeyPress
         SoloNumero(e)
-    End Sub
-
-    Private Sub DPreviaACargar_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DPreviaACargar.CellContentClick
-        If e.ColumnIndex = 0 Then
-            DPreviaACargar.Rows.Remove(DPreviaACargar.Rows(e.RowIndex))
-            Return
-        End If
-        cmbTipoComprobante.Text = DPreviaACargar.Item(1, e.RowIndex).Value()
-        DFechaIngreso.Value = CDate(DPreviaACargar.Item(2, e.RowIndex).Value())
-        cmbCliente.Text = DPreviaACargar.Item(3, e.RowIndex).Value()
-        cmbCompania.Text = DPreviaACargar.Item(4, e.RowIndex).Value()
-        txtImporte.Text = DPreviaACargar.Item(5, e.RowIndex).Value()
-        txtNumero.Text = DPreviaACargar.Item(6, e.RowIndex).Value()
-        DFechaPago.Value = CDate(DPreviaACargar.Item(7, e.RowIndex).Value())
-        cmbBanco.Text = DPreviaACargar.Item(8, e.RowIndex).Value()
-        txtObservaciones.Text = DPreviaACargar.Item(9, e.RowIndex).Value()
-        cmbTipoComprobante.Focus()
     End Sub
 
     Private Sub cmbTipoComprobante_Validated(sender As Object, e As EventArgs) Handles cmbTipoComprobante.Validated
@@ -211,7 +205,35 @@ Public Class frmConsultarComprobantes
             Return
         End If
 
+        Dim tComp = ExtraerNumeros(cmbTipoComprobante.Text)
 
+        If tComp = 1 And (cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Compañia")
+            Return
+        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Banco o Compañia")
+            Return
+        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then
+            MsgBox("Falta Ingresar Numero o Banco")
+            Return
+        ElseIf tComp = 4 And (cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Compañia")
+            Return
+        ElseIf tComp = 5 Then
+        End If
+
+        Dim listaCombos As New List(Of ComboBox)
+        With listaCombos
+            .Add(cmbBanco)
+            .Add(cmbCompania)
+            .Add(cmbCliente)
+            .Add(cmbTipoComprobante)
+        End With
+
+        If ComprobarSiValorExisteCombo(listaCombos) = 0 Then
+            MsgBox("Uno de los combos tiene un valor inexistente")
+            Return
+        End If
 
         DPreviaACargar.Rows.Add(cmbTipoComprobante.Text, DFechaIngreso.Value,
                                 cmbCliente.Text, cmbCompania.Text, txtImporte.Text,
@@ -299,5 +321,14 @@ Public Class frmConsultarComprobantes
 
     Private Sub CmbCompania_keypress(sender As Object, e As EventArgs) Handles cmbCompania.KeyPress
         SoloLetra(e)
+    End Sub
+
+    Private Sub DPreviaACargar_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DPreviaACargar.CellContentDoubleClick
+        With DPreviaACargar
+            cmbTipoComprobante.Text = .Item("TipoComprobante", e.RowIndex).Value
+            cmbCliente.Text = .Item("Cliente", e.RowIndex).Value()
+            txtImporte.Text = .Item("Importe", e.RowIndex).Value()
+            cmbTipoComprobante.Focus()
+        End With
     End Sub
 End Class

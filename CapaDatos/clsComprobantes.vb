@@ -13,8 +13,6 @@ Public Class ClsComprobantes
     Public Function CrearMovimiento(pAlta As ModeloComprobante) As Int16
 
         Try
-
-
             Dim cadena As String =
             "INSERT INTO Comprobantes 
             (idTipoComprobante, fIngreso, idCliente, idCompania, obs, numero, idBanco, importe, fPago, idUsuario, idEstado, obsBaja, idEstadoOperacion)
@@ -22,18 +20,18 @@ Public Class ClsComprobantes
             SELECT TOP 1 idAlta From Comprobantes ORDER BY idAlta DESC"
             Dim query As New SqlCommand(cadena, mCon)
             With query.Parameters
-                .AddWithValue("idTipoComprobante", pAlta.idTipoComprobante)
+                .AddWithValue("idTipoComprobante", pAlta.IdTipoComprobante)
                 .AddWithValue("fIngreso", pAlta.FIngreso)
-                .AddWithValue("idCliente", pAlta.idCliente)
-                .AddWithValue("idCompania", pAlta.idCompania)
+                .AddWithValue("idCliente", pAlta.IdCliente)
+                .AddWithValue("idCompania", pAlta.IdCompania)
                 .AddWithValue("obs", pAlta.Obs)
                 .AddWithValue("importe", pAlta.Importe)
                 .AddWithValue("fPago", pAlta.FPago)
-                .AddWithValue("idUsuario", pAlta.idUsuario)
-                .AddWithValue("idEstado", pAlta.idEstado)
+                .AddWithValue("idUsuario", pAlta.IdUsuario)
+                .AddWithValue("idEstado", pAlta.IdEstado)
                 .AddWithValue("numero", pAlta.Numero)
-                .AddWithValue("idBanco", pAlta.idBanco)
-                .AddWithValue("idEstadoOperacion", pAlta.idEstadoOperacion)
+                .AddWithValue("idBanco", pAlta.IdBanco)
+                .AddWithValue("idEstadoOperacion", pAlta.IdEstadoOperacion)
             End With
 
             mCon.Open()
@@ -63,6 +61,38 @@ Public Class ClsComprobantes
 
             mCon.Open()
             query.ExecuteNonQuery()
+
+            Return 1
+        Catch ex As Exception
+            MsgBox("Error de sistema: CambiarEstado" & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+    Public Function CambiarEstadoOperacion(pIdCliente As Integer, pF As Date) As Int16
+
+        Try
+            Dim cadena As String = "SELECT idAlta from PlanillasComprobantes where idCliente = @idCliente and f = @f"
+            Dim query As New SqlCommand(cadena, mCon)
+            With query.Parameters
+                .AddWithValue("idCliente", pIdCliente)
+                .AddWithValue("f", pF)
+            End With
+            mCon.Open()
+            Dim data = query.ExecuteReader()
+            Dim idaltas = "("
+            While data.Read()
+                idaltas &= data.Item(0) & ","
+            End While
+            idaltas = idaltas.TrimEnd(",")
+            idaltas &= ")"
+            data.Close()
+            Dim cadena2 As String = $"UPDATE Comprobantes SET idEstadoOperacion=1 WHERE idAlta IN {idaltas}"
+            Dim query2 As New SqlCommand(cadena2, mCon)
+
+            query2.ExecuteNonQuery()
 
             Return 1
         Catch ex As Exception
@@ -104,7 +134,8 @@ Public Class ClsComprobantes
 		            (Clientes.nombreCliente LIKE '%'+ @NombreCliente +'%' ) AND
 		            (Companias.nombreCompania LIKE '%'+ @NombreCompania +'%' ) AND
 		            (TipoComprobantes.nombreTipoComprobante LIKE '%'+ @NombreTipoComprobante +'%') AND
-		            (Usuarios.nombreUsuario LIKE  '%'+ @NombreUsuario +'%')"
+		            (Usuarios.nombreUsuario LIKE  '%'+ @NombreUsuario +'%') AND
+                    idEstadoOperacion = 1"
 
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("NombreTipoComprobante", pTipoComprobante)
@@ -148,6 +179,29 @@ Public Class ClsComprobantes
             query.ExecuteNonQuery()
 
             Return 1
+        Catch ex As Exception
+            MsgBox("Error de sistema: EliminarComprobante" & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+
+    Public Function ConsultarIdCompania(pNombreCompania As String) As Integer
+
+        Try
+            Dim cadena As String = "SELECT TOP 1 idCompania FROM Companias WHERE nombreCompania = @nombreCompania "
+            Dim query As New SqlCommand(cadena, mCon)
+            With query.Parameters
+                .AddWithValue("nombreCompania", pNombreCompania)
+            End With
+
+            mCon.Open()
+            Dim a = query.ExecuteReader()
+            a.Read()
+
+            Return a.Item(0)
         Catch ex As Exception
             MsgBox("Error de sistema: EliminarComprobante" & ex.Message)
             Return 0

@@ -6,14 +6,20 @@ Imports Microsoft.Reporting.WinForms
 Public Class frmPlanillas
 
     Dim ComprobantesController As New ClsComprobantes
-    Dim PlanillasController As New ClsPlanillas
+    Public PlanillasController As New ClsPlanillas
     Dim SaldosController As New ClsSaldos
 
-    Private Sub FrmConsultarComprobantes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub FrmConsultarComprobantes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         setearValoresCombo()
     End Sub
 
     Public Sub setearValoresCombo()
+        If frmLogin.idRol = 2 Then
+            btnCambioEstadoPlanilla.Visible = False
+            rbAceptar.Visible = False
+            rbRechazar.Visible = False
+        End If
+
         rbAceptar.Visible = False
         rbRechazar.Visible = False
         btnCambioEstadoPlanilla.Visible = False
@@ -33,6 +39,7 @@ Public Class frmPlanillas
         LlenarComboTipoComprobantes(cmbTipoComprobante)
         LlenarComboCompanias(cmbCompania)
         LlenarComboBancos(cmbBanco)
+        LlenarComboUsuarios(cmbUsuario)
     End Sub
 
     Private Sub cmbClientePChanged(sender As Object, e As EventArgs) Handles cmbClienteP.SelectedIndexChanged
@@ -74,7 +81,7 @@ Public Class frmPlanillas
         MsgBox("La planilla se guardó correctamente")
     End Sub
 
-    Private Sub cmbFechaPChanged(sender As Object, e As EventArgs) Handles cmbFechaP.SelectedIndexChanged
+    Public Sub cmbFechaPChanged(sender As Object, e As EventArgs) Handles cmbFechaP.SelectedIndexChanged
         If cmbFechaP.Text = "Nueva Planilla" Then
             DFechaPlanillaNueva.Visible = True
             DgPlanillaPolizas.Visible = False
@@ -91,9 +98,24 @@ Public Class frmPlanillas
             Return
         End If
 
-        PlanillasController.DevolverRecibosDePlanilla(DgPlanillaPolizas,
+        DgPlanillaPolizas.Columns.Clear()
+        Dim data = PlanillasController.DevolverRecibosDePlanilla(DgPlanillaPolizas,
                                           ExtraerNumeros(cmbClienteP.Text),
                                           cmbFechaP.Text)
+
+        Dim columCombo As New DataGridViewComboBoxColumn()
+        columCombo.HeaderText = "Compañia"
+        columCombo.Name = "columCombo"
+        For Each i As String In cmbCompania.Items
+            columCombo.Items.Add(ExtraerLetras(i))
+        Next
+        Dim s = PlanillasController.DevolverCompaniasdeRecibosDePlanilla(ExtraerNumeros(cmbClienteP.Text),
+                                          cmbFechaP.Text)
+
+        DgPlanillaPolizas.Columns.Add(columCombo)
+        For i = 0 To s.Count - 1
+            DgPlanillaPolizas.Item("columCombo", i).Value = s.Item(i)
+        Next
 
         txtEstado.Text = PlanillasController.DatosGeneralesPlanilla(ExtraerNumeros(cmbClienteP.Text), cmbFechaP.Text)
 
@@ -123,6 +145,27 @@ Public Class frmPlanillas
         If cmbTipoComprobante.Text = "" Or cmbClienteP.Text = "" Or txtImporte.Text = "" Then
             MsgBox("Ingrese los campos obligatorios (estan marcados con asterisco)")
             Return
+        End If
+        If cmbFechaP.Text = "" Then
+            MsgBox("Seleccione una planilla")
+            Return
+        End If
+
+        Dim tComp = ExtraerNumeros(cmbTipoComprobante.Text)
+
+        If tComp = 1 And (cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Compañia")
+            Return
+        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Banco o Compañia")
+            Return
+        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then
+            MsgBox("Falta Ingresar Numero o Banco")
+            Return
+        ElseIf tComp = 4 And (cmbCompania.Text = "") Then
+            MsgBox("Falta Ingresar Compañia")
+            Return
+        ElseIf tComp = 5 Then
         End If
 
         DPreviaACargar.Rows.Add(cmbTipoComprobante.Text, DFechaIngreso.Value,
@@ -181,7 +224,7 @@ Public Class frmPlanillas
                 .Obs = Fila.Cells("obs").Value
                 .IdUsuario = frmLogin.idUsuario
                 .IdEstado = 1
-                .IdEstadoOperacion = 2
+                .IdEstadoOperacion = If(txtEstado.Text = "ACEPTADO", 1, 2)
             End With
             Dim idAlta As Integer = ComprobantesController.CrearMovimiento(objAlta)
 
@@ -213,7 +256,7 @@ Public Class frmPlanillas
             alta.FIngreso = cmbFechaP.Text
             alta.FPago = cmbFechaP.Text
             alta.IdTipoComprobante = 4
-            alta.IdCompania = row.Cells("idCompania").Value
+            alta.IdCompania = ComprobantesController.ConsultarIdCompania(row.Cells("columCombo").Value)
             alta.IdUsuario = frmLogin.idUsuario
             alta.Importe = row.Cells("importe").Value
             alta.Obs = ""
@@ -227,7 +270,7 @@ Public Class frmPlanillas
 
             PlanillasController.AgregarReciboAPlanilla(idCliente, cmbFechaP.Text, idAlta,
                                                        row.Cells("Tomador").Value, row.Cells("Ref").Value,
-                                                       row.Cells("idCompania").Value, row.Cells("Detalle").Value,
+                                                       alta.IdCompania, row.Cells("Detalle").Value,
                                                        If(IsDBNull(row.Cells("patente").Value) = True, "", row.Cells("patente").Value),
                                                        row.Cells("FVencimiento").Value,
                                                        row.Cells("importe").Value)
@@ -257,6 +300,7 @@ Public Class frmPlanillas
 
         If rbAceptar.Checked = True Then
             PlanillasController.CambiarEstadoPlanilla(idCliente, f, 1)
+            ComprobantesController.CambiarEstadoOperacion(ExtraerNumeros(cmbClienteP.Text), cmbFechaP.Text)
         Else
             PlanillasController.CambiarEstadoPlanilla(idCliente, f, 3)
         End If
@@ -339,7 +383,7 @@ Public Class frmPlanillas
     End Sub
 
     Private Sub BtnExportarExcel_Click(sender As Object, e As EventArgs) Handles btnExportarExcel.Click
-        ExportarExcel(DgPlanillaPolizas, "", "")
+        ExportarExcel(DgPlanillaPolizas)
     End Sub
 
     Private Sub PDF_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -361,6 +405,45 @@ Public Class frmPlanillas
             .reporteActivo.Show()
         End With
 
+
+    End Sub
+
+    Private Sub cmbTipoComprobante_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTipoComprobante.SelectedIndexChanged
+        Dim tComprobante = ExtraerLetras(cmbTipoComprobante.Text)
+        If tComprobante = "Efectivo" Then
+            DFechaPago.Enabled = False
+            txtNumero.Enabled = False
+            cmbBanco.Enabled = False
+            cmbCompania.Enabled = True
+        ElseIf tComprobante = "Recibo" Then
+            DFechaPago.Enabled = False
+            txtNumero.Enabled = False
+            cmbBanco.Enabled = False
+            cmbCompania.Enabled = True
+        ElseIf tComprobante = "Cheque" Then
+            DFechaPago.Enabled = True
+            txtNumero.Enabled = True
+            cmbBanco.Enabled = True
+            cmbCompania.Enabled = False
+        ElseIf tComprobante = "Comprobante de Retencion" Then
+
+        ElseIf tComprobante = "Transferencia" Then
+            DFechaPago.Enabled = False
+            txtNumero.Enabled = False
+            cmbBanco.Enabled = True
+            cmbCompania.Enabled = True
+        End If
+    End Sub
+
+    Private Sub DPreviaACargar_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DPreviaACargar.CellContentDoubleClick
+        With DPreviaACargar
+            cmbTipoComprobante.Text = .Item("TipoComprobante", e.RowIndex).Value
+            txtImporte.Text = .Item("Importe", e.RowIndex).Value()
+            cmbTipoComprobante.Focus()
+        End With
+    End Sub
+
+    Private Sub DgPlanillaPolizas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DgPlanillaPolizas.CellContentClick
 
     End Sub
 End Class

@@ -74,6 +74,7 @@
     <Compile Include="clsPlanillas.vb" />
     <Compile Include="clsSaldos.vb" />
     <Compile Include="clsTipoComprobantes.vb" />
+    <Compile Include="clsUsuarios.vb" />
     <Compile Include="Conn.vb" />
     <Compile Include="clsReportes.vb" />
     <Compile Include="Models\ModeloComprobante.vb" />

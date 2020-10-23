@@ -76,6 +76,8 @@ Partial Class frmPlanillas
         Me.txtSaldoCliente = New System.Windows.Forms.TextBox()
         Me.btnModificar = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cmbUsuario = New System.Windows.Forms.ComboBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DgPlanillaPolizas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,7 +91,7 @@ Partial Class frmPlanillas
         'cCopiarDatos
         '
         Me.cCopiarDatos.AutoSize = True
-        Me.cCopiarDatos.Location = New System.Drawing.Point(19, 134)
+        Me.cCopiarDatos.Location = New System.Drawing.Point(22, 189)
         Me.cCopiarDatos.Name = "cCopiarDatos"
         Me.cCopiarDatos.Size = New System.Drawing.Size(87, 17)
         Me.cCopiarDatos.TabIndex = 53
@@ -116,7 +118,7 @@ Partial Class frmPlanillas
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(16, 60)
+        Me.Label24.Location = New System.Drawing.Point(15, 126)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(102, 13)
         Me.Label24.TabIndex = 48
@@ -126,14 +128,14 @@ Partial Class frmPlanillas
         '
         Me.cmbFechaP.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbFechaP.FormattingEnabled = True
-        Me.cmbFechaP.Location = New System.Drawing.Point(14, 89)
+        Me.cmbFechaP.Location = New System.Drawing.Point(18, 142)
         Me.cmbFechaP.Name = "cmbFechaP"
         Me.cmbFechaP.Size = New System.Drawing.Size(133, 28)
         Me.cmbFechaP.TabIndex = 47
         '
         'btnCargarPlanillaNueva
         '
-        Me.btnCargarPlanillaNueva.Location = New System.Drawing.Point(19, 194)
+        Me.btnCargarPlanillaNueva.Location = New System.Drawing.Point(18, 240)
         Me.btnCargarPlanillaNueva.Name = "btnCargarPlanillaNueva"
         Me.btnCargarPlanillaNueva.Size = New System.Drawing.Size(133, 22)
         Me.btnCargarPlanillaNueva.TabIndex = 45
@@ -145,9 +147,9 @@ Partial Class frmPlanillas
         Me.DgPlanillaPolizas.AllowUserToResizeColumns = False
         Me.DgPlanillaPolizas.AllowUserToResizeRows = False
         Me.DgPlanillaPolizas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(237, 5)
+        Me.DgPlanillaPolizas.Location = New System.Drawing.Point(179, 5)
         Me.DgPlanillaPolizas.Name = "DgPlanillaPolizas"
-        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(737, 218)
+        Me.DgPlanillaPolizas.Size = New System.Drawing.Size(846, 218)
         Me.DgPlanillaPolizas.TabIndex = 43
         '
         'cmbClienteP
@@ -198,7 +200,7 @@ Partial Class frmPlanillas
         Me.GrupoComprobantes.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GrupoComprobantes.Location = New System.Drawing.Point(0, 271)
         Me.GrupoComprobantes.Name = "GrupoComprobantes"
-        Me.GrupoComprobantes.Size = New System.Drawing.Size(1140, 261)
+        Me.GrupoComprobantes.Size = New System.Drawing.Size(1179, 261)
         Me.GrupoComprobantes.TabIndex = 54
         Me.GrupoComprobantes.TabStop = False
         Me.GrupoComprobantes.Text = "Ingrese un comprobante"
@@ -207,10 +209,10 @@ Partial Class frmPlanillas
         '
         Me.btnPreCargar.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnPreCargar.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPreCargar.Location = New System.Drawing.Point(337, 151)
+        Me.btnPreCargar.Location = New System.Drawing.Point(276, 28)
         Me.btnPreCargar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPreCargar.Name = "btnPreCargar"
-        Me.btnPreCargar.Size = New System.Drawing.Size(104, 31)
+        Me.btnPreCargar.Size = New System.Drawing.Size(104, 27)
         Me.btnPreCargar.TabIndex = 50
         Me.btnPreCargar.Text = "Pre Cargar"
         Me.btnPreCargar.UseVisualStyleBackColor = False
@@ -218,7 +220,7 @@ Partial Class frmPlanillas
         'btnCargaCompania
         '
         Me.btnCargaCompania.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.btnCargaCompania.Location = New System.Drawing.Point(88, 169)
+        Me.btnCargaCompania.Location = New System.Drawing.Point(107, 84)
         Me.btnCargaCompania.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargaCompania.Name = "btnCargaCompania"
         Me.btnCargaCompania.Size = New System.Drawing.Size(25, 24)
@@ -231,17 +233,17 @@ Partial Class frmPlanillas
         Me.cmbCompania.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbCompania.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbCompania.FormattingEnabled = True
-        Me.cmbCompania.Location = New System.Drawing.Point(357, 102)
+        Me.cmbCompania.Location = New System.Drawing.Point(140, 200)
         Me.cmbCompania.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbCompania.Name = "cmbCompania"
         Me.cmbCompania.Size = New System.Drawing.Size(128, 26)
-        Me.cmbCompania.TabIndex = 33
+        Me.cmbCompania.TabIndex = 36
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(259, 107)
+        Me.Label4.Location = New System.Drawing.Point(5, 210)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 16)
@@ -253,16 +255,16 @@ Partial Class frmPlanillas
         Me.cmbTipoComprobante.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbTipoComprobante.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbTipoComprobante.FormattingEnabled = True
-        Me.cmbTipoComprobante.Location = New System.Drawing.Point(126, 28)
+        Me.cmbTipoComprobante.Location = New System.Drawing.Point(140, 28)
         Me.cmbTipoComprobante.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbTipoComprobante.Name = "cmbTipoComprobante"
         Me.cmbTipoComprobante.Size = New System.Drawing.Size(128, 26)
-        Me.cmbTipoComprobante.TabIndex = 28
+        Me.cmbTipoComprobante.TabIndex = 30
         '
         'btnCargaBanco
         '
         Me.btnCargaBanco.BackColor = System.Drawing.Color.LightSteelBlue
-        Me.btnCargaBanco.Location = New System.Drawing.Point(88, 140)
+        Me.btnCargaBanco.Location = New System.Drawing.Point(107, 141)
         Me.btnCargaBanco.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargaBanco.Name = "btnCargaBanco"
         Me.btnCargaBanco.Size = New System.Drawing.Size(27, 26)
@@ -275,63 +277,63 @@ Partial Class frmPlanillas
         Me.cmbBanco.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbBanco.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbBanco.FormattingEnabled = True
-        Me.cmbBanco.Location = New System.Drawing.Point(126, 138)
+        Me.cmbBanco.Location = New System.Drawing.Point(140, 141)
         Me.cmbBanco.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbBanco.Name = "cmbBanco"
         Me.cmbBanco.Size = New System.Drawing.Size(128, 26)
-        Me.cmbBanco.TabIndex = 41
+        Me.cmbBanco.TabIndex = 34
         '
         'txtObservaciones
         '
-        Me.txtObservaciones.Location = New System.Drawing.Point(126, 65)
+        Me.txtObservaciones.Location = New System.Drawing.Point(140, 169)
         Me.txtObservaciones.Margin = New System.Windows.Forms.Padding(4)
         Me.txtObservaciones.Multiline = True
         Me.txtObservaciones.Name = "txtObservaciones"
-        Me.txtObservaciones.Size = New System.Drawing.Size(128, 38)
-        Me.txtObservaciones.TabIndex = 42
+        Me.txtObservaciones.Size = New System.Drawing.Size(128, 30)
+        Me.txtObservaciones.TabIndex = 35
         '
         'txtNumero
         '
-        Me.txtNumero.Location = New System.Drawing.Point(126, 169)
+        Me.txtNumero.Location = New System.Drawing.Point(140, 84)
         Me.txtNumero.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNumero.Name = "txtNumero"
         Me.txtNumero.Size = New System.Drawing.Size(128, 24)
-        Me.txtNumero.TabIndex = 38
+        Me.txtNumero.TabIndex = 32
         '
         'txtImporte
         '
-        Me.txtImporte.Location = New System.Drawing.Point(357, 62)
+        Me.txtImporte.Location = New System.Drawing.Point(140, 58)
         Me.txtImporte.Margin = New System.Windows.Forms.Padding(4)
         Me.txtImporte.Name = "txtImporte"
         Me.txtImporte.Size = New System.Drawing.Size(128, 24)
-        Me.txtImporte.TabIndex = 36
+        Me.txtImporte.TabIndex = 31
         '
         'DFechaPago
         '
         Me.DFechaPago.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DFechaPago.Location = New System.Drawing.Point(126, 111)
+        Me.DFechaPago.Location = New System.Drawing.Point(140, 112)
         Me.DFechaPago.Margin = New System.Windows.Forms.Padding(4)
         Me.DFechaPago.Name = "DFechaPago"
         Me.DFechaPago.Size = New System.Drawing.Size(128, 24)
-        Me.DFechaPago.TabIndex = 39
+        Me.DFechaPago.TabIndex = 33
         Me.DFechaPago.Value = New Date(2020, 8, 12, 11, 49, 20, 0)
         '
         'DFechaIngreso
         '
         Me.DFechaIngreso.CustomFormat = ""
         Me.DFechaIngreso.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DFechaIngreso.Location = New System.Drawing.Point(357, 25)
+        Me.DFechaIngreso.Location = New System.Drawing.Point(140, 228)
         Me.DFechaIngreso.Margin = New System.Windows.Forms.Padding(4)
         Me.DFechaIngreso.Name = "DFechaIngreso"
         Me.DFechaIngreso.Size = New System.Drawing.Size(128, 24)
-        Me.DFechaIngreso.TabIndex = 31
+        Me.DFechaIngreso.TabIndex = 37
         Me.DFechaIngreso.Value = New Date(2020, 8, 12, 11, 49, 20, 0)
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(3, 79)
+        Me.Label10.Location = New System.Drawing.Point(3, 183)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(100, 16)
@@ -342,7 +344,7 @@ Partial Class frmPlanillas
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(3, 36)
+        Me.Label8.Location = New System.Drawing.Point(3, 38)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(129, 16)
@@ -353,7 +355,7 @@ Partial Class frmPlanillas
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(262, 72)
+        Me.Label7.Location = New System.Drawing.Point(3, 68)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(61, 16)
@@ -364,10 +366,10 @@ Partial Class frmPlanillas
         '
         Me.btnCargar.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnCargar.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCargar.Location = New System.Drawing.Point(930, 209)
+        Me.btnCargar.Location = New System.Drawing.Point(493, 29)
         Me.btnCargar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargar.Name = "btnCargar"
-        Me.btnCargar.Size = New System.Drawing.Size(153, 31)
+        Me.btnCargar.Size = New System.Drawing.Size(153, 26)
         Me.btnCargar.TabIndex = 50
         Me.btnCargar.Text = "Cargar Comprobantes"
         Me.btnCargar.UseVisualStyleBackColor = False
@@ -376,7 +378,7 @@ Partial Class frmPlanillas
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(7, 176)
+        Me.Label6.Location = New System.Drawing.Point(3, 92)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(56, 16)
@@ -387,7 +389,7 @@ Partial Class frmPlanillas
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 118)
+        Me.Label3.Location = New System.Drawing.Point(3, 120)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(82, 16)
@@ -398,7 +400,7 @@ Partial Class frmPlanillas
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(7, 150)
+        Me.Label9.Location = New System.Drawing.Point(3, 151)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(47, 16)
@@ -412,9 +414,9 @@ Partial Class frmPlanillas
         Me.DPreviaACargar.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DPreviaACargar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DPreviaACargar.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.tipoComprobante, Me.FIngreso, Me.Cliente, Me.Compania, Me.importe, Me.numero, Me.FPago, Me.Banco, Me.Obs})
-        Me.DPreviaACargar.Location = New System.Drawing.Point(502, 23)
+        Me.DPreviaACargar.Location = New System.Drawing.Point(275, 61)
         Me.DPreviaACargar.Name = "DPreviaACargar"
-        Me.DPreviaACargar.Size = New System.Drawing.Size(581, 181)
+        Me.DPreviaACargar.Size = New System.Drawing.Size(916, 191)
         Me.DPreviaACargar.TabIndex = 49
         '
         'tipoComprobante
@@ -484,7 +486,7 @@ Partial Class frmPlanillas
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(262, 33)
+        Me.Label12.Location = New System.Drawing.Point(5, 236)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(94, 16)
@@ -495,7 +497,7 @@ Partial Class frmPlanillas
         '
         Me.DFechaPlanillaNueva.CustomFormat = ""
         Me.DFechaPlanillaNueva.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DFechaPlanillaNueva.Location = New System.Drawing.Point(19, 167)
+        Me.DFechaPlanillaNueva.Location = New System.Drawing.Point(22, 213)
         Me.DFechaPlanillaNueva.Margin = New System.Windows.Forms.Padding(4)
         Me.DFechaPlanillaNueva.Name = "DFechaPlanillaNueva"
         Me.DFechaPlanillaNueva.Size = New System.Drawing.Size(99, 20)
@@ -521,7 +523,7 @@ Partial Class frmPlanillas
         Me.GDatos.Controls.Add(Me.txtEstado)
         Me.GDatos.Controls.Add(Me.Label1)
         Me.GDatos.Dock = System.Windows.Forms.DockStyle.Right
-        Me.GDatos.Location = New System.Drawing.Point(992, 0)
+        Me.GDatos.Location = New System.Drawing.Point(1031, 0)
         Me.GDatos.Name = "GDatos"
         Me.GDatos.Size = New System.Drawing.Size(148, 271)
         Me.GDatos.TabIndex = 57
@@ -623,6 +625,8 @@ Partial Class frmPlanillas
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.cmbUsuario)
         Me.GroupBox1.Controls.Add(Me.btnCargarPlanillaNueva)
         Me.GroupBox1.Controls.Add(Me.Label25)
         Me.GroupBox1.Controls.Add(Me.cmbClienteP)
@@ -633,9 +637,29 @@ Partial Class frmPlanillas
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(217, 271)
+        Me.GroupBox1.Size = New System.Drawing.Size(173, 271)
         Me.GroupBox1.TabIndex = 60
         Me.GroupBox1.TabStop = False
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(19, 69)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(56, 13)
+        Me.Label11.TabIndex = 56
+        Me.Label11.Text = "USUARIO"
+        '
+        'cmbUsuario
+        '
+        Me.cmbUsuario.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbUsuario.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbUsuario.FormattingEnabled = True
+        Me.cmbUsuario.Location = New System.Drawing.Point(18, 85)
+        Me.cmbUsuario.Name = "cmbUsuario"
+        Me.cmbUsuario.Size = New System.Drawing.Size(134, 28)
+        Me.cmbUsuario.TabIndex = 57
         '
         'GroupBox2
         '
@@ -646,9 +670,9 @@ Partial Class frmPlanillas
         Me.GroupBox2.Controls.Add(Me.btnModificar)
         Me.GroupBox2.Controls.Add(Me.btnExportarExcel)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.GroupBox2.Location = New System.Drawing.Point(217, 227)
+        Me.GroupBox2.Location = New System.Drawing.Point(173, 227)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(775, 44)
+        Me.GroupBox2.Size = New System.Drawing.Size(858, 44)
         Me.GroupBox2.TabIndex = 61
         Me.GroupBox2.TabStop = False
         '
@@ -663,9 +687,10 @@ Partial Class frmPlanillas
         '
         'frmPlanillas
         '
+        Me.AcceptButton = Me.btnPreCargar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1140, 532)
+        Me.ClientSize = New System.Drawing.Size(1179, 532)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GDatos)
@@ -746,4 +771,6 @@ Partial Class frmPlanillas
     Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
     Friend WithEvents GroupBox2 As Windows.Forms.GroupBox
     Friend WithEvents Button1 As Windows.Forms.Button
+    Friend WithEvents Label11 As Windows.Forms.Label
+    Friend WithEvents cmbUsuario As Windows.Forms.ComboBox
 End Class

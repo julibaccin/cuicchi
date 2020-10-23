@@ -33,25 +33,51 @@ Public Class ClsPlanillas
 
     End Function
 
-    Public Function DevolverRecibosDePlanilla(pTabla As DataGridView,
+    Public Function DevolverRecibosDePlanilla(pDataGrid As DataGridView,
                                               pIdCliente As Integer,
-                                              pF As Date) As Integer
+                                              pF As Date) As Int16
+        Dim data As New ArrayList()
         Try
-            Dim cadena As String = "select Tomador,Ref,idCompania,Detalle,Patente,FVencimiento,importe From PlanillasComprobantes
+            Dim cadena As String = "select Tomador,Ref,Detalle,Patente,FVencimiento,importe From PlanillasComprobantes
                                     WHERE idCliente = @idCliente and f=@f"
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("idCliente", pIdCliente)
             query.Parameters.AddWithValue("f", pF)
-            Dim adaptador As New SqlDataAdapter()
-            Dim tabla As New DataTable()
             mCon.Open()
-            adaptador.SelectCommand = query
-            adaptador.Fill(tabla)
-            pTabla.DataSource = tabla
+            Dim adapter As New SqlDataAdapter(query)
+            Dim table As New DataTable()
+            adapter.Fill(table)
+            pDataGrid.DataSource = table
             Return 1
         Catch ex As Exception
             MsgBox("Error de sistema: DevolverPolizasDePlanilla" & ex.Message)
             Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+
+    Public Function DevolverCompaniasdeRecibosDePlanilla(
+                                              pIdCliente As Integer,
+                                              pF As Date) As ArrayList
+        Dim data As New ArrayList()
+        Try
+            Dim cadena As String = "select nombreCompania From PlanillasComprobantes PC
+                                    INNER JOIN Companias C ON PC.idCompania = C.IdCompania
+                                    WHERE idCliente = @idCliente and f=@f"
+            Dim query As New SqlCommand(cadena, mCon)
+            query.Parameters.AddWithValue("idCliente", pIdCliente)
+            query.Parameters.AddWithValue("f", pF)
+            mCon.Open()
+            Dim comps = query.ExecuteReader()
+            While comps.Read()
+                data.Add(comps.Item(0))
+            End While
+            Return data
+        Catch ex As Exception
+            MsgBox("Error de sistema: DevolverPolizasDePlanilla" & ex.Message)
+            Return data
         Finally
             mCon.Close()
         End Try
