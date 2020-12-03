@@ -13,13 +13,13 @@ Public Class frmReportes
         reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.ReporteComprobantes.rdlc"
         Dim datos As New CapaDatos.ClsReportes()
         Dim dataTable As DataTable = datos.MovimientosComprobantes(DfDesde.Value, DfHasta.Value)
+        Dim dataTable1 As DataTable = datos.TotalGeneralComprobantes()
         Dim Pdesde As New ReportParameter("Desde", DfDesde.Value.ToShortDateString())
         Dim Phasta As New ReportParameter("Hasta", DfHasta.Value.ToShortDateString())
-        Dim Ptotalgeneral As New ReportParameter("Total_General", 50000)
         reporteActivo.LocalReport.SetParameters(Pdesde)
         reporteActivo.LocalReport.SetParameters(Phasta)
-        reporteActivo.LocalReport.SetParameters(Ptotalgeneral)
         reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSComprobantes", dataTable))
+        reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSTotalGeneral", dataTable))
         reporteActivo.RefreshReport()
         reporteActivo.Show()
     End Sub
@@ -33,18 +33,15 @@ Public Class frmReportes
         reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.ReporteRecibos.rdlc"
         Dim datos As New CapaDatos.ClsReportes()
         Dim dataTable As DataTable = datos.MovimientosRecibos(DfDesde.Value, DfHasta.Value)
+        Dim dataTable1 As DataTable = datos.TotalGeneralRecibos()
         Dim Pdesde As New ReportParameter("Desde", DfDesde.Value.ToShortDateString())
         Dim Phasta As New ReportParameter("Hasta", DfHasta.Value.ToShortDateString())
-        Dim Ptotalgeneral As New ReportParameter("Total_General", 50000)
         reporteActivo.LocalReport.SetParameters(Pdesde)
         reporteActivo.LocalReport.SetParameters(Phasta)
-        reporteActivo.LocalReport.SetParameters(Ptotalgeneral)
         reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSRecibos", dataTable))
+        reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSTotalGeneral", dataTable))
         reporteActivo.RefreshReport()
         reporteActivo.Show()
     End Sub
 
-    Private Sub FrmReportes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class

@@ -82,6 +82,7 @@
     <Compile Include="Models\ModeloPlanilla.vb" />
     <Compile Include="Models\ModeloReporteComprobantes.vb" />
     <Compile Include="Models\ModeloReporteRecibos.vb" />
+    <Compile Include="Models\TotalGeneral.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

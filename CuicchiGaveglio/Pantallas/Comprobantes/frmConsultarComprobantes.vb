@@ -252,11 +252,11 @@ Public Class frmConsultarComprobantes
                     .idTipoComprobante = ExtraerNumeros(Fila.Cells("tipoComprobante").Value)
                     .FIngreso = Fila.Cells("fIngreso").Value
                     .idCliente = ExtraerNumeros(Fila.Cells("Cliente").Value)
-                    .IdCompania = If(ExtraerNumeros(Fila.Cells("Compania").Value), 0)
+                    .IdCompania = ExtraerNumeros(Fila.Cells("Compania").Value)
                     .Importe = Fila.Cells("importe").Value
                     .Numero = If(Fila.Cells("numero").Value, "")
                     .FPago = Fila.Cells("fpago").Value
-                    .IdBanco = If(ExtraerNumeros(Fila.Cells("Banco").Value), 0)
+                    .IdBanco = ExtraerNumeros(Fila.Cells("Banco").Value)
                     .Obs = If(Fila.Cells("obs").Value, "")
                     .idUsuario = frmLogin.idUsuario
                     .idEstado = 1

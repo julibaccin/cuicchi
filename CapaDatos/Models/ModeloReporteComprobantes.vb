@@ -30,13 +30,4 @@
             _Salio = Value
         End Set
     End Property
-
-    Property Total As Integer
-        Get
-            Return _Total
-        End Get
-        Set
-            _Total = Value
-        End Set
-    End Property
 End Class

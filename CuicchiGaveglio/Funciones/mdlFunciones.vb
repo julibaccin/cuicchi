@@ -3,8 +3,6 @@ Imports CapaDatos
 Imports SpreadsheetLight
 Module mdlFunciones
 
-#Region "Llenar Combos"
-
     Public Sub LlenarComboClientes(pCombo As ComboBox)
         pCombo.Items.Clear()
         Dim ControladorClientes As New ClsClientes
@@ -71,10 +69,6 @@ Module mdlFunciones
         End If
     End Sub
 
-#End Region
-
-#Region "Filtros"
-
     Public Sub SoloNumero(ev As KeyPressEventArgs)
         If Char.IsNumber(ev.KeyChar) Or Char.IsControl(ev.KeyChar) Then
             ev.Handled = False
@@ -97,8 +91,6 @@ Module mdlFunciones
             ev.Handled = True
         End If
     End Sub
-
-
 
     Public Function ExtraerNumeros(ByVal strCadena As String) As String
         Dim SoloNumero As String = ""
@@ -129,10 +121,6 @@ Module mdlFunciones
         End If
         Return SoloLetra
     End Function
-
-#End Region
-
-#Region "Exportar Excel"
     Public Function ExportarExcel(pDataGrid As DataGridView)
         Try
 
@@ -161,7 +149,6 @@ Module mdlFunciones
         End Try
 
     End Function
-#End Region
 
     Public Sub EliminarFilaDataGridClickDerecho(e As DataGridViewCellMouseEventArgs, dg As DataGridView)
         If e.RowIndex = -1 Or e.ColumnIndex = -1 Or e.Button = MouseButtons.Left Then

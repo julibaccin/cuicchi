@@ -203,6 +203,7 @@
     <None Include="My Project\DataSources\CapaDatos.ModeloReporteRecibos.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloReportes.datasource" />
     <None Include="My Project\DataSources\CapaDatos.MovimientoComprobantes.datasource" />
+    <None Include="My Project\DataSources\CapaDatos.TotalGeneral.datasource" />
     <None Include="My Project\DataSources\ControladorReportes.datasource" />
     <None Include="My Project\DataSources\frmLogin.datasource" />
     <None Include="My Project\DataSources\MovimientoComprobantes.datasource" />

@@ -4,6 +4,7 @@
     Private _Salio As Integer
     Private _Total As Integer
 
+
     Property Compania As String
         Get
             Return _Compania
@@ -39,4 +40,5 @@
             _Total = Value
         End Set
     End Property
+
 End Class
