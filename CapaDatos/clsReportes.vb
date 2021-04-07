@@ -10,15 +10,14 @@ Public Class ClsReportes
         mCon = ObtenerConexion()
     End Sub
 
-    Public Function ReportePlanilla(pidCliente As Integer, pf As Date) As DataTable
+    Public Function ReportePlanilla(pidPlanilla As Integer) As DataTable
         Dim table As New DataTable
         Try
-            Dim cadena As String = "select Tomador, Ref, nombreCompania, detalle, patente, fVencimiento, importe from PlanillasComprobantes PC
-                                INNER JOIN Companias C ON PC.idCompania = C.idCompania
-                                WHERE idCliente = @idCliente AND f = @f"
+            Dim cadena As String = "select Tomador, Ref, nombreCompania, detalle, patente, fVencimiento, importe from Comprobantes C
+                                INNER JOIN Companias Co ON Co.idCompania = C.idCompania
+                                WHERE idPlanilla = @idPlanilla"
             Dim comando As New SqlCommand(cadena, mCon)
-            comando.Parameters.AddWithValue("@idCliente", pidCliente)
-            comando.Parameters.AddWithValue("@f", pf)
+            comando.Parameters.AddWithValue("@idPlanilla", pidPlanilla)
             Dim adaptador As New SqlDataAdapter(comando)
 
             adaptador.Fill(table)
@@ -39,7 +38,7 @@ Public Class ClsReportes
 		                            SUM(importe) as TOTAL 
                                     from Comprobantes C
                                     INNER JOIN TipoComprobantes TC ON C.idTipoComprobante = TC.idTipoComprobante
-                                    where C.idTipoComprobante != 4 AND fIngreso between @fDesde and @fHasta
+                                    where C.idTipoComprobante != 4 AND CONVERT(VARCHAR(10), FIngreso, 23) between @fDesde and @fHasta
                                     group by TC.nombreTipoComprobante"
             Dim comando As New SqlCommand(cadena, mCon)
             comando.Parameters.AddWithValue("@fDesde", pfDesde)
@@ -66,7 +65,7 @@ Public Class ClsReportes
 		                            SUM(importe) as TOTAL 
                                     from Comprobantes C
                                     INNER JOIN Companias Com ON C.idCompania = Com.idCompania
-                                    where idTipoComprobante = 4 AND fIngreso between @fDesde and @fHasta
+                                    where idTipoComprobante = 4 AND CONVERT(VARCHAR(10), fIngreso, 23) between @fDesde and @fHasta
                                     group by nombreCompania"
             Dim comando As New SqlCommand(cadena, mCon)
             comando.Parameters.AddWithValue("@fDesde", pfDesde)

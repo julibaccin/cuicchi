@@ -9,6 +9,6 @@
     Public email As String
     Public domicilio As String
     Public cbu As String
-
-
+    Public idcobrador As String
+    Public obs As String
 End Class

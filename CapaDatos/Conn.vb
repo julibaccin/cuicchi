@@ -12,6 +12,5 @@ Public MustInherit Class Conn
             MsgBox("Error ObtenerConexion: " + ex.Message)
             Return New SqlConnection()
         End Try
-
     End Function
 End Class

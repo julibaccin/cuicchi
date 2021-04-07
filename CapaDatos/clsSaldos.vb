@@ -53,9 +53,12 @@ Public Class ClsSaldos
 
     Public Function ConsultarPlanillasPendientes(pTabla As DataGridView)
         Try
-            Dim cadena As String = "SELECT C.nombreCliente as CLIENTE, P.f as FECHA_PLANILLA, P.idCliente FROM Planillas P
-                                    INNER JOIN Clientes C ON P.idCliente = C.idCliente 
-                                    WHERE idEstadoOperacion = 2"
+            Dim cadena As String = "SELECT U.nombreUsuario as USUARIO,C.nombreCliente as CLIENTE, P.fPlanilla as FECHA_PLANILLA, P.idCliente, idPlanilla FROM Planillas P
+                                    INNER JOIN Clientes C ON P.idCliente = C.idCliente
+                                    INNER JOIN Usuarios U ON P.idUsuario = U.idUsuario 
+                                    WHERE idEstadoOperacion = 2 
+									AND idPlanilla IN (SELECT idPlanilla FROM Comprobantes WHERE idPlanilla is not null AND idTipoComprobante = 4 GROUP BY idPlanilla)
+                                    AND idPlanilla IN (SELECT idPlanilla FROM Comprobantes WHERE idPlanilla is not null AND idTipoComprobante <> 4 GROUP BY idPlanilla)"
             Dim query As New SqlCommand(cadena, mCon)
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()
@@ -76,9 +79,9 @@ Public Class ClsSaldos
 
     Public Function ConsultarChequesProximosAVencer(pTabla As DataGridView)
         Try
-            Dim cadena = "SELECT numero as Numero_Cheque, DATEADD(DAY,30,fPago) as Fecha_de_Vencimiento from Comprobantes AC
-                            INNER JOIN Estados ON AC.idEstado = Estados.idEstado
-                            where (idTipoComprobante = 3 and AC.idEstado = 1) AND DATEADD(DAY,30,fPago) >= GETDATE()"
+            Dim cadena = "SELECT numero as Numero_Cheque, DATEADD(DAY,30,CONVERT(dateTIME,convert(char(8),CONVERT(VARCHAR(8),fPago)))) as Fecha_de_Vencimiento from Comprobantes AC
+                          INNER JOIN Estados ON AC.idEstado = Estados.idEstado
+                          WHERE (idTipoComprobante = 3 and AC.idEstado = 1) AND DATEDIFF(DAY, GETDATE(), DATEADD(DAY,30,CONVERT(dateTIME,convert(char(8),CONVERT(VARCHAR(8),fPago))))) <= 5"
             Dim query As New SqlCommand(cadena, mCon)
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()
@@ -90,7 +93,7 @@ Public Class ClsSaldos
             Return 1
 
         Catch ex As Exception
-            MsgBox("Error de sistema: ConsultarChequesProximosAVencer" & ex.Message)
+            MsgBox("Error de sistema: ConsultarChequesProximosAVencer: " & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -99,7 +102,7 @@ Public Class ClsSaldos
 
     Public Function ConsultarPlanillasRechazadas(pTabla As DataGridView)
         Try
-            Dim cadena As String = "SELECT C.nombreCliente as CLIENTE, P.f as FECHA_PLANILLA FROM Planillas P
+            Dim cadena As String = "SELECT C.nombreCliente as CLIENTE, P.fPlanilla as FECHA_PLANILLA, P.idCliente, idPlanilla FROM Planillas P
                                     INNER JOIN Clientes C ON P.idCliente = C.idCliente 
                                     WHERE idEstadoOperacion = 3"
             Dim query As New SqlCommand(cadena, mCon)

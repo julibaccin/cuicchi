@@ -11,13 +11,14 @@ Public Class ClsPlanillas
     End Sub
 
     'Lectura
-    Public Function DevolverPlanillasCliente(pidCliente As Integer) As ArrayList
+    Public Function DevolverPlanillasCliente(pidCliente As Integer, pidUsuario As Integer) As ArrayList
 
         Dim Respuesta As New ArrayList
         Try
-            Dim cadena As String = "SELECT f FROM Planillas WHERE idCliente = @idCliente"
+            Dim cadena As String = "SELECT fPlanilla FROM Planillas WHERE idCliente = @idCliente AND idUsuario = @idUsuario"
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("idCliente", pidCliente)
+            query.Parameters.AddWithValue("idUsuario", pidUsuario)
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()
@@ -34,15 +35,13 @@ Public Class ClsPlanillas
     End Function
 
     Public Function DevolverRecibosDePlanilla(pDataGrid As DataGridView,
-                                              pIdCliente As Integer,
-                                              pF As Date) As Int16
+                                              pIdPlanilla As Integer) As Int16
         Dim data As New ArrayList()
         Try
-            Dim cadena As String = "select Tomador,Ref,Detalle,Patente,FVencimiento,importe From PlanillasComprobantes
-                                    WHERE idCliente = @idCliente and f=@f"
+            Dim cadena As String = "SELECT Tomador,Ref,Detalle,Patente, FVencimiento as FVencimiento,importe From Comprobantes C
+                                    WHERE idPlanilla = @idPlanilla and idTipoComprobante = 4"
             Dim query As New SqlCommand(cadena, mCon)
-            query.Parameters.AddWithValue("idCliente", pIdCliente)
-            query.Parameters.AddWithValue("f", pF)
+            query.Parameters.AddWithValue("idPlanilla", pIdPlanilla)
             mCon.Open()
             Dim adapter As New SqlDataAdapter(query)
             Dim table As New DataTable()
@@ -50,7 +49,7 @@ Public Class ClsPlanillas
             pDataGrid.DataSource = table
             Return 1
         Catch ex As Exception
-            MsgBox("Error de sistema: DevolverPolizasDePlanilla" & ex.Message)
+            MsgBox("Error de sistema: DevolverRecibosDePlanilla " & ex.Message)
             Return 0
         Finally
             mCon.Close()
@@ -58,17 +57,47 @@ Public Class ClsPlanillas
 
     End Function
 
-    Public Function DevolverCompaniasdeRecibosDePlanilla(
-                                              pIdCliente As Integer,
-                                              pF As Date) As ArrayList
+    Public Function DevolverPagosDePlanilla(pDataGrid As DataGridView,
+                                              pIdPlanilla As Integer) As Int16
         Dim data As New ArrayList()
         Try
-            Dim cadena As String = "select nombreCompania From PlanillasComprobantes PC
-                                    INNER JOIN Companias C ON PC.idCompania = C.IdCompania
-                                    WHERE idCliente = @idCliente and f=@f"
+            Dim cadena As String = "SELECT 
+                                    idtipocomprobante as idtipocomprobante,
+                                    C.fingreso as fingreso,
+                                    idcliente as idcliente,
+                                    idcompania as idcompania,
+                                    importe as importe,
+                                    numero as numero,
+                                    fpago as fpago,
+                                    idbanco as idbanco,
+                                    obs as Obs 
+                                    From Comprobantes C
+                                    WHERE idPlanilla = @idPlanilla and idTipoComprobante <> 4"
             Dim query As New SqlCommand(cadena, mCon)
-            query.Parameters.AddWithValue("idCliente", pIdCliente)
-            query.Parameters.AddWithValue("f", pF)
+            query.Parameters.AddWithValue("idPlanilla", pIdPlanilla)
+            mCon.Open()
+            Dim adapter As New SqlDataAdapter(query)
+            Dim table As New DataTable()
+            adapter.Fill(table)
+            pDataGrid.DataSource = table
+            Return 1
+        Catch ex As Exception
+            MsgBox("Error de sistema: DevolverPagosDePlanilla " & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+
+    Public Function DevolverCompaniasdeRecibosDePlanilla(pIdPlanilla As Integer) As ArrayList
+        Dim data As New ArrayList()
+        Try
+            Dim cadena As String = "select nombreCompania From Comprobantes C
+                                    INNER JOIN Companias Co ON Co.idCompania = C.IdCompania
+                                    WHERE idPlanilla = @idPlanilla AND idTipoComprobante = 4"
+            Dim query As New SqlCommand(cadena, mCon)
+            query.Parameters.AddWithValue("idPlanilla", pIdPlanilla)
             mCon.Open()
             Dim comps = query.ExecuteReader()
             While comps.Read()
@@ -76,7 +105,7 @@ Public Class ClsPlanillas
             End While
             Return data
         Catch ex As Exception
-            MsgBox("Error de sistema: DevolverPolizasDePlanilla" & ex.Message)
+            MsgBox("Error de sistema: DevolverCompaniasdeRecibosDePlanilla" & ex.Message)
             Return data
         Finally
             mCon.Close()
@@ -84,16 +113,15 @@ Public Class ClsPlanillas
 
     End Function
 
-    Public Function CrearPlanilla(pidCliente As Integer, pF As Date, pIdUsuario As Integer, pEstadoOperacion As Int16) As Int16
+    Public Function CrearPlanilla(pidCliente As Integer, pF As Integer, pIdUsuario As Integer) As Int16
         Try
-            Dim cadena As String = "INSERT INTO Planillas (idCliente,f,idUsuario,idEstadoOperacion)
-                                    VALUES (@idCliente,@f,@idusuario,@idEstadoOperacion)"
+            Dim cadena As String = "INSERT INTO Planillas (idCliente,fPlanilla,idUsuario,idEstadoOperacion)
+                                    VALUES (@idCliente,@fPlanilla,@idusuario,2)"
             Dim query As New SqlCommand(cadena, mCon)
 
             query.Parameters.AddWithValue("idCliente", pidCliente)
-            query.Parameters.AddWithValue("f", pF)
+            query.Parameters.AddWithValue("fPlanilla", pF)
             query.Parameters.AddWithValue("idusuario", pIdUsuario)
-            query.Parameters.AddWithValue("idEstadoOperacion", pEstadoOperacion)
             mCon.Open()
             query.ExecuteNonQuery()
             Return 1
@@ -106,16 +134,15 @@ Public Class ClsPlanillas
 
     End Function
 
-    Public Function DatosGeneralesPlanilla(pidCliente As Integer, pF As Date) As String
+    Public Function DatosGeneralesPlanilla(pIdPlanilla As Integer) As String
 
         Dim Respuesta As New ArrayList
         Try
             Dim cadena As String = "SELECT nombreEstadoOperacion FROM Planillas P
                                     INNER JOIN EstadosOperacion EO ON P.idEstadoOperacion = EO.idEstadoOperacion 
-                                    WHERE idCliente = @idCliente AND f=@f"
+                                    WHERE idPlanilla = @idPlanilla"
             Dim query As New SqlCommand(cadena, mCon)
-            query.Parameters.AddWithValue("idCliente", pidCliente)
-            query.Parameters.AddWithValue("f", pF)
+            query.Parameters.AddWithValue("idPlanilla", pIdPlanilla)
             mCon.Open()
             Dim data As SqlDataReader = query.ExecuteReader()
             While data.Read()
@@ -131,12 +158,35 @@ Public Class ClsPlanillas
 
     End Function
 
-    Public Function CambiarEstadoPlanilla(pidCliente As Integer, pf As Date, pidEstadoOperacion As Int16) As Int16
+    Public Function ObtenerIdPlanilla(pIdCliente As Integer, pfPlanilla As Integer) As Integer
+
+        Dim Respuesta As New ArrayList
         Try
-            Dim cadena As String = "UPDATE PLANILLAS SET idEstadoOperacion = @idEstadoOperacion WHERE idCliente = @idCliente AND f = @f"
+            Dim cadena As String = "SELECT idPlanilla FROM Planillas WHERE idCliente = @idCliente AND
+                                    fPlanilla = @fPlanilla"
             Dim query As New SqlCommand(cadena, mCon)
-            query.Parameters.AddWithValue("idCliente", pidCliente)
-            query.Parameters.AddWithValue("f", pf)
+            query.Parameters.AddWithValue("IdCliente", pIdCliente)
+            query.Parameters.AddWithValue("fPlanilla", pfPlanilla)
+            mCon.Open()
+            Dim data As SqlDataReader = query.ExecuteReader()
+            While data.Read()
+                Return data.Item(0)
+            End While
+            Return 0
+        Catch ex As Exception
+            MsgBox("Error de sistema: DatosGeneralesPlanilla" & ex.Message)
+            Return ""
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+
+    Public Function CambiarEstadoPlanilla(pidPlanilla As Integer, pidEstadoOperacion As Int16) As Int16
+        Try
+            Dim cadena As String = "UPDATE PLANILLAS SET idEstadoOperacion = @idEstadoOperacion WHERE idPlanilla = @idPlanilla"
+            Dim query As New SqlCommand(cadena, mCon)
+            query.Parameters.AddWithValue("idPlanilla", pidPlanilla)
             query.Parameters.AddWithValue("idEstadoOperacion", pidEstadoOperacion)
             mCon.Open()
             query.ExecuteNonQuery()
@@ -149,59 +199,19 @@ Public Class ClsPlanillas
         End Try
     End Function
 
-    Public Function AgregarReciboAPlanilla(pidCliente As Integer, pF As Date, pidAlta As Integer,
-                                           pTomador As String, pRef As String, pIdCompania As Int64,
-                                           pDetalle As String, pPatente As String, pFVencimiento As Date, pImporte As Integer) As Integer
-        Try
-            Dim cadena As String = "INSERT INTO PlanillasComprobantes (idCliente,f,idAlta,Tomador,Ref,idCompania,Detalle,Patente,FVencimiento,Importe) 
-                                    VALUES (@idCliente,@f,@idAlta,@tomador,@ref,@idCompania,@detalle,@patente,@fVencimiento,@importe)"
-            Dim query As New SqlCommand(cadena, mCon)
-            query.Parameters.AddWithValue("idCliente", pidCliente)
-            query.Parameters.AddWithValue("f", pF)
-            query.Parameters.AddWithValue("idAlta", pidAlta)
-            query.Parameters.AddWithValue("tomador", pTomador)
-            query.Parameters.AddWithValue("ref", pRef)
-            query.Parameters.AddWithValue("idCompania", pIdCompania)
-            query.Parameters.AddWithValue("detalle", pDetalle)
-            query.Parameters.AddWithValue("patente", pPatente)
-            query.Parameters.AddWithValue("fVencimiento", pFVencimiento)
-            query.Parameters.AddWithValue("importe", pImporte)
-            mCon.Open()
-            query.ExecuteNonQuery()
-            Return 1
-        Catch ex As Exception
-            MsgBox("Error de sistema: AgregarReciboAPlanilla" & ex.Message)
-            Return 0
-        Finally
-            mCon.Close()
-        End Try
-    End Function
-
-    Public Function EliminarPlanillasComprobantes(pidCliente As Integer, pF As Date) As ArrayList
+    Public Function EliminarPlanillasComprobantes(pidPlanilla As Integer) As Integer
 
         Dim Respuesta As New ArrayList
         Try
-            Dim cadena1 As String = "SELECT idAlta FROM PlanillasComprobantes WHERE idCliente=@idCliente and f=@f"
-            Dim query1 As New SqlCommand(cadena1, mCon)
-            query1.Parameters.AddWithValue("idCliente", pidCliente)
-            query1.Parameters.AddWithValue("f", pF)
-
-            Dim cadena2 As String = "DELETE FROM PlanillasComprobantes WHERE idCliente = @idCliente and f=@f"
+            Dim cadena2 As String = "DELETE FROM Comprobantes WHERE idPlanilla = @idPlanilla"
             Dim query2 As New SqlCommand(cadena2, mCon)
-            query2.Parameters.AddWithValue("idCliente", pidCliente)
-            query2.Parameters.AddWithValue("f", pF)
-
+            query2.Parameters.AddWithValue("idPlanilla", pidPlanilla)
             mCon.Open()
-            Dim data As SqlDataReader = query1.ExecuteReader()
-            While data.Read()
-                Respuesta.Add(data.Item(0))
-            End While
-            data.Close()
             query2.ExecuteNonQuery()
-            Return Respuesta
+            Return 1
         Catch ex As Exception
             MsgBox("Error de sistema: EliminarPlanillasComprobantes" & ex.Message)
-            Return Respuesta
+            Return 0
         Finally
             mCon.Close()
         End Try

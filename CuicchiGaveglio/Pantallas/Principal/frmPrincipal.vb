@@ -1,6 +1,6 @@
 ﻿Imports CapaDatos
 
-Public Class frmPrincipal
+Public Class FrmPrincipal
 
     Private Sub FrmPrincipal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LlenarDatos()
@@ -12,6 +12,13 @@ Public Class frmPrincipal
         Control.ConsultarPlanillasPendientes(DPendientes)
         Control.ConsultarPlanillasRechazadas(DRechazados)
         Control.ConsultarChequesProximosAVencer(DChequesProximosAVencer)
+        If frmLogin.IdRol = 2 Then
+            DChequesProximosAVencer.Visible = False
+            lblAdvertencias.Visible = False
+        Else
+            DChequesProximosAVencer.Visible = True
+            lblAdvertencias.Visible = True
+        End If
     End Sub
     Private Sub Ayuda(sender As Object, e As EventArgs) Handles btnAbrirAyuda.Click
         MsgBox("Para cualquier Consulta/Error comunicarse al 3462-30216 (WhatsApp) - Julian Baccin", MsgBoxStyle.Information, "Ayuda")
@@ -31,7 +38,7 @@ Public Class frmPrincipal
     End Sub
 
 
-    Private Sub frmPrincipal_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+    Private Sub FrmPrincipal_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         frmLogin.Show()
     End Sub
 
@@ -71,10 +78,33 @@ Public Class frmPrincipal
             Return
         End If
 
-        frmPlanillas.FrmConsultarComprobantes_Load(sender, e)
-        frmPlanillas.cmbClienteP.Text = DPendientes.Item("Cliente", e.RowIndex).Value & "|" & DPendientes.Item("idCliente", e.RowIndex).Value
-        frmPlanillas.cmbFechaP.Text = DPendientes.Item("Fecha_Planilla", e.RowIndex).Value
-        frmPlanillas.cmbFechaPChanged(sender, e)
-        frmPlanillas.Show()
+        FrmPlanillas.FrmConsultarComprobantes_Load(sender, e)
+        FrmPlanillas.Show()
+        FrmPlanillas.cmbClienteP.Text = DPendientes.Item("Cliente", e.RowIndex).Value & "|" & DPendientes.Item("idCliente", e.RowIndex).Value
+        FrmPlanillas.cmbFechaP.Text = DPendientes.Item("Fecha_Planilla", e.RowIndex).Value
+        FrmPlanillas.txtIdPlanilla.Text = DPendientes.Item("idPlanilla", e.RowIndex).Value
+        FrmPlanillas.cmbFechaPChanged(sender, e)
+
+    End Sub
+
+    Private Sub SQLToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SQLToolStripMenuItem.Click
+        frmSQL.Show()
+    End Sub
+
+    Private Sub DRechazados_CellContentDoubleClick(sender As Object, e As Windows.Forms.DataGridViewCellEventArgs) Handles DRechazados.CellContentDoubleClick
+        If e.RowIndex = -1 Or e.ColumnIndex = -1 Then
+            Return
+        End If
+
+        FrmPlanillas.FrmConsultarComprobantes_Load(sender, e)
+        FrmPlanillas.Show()
+        FrmPlanillas.cmbClienteP.Text = DRechazados.Item("Cliente", e.RowIndex).Value & "|" & DRechazados.Item("idCliente", e.RowIndex).Value
+        FrmPlanillas.cmbFechaP.Text = DRechazados.Item("Fecha_Planilla", e.RowIndex).Value
+        FrmPlanillas.txtIdPlanilla.Text = DRechazados.Item("idPlanilla", e.RowIndex).Value
+        FrmPlanillas.CmbFechaPChanged(sender, e)
+    End Sub
+
+    Private Sub CobradoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CobradoresToolStripMenuItem.Click
+        frmAltaCobradores.ShowDialog()
     End Sub
 End Class

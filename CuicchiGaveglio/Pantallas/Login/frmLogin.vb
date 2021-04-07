@@ -6,7 +6,7 @@ Public Class frmLogin
     Private _idRol As Short
     Private _idUsuario As Short
 
-    Property idUsuario As Int16
+    Property IdUsuario As Int16
         Get
             Return _idUsuario
         End Get
@@ -15,7 +15,7 @@ Public Class frmLogin
         End Set
     End Property
 
-    Property idRol As Short
+    Property IdRol As Short
         Get
             Return _idRol
         End Get
@@ -49,7 +49,7 @@ Public Class frmLogin
     End Sub
 
 
-    Private Sub limpiarCampos()
+    Private Sub LimpiarCampos()
         txtUsuario.Text = ""
         txtContrasenia.Text = ""
         txtUsuario.Focus()

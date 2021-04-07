@@ -46,6 +46,89 @@ Public Class ClsComprobantes
         End Try
 
     End Function
+    Public Function CrearMovimientoPlanilla(pAlta As ModeloComprobante) As Int16
+
+        Try
+            Dim cadena As String =
+            "INSERT INTO Comprobantes 
+            (idTipoComprobante, fIngreso, idCliente, idCompania, obs, numero, idBanco, importe, fPago, idUsuario, idEstado, obsBaja, idEstadoOperacion, idPlanilla)
+		    VALUES(@idTipoComprobante,@fIngreso,@idCliente,@idCompania,@obs,@numero,@idBanco,@importe,@fPago,@idUsuario,@idEstado,'',@idEstadoOperacion, @idPlanilla)
+            SELECT TOP 1 idAlta From Comprobantes ORDER BY idAlta DESC"
+            Dim query As New SqlCommand(cadena, mCon)
+            With query.Parameters
+                .AddWithValue("idTipoComprobante", pAlta.IdTipoComprobante)
+                .AddWithValue("fIngreso", pAlta.FIngreso)
+                .AddWithValue("idCliente", pAlta.IdCliente)
+                .AddWithValue("idCompania", pAlta.IdCompania)
+                .AddWithValue("obs", pAlta.Obs)
+                .AddWithValue("importe", pAlta.Importe)
+                .AddWithValue("fPago", pAlta.FPago)
+                .AddWithValue("idUsuario", pAlta.IdUsuario)
+                .AddWithValue("idEstado", pAlta.IdEstado)
+                .AddWithValue("numero", pAlta.Numero)
+                .AddWithValue("idBanco", pAlta.IdBanco)
+                .AddWithValue("idEstadoOperacion", pAlta.IdEstadoOperacion)
+                .AddWithValue("IdPlanilla", pAlta.IdPlanilla)
+            End With
+
+            mCon.Open()
+            Dim resp = query.ExecuteReader()
+            resp.Read()
+            Return resp.Item(0)
+        Catch ex As Exception
+            MsgBox("Error de sistema: CrearMovimientoPlanilla" & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
+    Public Function CrearMovimientoReciboPlanilla(pAlta As ModeloComprobante) As Int16
+
+        Try
+            Dim cadena As String =
+            "INSERT INTO Comprobantes 
+            (idTipoComprobante, fIngreso, idCliente, idCompania, obs, numero,
+             idBanco, importe, fPago, idUsuario, idEstado, idEstadoOperacion,
+             Tomador, Ref, Detalle, Patente, FVencimiento, idPlanilla)
+		    VALUES(@idTipoComprobante, @fIngreso, @idCliente ,@idCompania,@obs,@numero,
+             @idBanco,@importe,@fPago, @idUsuario, @idEstado ,@idEstadoOperacion,
+             @Tomador, @Ref, @Detalle, @Patente, @FVencimiento, @idPlanilla)
+            SELECT TOP 1 idAlta From Comprobantes ORDER BY idAlta DESC"
+            Dim query As New SqlCommand(cadena, mCon)
+            With query.Parameters
+                .AddWithValue("idTipoComprobante", pAlta.IdTipoComprobante)
+                .AddWithValue("fIngreso", pAlta.FIngreso)
+                .AddWithValue("idCliente", pAlta.IdCliente)
+                .AddWithValue("idCompania", pAlta.IdCompania)
+                .AddWithValue("obs", pAlta.Obs)
+                .AddWithValue("importe", pAlta.Importe)
+                .AddWithValue("fPago", pAlta.FPago)
+                .AddWithValue("idUsuario", pAlta.IdUsuario)
+                .AddWithValue("idEstado", pAlta.IdEstado)
+                .AddWithValue("numero", pAlta.Numero)
+                .AddWithValue("idBanco", pAlta.IdBanco)
+                .AddWithValue("idEstadoOperacion", pAlta.IdEstadoOperacion)
+                .AddWithValue("idPlanilla", pAlta.IdPlanilla)
+                .AddWithValue("Tomador", pAlta.Tomador)
+                .AddWithValue("Ref", pAlta.Ref)
+                .AddWithValue("Detalle", pAlta.Detalle)
+                .AddWithValue("Patente", pAlta.Patente)
+                .AddWithValue("FVencimiento", pAlta.FVencimiento)
+            End With
+
+            mCon.Open()
+            Dim resp = query.ExecuteReader()
+            resp.Read()
+            Return resp.Item(0)
+        Catch ex As Exception
+            MsgBox("Error de sistema: CrearMovimientoReciboPlanilla" & ex.Message)
+            Return 0
+        Finally
+            mCon.Close()
+        End Try
+
+    End Function
 
     Public Function CambiarEstado(pIdAlta As Integer, pObsBaja As String, pIdEstado As Integer, pIdCompania As Integer) As Int16
 
@@ -71,29 +154,15 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-    Public Function CambiarEstadoOperacion(pIdCliente As Integer, pF As Date) As Int16
+    Public Function CambiarEstadoOperacion(pIdPlanilla As Integer, pidEstadoOperacion As Integer) As Int16
 
         Try
-            Dim cadena As String = "SELECT idAlta from PlanillasComprobantes where idCliente = @idCliente and f = @f"
+            Dim cadena As String = "UPDATE Comprobantes SET idEstadoOperacion= @idEstadoOperacion WHERE idPlanilla = @idPlanilla "
             Dim query As New SqlCommand(cadena, mCon)
-            With query.Parameters
-                .AddWithValue("idCliente", pIdCliente)
-                .AddWithValue("f", pF)
-            End With
+            query.Parameters.AddWithValue("idPlanilla", pIdPlanilla)
+            query.Parameters.AddWithValue("idEstadoOperacion", pidEstadoOperacion)
             mCon.Open()
-            Dim data = query.ExecuteReader()
-            Dim idaltas = "("
-            While data.Read()
-                idaltas &= data.Item(0) & ","
-            End While
-            idaltas = idaltas.TrimEnd(",")
-            idaltas &= ")"
-            data.Close()
-            Dim cadena2 As String = $"UPDATE Comprobantes SET idEstadoOperacion=1 WHERE idAlta IN {idaltas}"
-            Dim query2 As New SqlCommand(cadena2, mCon)
-
-            query2.ExecuteNonQuery()
-
+            query.ExecuteNonQuery()
             Return 1
         Catch ex As Exception
             MsgBox("Error de sistema: CambiarEstado" & ex.Message)
@@ -105,20 +174,20 @@ Public Class ClsComprobantes
     End Function
 
     Public Function ConsultarComprobantes(pTabla As DataGridView, pTipoComprobante As String,
-                                              pFechaDesde As Date, pFechaHasta As Date,
+                                              pFechaDesde As Integer, pFechaHasta As Integer,
                                               pNumero As String, pNombreUsuario As String,
-                                              pFechaPago As Date, pImporte As Integer,
+                                              pFechaPago As Integer, pImporte As Integer,
                                               pNombreCliente As String, pNombreCompania As String,
                                               pNombreEstado As String
                                               ) As Int16
 
         Try
-            Dim cadena As String = "SELECT fIngreso, Clientes.nombreCliente, 
+            Dim cadena As String = "SELECT fIngreso as fIngreso, Clientes.nombreCliente, 
 			                        TipoComprobantes.nombreTipoComprobante AS Tipo_Comprobante,
 			                        importe, Companias.nombreCompania,
 			                        Estados.nombreEstado AS Estado,
 			                        fPago, numero, Bancos.nombreBanco,
-			                        obs, obsBaja, Usuarios.nombreUsuario, idAlta
+			                        C.obs, obsBaja, Usuarios.nombreUsuario, idAlta
 		                            FROM Comprobantes C
 		        INNER JOIN TipoComprobantes ON C.idTipoComprobante = TipoComprobantes.idTipoComprobante
 		        INNER JOIN Clientes ON Clientes.idCliente = C.idCliente
@@ -126,8 +195,8 @@ Public Class ClsComprobantes
 		        INNER JOIN Bancos ON Bancos.idBanco = C.idBanco
 		        INNER JOIN Estados ON Estados.idEstado = C.idEstado
 		        INNER JOIN Usuarios ON Usuarios.idUsuario = C.idUsuario
-		        WHERE 
-		            (fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta) AND
+		        WHERE
+                    fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta AND	            
 		            (numero LIKE '%' + @numero + '%') AND
 		            (importe >= @importe) AND
 		            (Estados.nombreEstado LIKE '%' + @NombreEstado + '%') AND
@@ -136,7 +205,7 @@ Public Class ClsComprobantes
 		            (TipoComprobantes.nombreTipoComprobante LIKE '%'+ @NombreTipoComprobante +'%') AND
 		            (Usuarios.nombreUsuario LIKE  '%'+ @NombreUsuario +'%') AND
                     idEstadoOperacion = 1"
-
+            '(fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta) AND
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("NombreTipoComprobante", pTipoComprobante)
             query.Parameters.AddWithValue("fechaDesde", pFechaDesde)
@@ -191,10 +260,17 @@ Public Class ClsComprobantes
     Public Function ConsultarIdCompania(pNombreCompania As String) As Integer
 
         Try
+            Dim aux = ""
+            If IsNothing(pNombreCompania) Or pNombreCompania = "" Then
+                aux = "N"
+            Else
+                aux = pNombreCompania
+            End If
+
             Dim cadena As String = "SELECT TOP 1 idCompania FROM Companias WHERE nombreCompania = @nombreCompania "
             Dim query As New SqlCommand(cadena, mCon)
             With query.Parameters
-                .AddWithValue("nombreCompania", pNombreCompania)
+                .AddWithValue("nombreCompania", aux)
             End With
 
             mCon.Open()
@@ -203,7 +279,7 @@ Public Class ClsComprobantes
 
             Return a.Item(0)
         Catch ex As Exception
-            MsgBox("Error de sistema: EliminarComprobante" & ex.Message)
+            MsgBox("Error de sistema: ConsultarIdCompania" & ex.Message)
             Return 0
         Finally
             mCon.Close()

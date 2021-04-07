@@ -67,12 +67,14 @@
   <ItemGroup>
     <Compile Include="clsBancos.vb" />
     <Compile Include="clsClientes.vb" />
+    <Compile Include="clsCobradores.vb" />
     <Compile Include="clsCompania.vb" />
     <Compile Include="clsComprobantes.vb" />
     <Compile Include="clsEstados.vb" />
     <Compile Include="clsLogin.vb" />
     <Compile Include="clsPlanillas.vb" />
     <Compile Include="clsSaldos.vb" />
+    <Compile Include="clsSQL.vb" />
     <Compile Include="clsTipoComprobantes.vb" />
     <Compile Include="clsUsuarios.vb" />
     <Compile Include="Conn.vb" />

@@ -25,7 +25,7 @@ Public Class frmReportes
     End Sub
 
 
-    Private Sub btnRecibos(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub BtnRecibos(sender As Object, e As EventArgs) Handles Button1.Click
         panelReportes.Controls.Clear()
         reporteActivo = New ReportViewer()
         panelReportes.Controls.Add(reporteActivo)

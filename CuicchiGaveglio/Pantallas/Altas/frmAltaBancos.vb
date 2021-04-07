@@ -2,19 +2,19 @@
 Imports CapaDatos
 
 Public Class frmAltaBancos
-    Dim Control As New ClsBancos()
-    Private Sub limpiarCampos()
+    ReadOnly Control As New ClsBancos()
+    Private Sub LimpiarCampos()
         txtNombreBanco.Text = ""
         txtNumeroBanco.Text = ""
         txtNombreBanco.Focus()
     End Sub
 
     '-----------VALIDACIONES------------
-    Private Sub txtNumeroBanco_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumeroBanco.KeyPress
+    Private Sub TxtNumeroBanco_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumeroBanco.KeyPress
         SoloNumero(e)
     End Sub
 
-    Private Sub txtBanco_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombreBanco.KeyPress
+    Private Sub TxtBanco_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNombreBanco.KeyPress
         SoloLetra(e)
     End Sub
 
@@ -49,5 +49,4 @@ Public Class frmAltaBancos
             End If
         End If
     End Sub
-
 End Class

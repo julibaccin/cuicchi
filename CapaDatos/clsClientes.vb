@@ -12,8 +12,9 @@ Public Class ClsClientes
     Public Function CrearCliente(pCliente As ModeloCliente) As Int16
 
         Try
-            Dim cadena As String = "INSERT INTO Clientes(nombreCliente,dni,telefono,cuit,domicilio,cbu,email) VALUES
-			(@nombreCliente,@dni,@telefono,@cuit,@domicilio,@cbu,@email);"
+            Dim cadena As String = "INSERT INTO Clientes
+            (nombreCliente,dni,telefono,cuit,domicilio,cbu,email,obs,idCobrador) VALUES
+			(@nombreCliente,@dni,@telefono,@cuit,@domicilio,@cbu,@email,@obs,@idCobrador);"
             Dim query As New SqlCommand(cadena, mCon)
             With query
                 .Parameters.AddWithValue("nombreCliente", pCliente.nombreCliente)
@@ -23,6 +24,8 @@ Public Class ClsClientes
                 .Parameters.AddWithValue("domicilio", pCliente.domicilio)
                 .Parameters.AddWithValue("cbu", pCliente.cbu)
                 .Parameters.AddWithValue("email", pCliente.email)
+                .Parameters.AddWithValue("obs", pCliente.obs)
+                .Parameters.AddWithValue("idCobrador", pCliente.idcobrador)
             End With
             mCon.Open()
             query.ExecuteNonQuery()
@@ -39,7 +42,7 @@ Public Class ClsClientes
 
         Try
             Dim cadena As String = "UPDATE Clientes 
-        SET nombreCliente= @nombreCliente,dni = @dni, telefono = @telefono, cuit = @cuit, domicilio = @domicilio, cbu = @CBU, email = @email WHERE idCliente = @idCliente"
+        SET nombreCliente= @nombreCliente,dni = @dni, telefono = @telefono, cuit = @cuit, domicilio = @domicilio, cbu = @CBU, email = @email, obs = @obs, idCobrador=@idCobrador WHERE idCliente = @idCliente"
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("idCliente", pCliente.idCliente)
             query.Parameters.AddWithValue("nombreCliente", pCliente.nombreCliente)
@@ -49,6 +52,8 @@ Public Class ClsClientes
             query.Parameters.AddWithValue("domicilio", pCliente.domicilio)
             query.Parameters.AddWithValue("cbu", pCliente.cbu)
             query.Parameters.AddWithValue("email", pCliente.email)
+            query.Parameters.AddWithValue("idCobrador", pCliente.idcobrador)
+            query.Parameters.AddWithValue("obs", pCliente.obs)
             mCon.Open()
             query.ExecuteNonQuery()
             Return 1
@@ -64,7 +69,8 @@ Public Class ClsClientes
     Public Function ConsultarClientes(pTabla As DataGridView, pFiltro As String) As Int16
 
         Try
-            Dim cadena As String = "SELECT * FROM Clientes WHERE nombreCliente like '%' + @nombreCliente +'%'"
+            Dim cadena As String = "SELECT idCliente, nombreCliente, telefono, cuit, dni, email, domicilio, cbu, obs, nombreCobrador FROM Clientes INNER JOIN Cobradores C ON Clientes.idCobrador = C.idCobrador WHERE nombreCliente like '%' + @nombreCliente +'%'"
+
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("nombreCliente", pFiltro)
             Dim adaptador As New SqlDataAdapter()

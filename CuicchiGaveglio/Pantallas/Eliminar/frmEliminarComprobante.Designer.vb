@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmEliminarComprobante
+Partial Class FrmEliminarComprobante
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.

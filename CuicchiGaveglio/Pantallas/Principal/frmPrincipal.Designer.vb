@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class frmPrincipal
+Partial Class FrmPrincipal
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -34,6 +34,7 @@ Partial Class frmPrincipal
         Me.btnAltaClientes = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAltaBancos = New System.Windows.Forms.ToolStripMenuItem()
         Me.CompañiasToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CobradoresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AltaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ComprobantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PLANILLASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -54,6 +55,7 @@ Partial Class frmPrincipal
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
         Me.MenuPrincipal = New System.Windows.Forms.MenuStrip()
+        Me.SQLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DRechazados = New System.Windows.Forms.DataGridView()
         Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.DPendientes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,7 +126,7 @@ Partial Class frmPrincipal
         '
         'AltaToolStripMenuItem
         '
-        Me.AltaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAltaClientes, Me.btnAltaBancos, Me.CompañiasToolStripMenuItem})
+        Me.AltaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAltaClientes, Me.btnAltaBancos, Me.CompañiasToolStripMenuItem, Me.CobradoresToolStripMenuItem})
         Me.AltaToolStripMenuItem.Name = "AltaToolStripMenuItem"
         Me.AltaToolStripMenuItem.Size = New System.Drawing.Size(65, 25)
         Me.AltaToolStripMenuItem.Text = "ALTAS"
@@ -132,20 +134,26 @@ Partial Class frmPrincipal
         'btnAltaClientes
         '
         Me.btnAltaClientes.Name = "btnAltaClientes"
-        Me.btnAltaClientes.Size = New System.Drawing.Size(158, 26)
+        Me.btnAltaClientes.Size = New System.Drawing.Size(161, 26)
         Me.btnAltaClientes.Text = "Clientes"
         '
         'btnAltaBancos
         '
         Me.btnAltaBancos.Name = "btnAltaBancos"
-        Me.btnAltaBancos.Size = New System.Drawing.Size(158, 26)
+        Me.btnAltaBancos.Size = New System.Drawing.Size(161, 26)
         Me.btnAltaBancos.Text = "Bancos"
         '
         'CompañiasToolStripMenuItem
         '
         Me.CompañiasToolStripMenuItem.Name = "CompañiasToolStripMenuItem"
-        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(158, 26)
+        Me.CompañiasToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
         Me.CompañiasToolStripMenuItem.Text = "Compañias"
+        '
+        'CobradoresToolStripMenuItem
+        '
+        Me.CobradoresToolStripMenuItem.Name = "CobradoresToolStripMenuItem"
+        Me.CobradoresToolStripMenuItem.Size = New System.Drawing.Size(161, 26)
+        Me.CobradoresToolStripMenuItem.Text = "Cobradores"
         '
         'AltaToolStripMenuItem1
         '
@@ -289,7 +297,7 @@ Partial Class frmPrincipal
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(104, 18)
         Me.Label4.TabIndex = 14
-        Me.Label4.Text = "Versión: 0.9.1"
+        Me.Label4.Text = "Versión: 1.0.0"
         '
         'BottomToolStripPanel
         '
@@ -332,7 +340,7 @@ Partial Class frmPrincipal
         Me.MenuPrincipal.BackColor = System.Drawing.Color.White
         Me.MenuPrincipal.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuPrincipal.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
-        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem})
+        Me.MenuPrincipal.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SistemaToolStripMenuItem, Me.ComprobantesToolStripMenuItem, Me.REPORTESToolStripMenuItem, Me.AltaToolStripMenuItem, Me.EliiminarToolStripMenuItem, Me.SQLToolStripMenuItem})
         Me.MenuPrincipal.Location = New System.Drawing.Point(0, 0)
         Me.MenuPrincipal.Name = "MenuPrincipal"
         Me.MenuPrincipal.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
@@ -340,6 +348,12 @@ Partial Class frmPrincipal
         Me.MenuPrincipal.Size = New System.Drawing.Size(705, 31)
         Me.MenuPrincipal.TabIndex = 11
         Me.MenuPrincipal.Text = "MenuStrip1"
+        '
+        'SQLToolStripMenuItem
+        '
+        Me.SQLToolStripMenuItem.Name = "SQLToolStripMenuItem"
+        Me.SQLToolStripMenuItem.Size = New System.Drawing.Size(51, 25)
+        Me.SQLToolStripMenuItem.Text = "SQL"
         '
         'DRechazados
         '
@@ -368,7 +382,7 @@ Partial Class frmPrincipal
         Me.Label3.TabIndex = 26
         Me.Label3.Text = "RECHAZADOS"
         '
-        'frmPrincipal
+        'FrmPrincipal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -388,7 +402,7 @@ Partial Class frmPrincipal
         Me.MainMenuStrip = Me.MenuPrincipal
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
-        Me.Name = "frmPrincipal"
+        Me.Name = "FrmPrincipal"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Cuicchi Gaveglio"
         CType(Me.DPendientes, System.ComponentModel.ISupportInitialize).EndInit()
@@ -435,4 +449,6 @@ Partial Class frmPrincipal
     Friend WithEvents DRechazados As DataGridView
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents SQLToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CobradoresToolStripMenuItem As ToolStripMenuItem
 End Class

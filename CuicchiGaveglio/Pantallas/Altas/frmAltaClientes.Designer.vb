@@ -46,6 +46,10 @@ Partial Class frmAltaClientes
         Me.txtIdCliente = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cmbCobrador = New System.Windows.Forms.ComboBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtObs = New System.Windows.Forms.TextBox()
         CType(Me.DClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -53,7 +57,7 @@ Partial Class frmAltaClientes
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(18, 105)
+        Me.Label2.Location = New System.Drawing.Point(18, 79)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(62, 18)
@@ -62,7 +66,7 @@ Partial Class frmAltaClientes
         '
         'txtCuit
         '
-        Me.txtCuit.Location = New System.Drawing.Point(122, 199)
+        Me.txtCuit.Location = New System.Drawing.Point(122, 173)
         Me.txtCuit.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCuit.MaxLength = 11
         Me.txtCuit.Name = "txtCuit"
@@ -73,7 +77,7 @@ Partial Class frmAltaClientes
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(18, 207)
+        Me.Label1.Location = New System.Drawing.Point(18, 181)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(42, 18)
@@ -82,7 +86,7 @@ Partial Class frmAltaClientes
         '
         'txtDomicilio
         '
-        Me.txtDomicilio.Location = New System.Drawing.Point(122, 233)
+        Me.txtDomicilio.Location = New System.Drawing.Point(122, 207)
         Me.txtDomicilio.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDomicilio.Name = "txtDomicilio"
         Me.txtDomicilio.Size = New System.Drawing.Size(250, 26)
@@ -92,7 +96,7 @@ Partial Class frmAltaClientes
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(18, 241)
+        Me.Label3.Location = New System.Drawing.Point(18, 215)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(70, 18)
@@ -101,7 +105,7 @@ Partial Class frmAltaClientes
         '
         'txtTelefono
         '
-        Me.txtTelefono.Location = New System.Drawing.Point(122, 165)
+        Me.txtTelefono.Location = New System.Drawing.Point(122, 139)
         Me.txtTelefono.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTelefono.Name = "txtTelefono"
         Me.txtTelefono.Size = New System.Drawing.Size(250, 26)
@@ -111,7 +115,7 @@ Partial Class frmAltaClientes
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(18, 173)
+        Me.Label4.Location = New System.Drawing.Point(18, 147)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(66, 18)
@@ -120,7 +124,7 @@ Partial Class frmAltaClientes
         '
         'txtDni
         '
-        Me.txtDni.Location = New System.Drawing.Point(122, 131)
+        Me.txtDni.Location = New System.Drawing.Point(122, 105)
         Me.txtDni.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDni.MaxLength = 8
         Me.txtDni.Name = "txtDni"
@@ -131,7 +135,7 @@ Partial Class frmAltaClientes
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(18, 139)
+        Me.Label5.Location = New System.Drawing.Point(18, 113)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(33, 18)
@@ -140,7 +144,7 @@ Partial Class frmAltaClientes
         '
         'txtCBU
         '
-        Me.txtCBU.Location = New System.Drawing.Point(122, 267)
+        Me.txtCBU.Location = New System.Drawing.Point(122, 241)
         Me.txtCBU.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCBU.MaxLength = 22
         Me.txtCBU.Name = "txtCBU"
@@ -151,7 +155,7 @@ Partial Class frmAltaClientes
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(18, 275)
+        Me.Label6.Location = New System.Drawing.Point(18, 249)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(40, 18)
@@ -162,7 +166,7 @@ Partial Class frmAltaClientes
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(18, 309)
+        Me.Label7.Location = New System.Drawing.Point(18, 283)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(45, 18)
@@ -171,7 +175,7 @@ Partial Class frmAltaClientes
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(122, 301)
+        Me.txtEmail.Location = New System.Drawing.Point(122, 275)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(250, 26)
@@ -182,7 +186,7 @@ Partial Class frmAltaClientes
         Me.btnCargarCliente.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnCargarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnCargarCliente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCargarCliente.Location = New System.Drawing.Point(258, 335)
+        Me.btnCargarCliente.Location = New System.Drawing.Point(143, 414)
         Me.btnCargarCliente.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCargarCliente.Name = "btnCargarCliente"
         Me.btnCargarCliente.Size = New System.Drawing.Size(114, 34)
@@ -207,7 +211,7 @@ Partial Class frmAltaClientes
         Me.btnModificarCliente.BackColor = System.Drawing.Color.LightSteelBlue
         Me.btnModificarCliente.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.btnModificarCliente.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnModificarCliente.Location = New System.Drawing.Point(122, 335)
+        Me.btnModificarCliente.Location = New System.Drawing.Point(21, 414)
         Me.btnModificarCliente.Margin = New System.Windows.Forms.Padding(4)
         Me.btnModificarCliente.Name = "btnModificarCliente"
         Me.btnModificarCliente.Size = New System.Drawing.Size(114, 34)
@@ -223,7 +227,7 @@ Partial Class frmAltaClientes
         Me.DClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DClientes.Location = New System.Drawing.Point(389, 56)
         Me.DClientes.Name = "DClientes"
-        Me.DClientes.Size = New System.Drawing.Size(697, 313)
+        Me.DClientes.Size = New System.Drawing.Size(988, 313)
         Me.DClientes.TabIndex = 18
         '
         'txtBuscarCliente
@@ -237,7 +241,7 @@ Partial Class frmAltaClientes
         '
         'txtNombreCliente
         '
-        Me.txtNombreCliente.Location = New System.Drawing.Point(122, 97)
+        Me.txtNombreCliente.Location = New System.Drawing.Point(122, 71)
         Me.txtNombreCliente.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNombreCliente.MaxLength = 60
         Me.txtNombreCliente.Name = "txtNombreCliente"
@@ -247,23 +251,25 @@ Partial Class frmAltaClientes
         'txtIdCliente
         '
         Me.txtIdCliente.Enabled = False
-        Me.txtIdCliente.Location = New System.Drawing.Point(122, 56)
+        Me.txtIdCliente.Location = New System.Drawing.Point(122, 42)
         Me.txtIdCliente.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIdCliente.MaxLength = 8
         Me.txtIdCliente.Name = "txtIdCliente"
         Me.txtIdCliente.Size = New System.Drawing.Size(84, 26)
         Me.txtIdCliente.TabIndex = 22
+        Me.txtIdCliente.Visible = False
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(18, 56)
+        Me.Label9.Location = New System.Drawing.Point(18, 42)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(64, 18)
         Me.Label9.TabIndex = 21
         Me.Label9.Text = "idCliente"
+        Me.Label9.Visible = False
         '
         'Label10
         '
@@ -276,12 +282,55 @@ Partial Class frmAltaClientes
         Me.Label10.TabIndex = 23
         Me.Label10.Text = "Filtrar por nombre"
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(18, 322)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(71, 18)
+        Me.Label11.TabIndex = 24
+        Me.Label11.Text = "Cobrador"
+        '
+        'cmbCobrador
+        '
+        Me.cmbCobrador.FormattingEnabled = True
+        Me.cmbCobrador.Location = New System.Drawing.Point(122, 314)
+        Me.cmbCobrador.Name = "cmbCobrador"
+        Me.cmbCobrador.Size = New System.Drawing.Size(250, 26)
+        Me.cmbCobrador.TabIndex = 25
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(18, 361)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(36, 18)
+        Me.Label12.TabIndex = 26
+        Me.Label12.Text = "Obs"
+        '
+        'txtObs
+        '
+        Me.txtObs.Location = New System.Drawing.Point(122, 353)
+        Me.txtObs.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtObs.Multiline = True
+        Me.txtObs.Name = "txtObs"
+        Me.txtObs.Size = New System.Drawing.Size(250, 53)
+        Me.txtObs.TabIndex = 27
+        '
         'frmAltaClientes
         '
         Me.AcceptButton = Me.btnCargarCliente
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1097, 379)
+        Me.ClientSize = New System.Drawing.Size(1389, 451)
+        Me.Controls.Add(Me.txtObs)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.cmbCobrador)
+        Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.txtIdCliente)
         Me.Controls.Add(Me.Label9)
@@ -337,4 +386,8 @@ Partial Class frmAltaClientes
     Friend WithEvents txtIdCliente As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cmbCobrador As ComboBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtObs As TextBox
 End Class

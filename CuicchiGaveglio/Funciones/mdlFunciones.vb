@@ -36,6 +36,16 @@ Module mdlFunciones
         End If
     End Sub
 
+    Public Sub LlenarComboCobradores(pCombo As ComboBox)
+        pCombo.Items.Clear()
+        Dim ControladorCobradores As New clsCobradores
+        Dim RespuestaCobradores As ArrayList = ControladorCobradores.ConsultarCobradoresCombo()
+        If (RespuestaCobradores IsNot Nothing) Then
+            For Each item As String In RespuestaCobradores
+                pCombo.Items.Add(item)
+            Next
+        End If
+    End Sub
     Public Sub LlenarComboCompanias(pCombo As ComboBox)
         pCombo.Items.Clear()
         Dim ControladorCompania As New ClsCompania
@@ -91,6 +101,18 @@ Module mdlFunciones
             ev.Handled = True
         End If
     End Sub
+
+    Public Function ExtraerIdCliente(ByVal strCadena As String) As String
+        Try
+            Dim index = strCadena.IndexOf("|")
+            Dim cadena = strCadena.Substring(index)
+            Dim idCliente = ExtraerNumeros(cadena)
+            Return idCliente
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+
+    End Function
 
     Public Function ExtraerNumeros(ByVal strCadena As String) As String
         Dim SoloNumero As String = ""
@@ -150,13 +172,21 @@ Module mdlFunciones
 
     End Function
 
-    Public Sub EliminarFilaDataGridClickDerecho(e As DataGridViewCellMouseEventArgs, dg As DataGridView)
-        If e.RowIndex = -1 Or e.ColumnIndex = -1 Or e.Button = MouseButtons.Left Then
-            Return
-        End If
-        Dim filaEliminar As DataGridViewRow = dg.Rows(e.RowIndex)
-        dg.Rows.Remove(filaEliminar)
-    End Sub
+    Public Function EliminarFilaDataGridClickDerecho(e As DataGridViewCellMouseEventArgs, dg As DataGridView) As Double
+        Try
+            If e.RowIndex = -1 Or e.ColumnIndex = -1 Or e.Button = MouseButtons.Left Then
+                Return 0
+            End If
+            Dim filaEliminar As DataGridViewRow = dg.Rows(e.RowIndex)
+            Dim resp = dg.Item("Importe", e.RowIndex).Value
+            dg.Rows.Remove(filaEliminar)
+            Return resp
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return 0
+        End Try
+
+    End Function
 
     Public Function ComprobarSiValorExisteCombo(combos As List(Of ComboBox)) As Int16
 
@@ -181,5 +211,13 @@ Module mdlFunciones
         Return 1
 
     End Function
+
+    Public Function FormatearFecha(d As Date) As Integer
+
+        Dim fechaFormateada = Format(d, "yyyyMMdd")
+
+        Return CInt(fechaFormateada)
+    End Function
+
 
 End Module

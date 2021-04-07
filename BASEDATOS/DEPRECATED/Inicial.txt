@@ -1,11 +1,17 @@
-IF NOT EXISTS (SELECT * FROM sysdatabases WHERE (name = 'CuicchiGaveglio')) 
-BEGIN
-	CREATE DATABASE CuicchiGaveglio
-END
-
+CREATE DATABASE CuicchiGaveglio
 ----------------------------------------------------------------------------------
 USE CuicchiGaveglio
-----------------------------------------------------------------------------------
+
+---------------------------FUNCION-----------------------
+
+CREATE FUNCTION dc(@date DATETIME)  
+RETURNS VARCHAR   
+AS   
+BEGIN    
+    RETURN CONVERT(varchar,@date,3);  
+END; 
+
+-----------------------------------MAESTRO------------------------------------------
 
 CREATE TABLE TipoComprobantes 
 (
@@ -13,37 +19,30 @@ idTipoComprobante TINYINT PRIMARY KEY,
 nombreTipoComprobante varchar(25) NOT NULL
 )
 
-
-----------------------------------------------------------------------------------
-
 CREATE TABLE Clientes 
 (
 idCliente SMALLINT IDENTITY(1,1) PRIMARY KEY,
 nombreCliente varchar(60) NOT NULL,
-telefono varchar(20) NOT NULL,
-cuit varchar(11) NOT NULL,
-dni varchar(8) NOT NULL,
-email varchar(60) NOT NULL,
-domicilio varchar(60) NOT NULL,
-cbu varchar(22) NOT NULL
+telefono varchar(20) NULL,
+cuit varchar(11) NULL,
+dni varchar(8) NULL,
+email varchar(60) NULL,
+domicilio varchar(60) NULL,
+cbu varchar(22) NULL
 )
 
----------------------------------------------------------------------------------
 CREATE TABLE Companias
 (
 idCompania SMALLINT IDENTITY(0,1) PRIMARY KEY,
 nombreCompania varchar(60) NOT NULL,
-cuitCompania varchar(11),
+cuitCompania varchar(11) NULL,
 )
 
----------------------------------------------------------------------------------
 CREATE TABLE Bancos 
 (
 idBanco INT PRIMARY KEY,
 nombreBanco varchar(60) NOT NULL
 )
-
----------------------------------------------------------------------------------
 
 CREATE TABLE Estados 
 (
@@ -51,78 +50,18 @@ idEstado tinyint PRIMARY KEY,
 nombreEstado varchar(20) NOT NULL
 )
 
------------------------------------------------------------------------------------
 CREATE TABLE Usuarios 
 (
 idUsuario TINYINT IDENTITY(1,1) PRIMARY KEY,
 nombreUsuario varchar(25) NOT NULL,
 pass varchar(25) NOT NULL,
-idRol tinyInt
+idRol tinyInt NOT NULL
 )
-
-----------------------------------------------------------------------------
 
 CREATE TABLE EstadosOperacion 
 (
 idEstadoOperacion TINYINT IDENTITY(1,1) PRIMARY KEY,
 nombreEstadoOperacion varchar(25) NOT NULL
-)
-----------------------------------------------------------------------------
-
-CREATE TABLE Comprobantes 
-(
-idAlta INT IDENTITY(1,1) PRIMARY KEY,
-idTipoComprobante TINYINT NOT NULL,
-fIngreso DATE NOT NULL,
-fPago date,
-idCliente SMALLINT NOT NULL,
-idCompania SMALLINT,
-importe money NOT NULL,
-numero varchar(25),
-idBanco INT,
-idEstado tinyint NOT NULL,
-obs varchar(100) NOT NULL,
-obsBaja varchar(100),
-idUsuario tinyint NOT NULL,
-idEstadoOperacion tinyint NOT NULL,
-CONSTRAINT fk_TipoComprobante FOREIGN KEY (idTipoComprobante) REFERENCES TipoComprobantes (idTipoComprobante),
-CONSTRAINT fk_Cliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
-CONSTRAINT fk_Compania FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania),
-CONSTRAINT fk_Banco FOREIGN KEY (idBanco) REFERENCES Bancos (idBanco),
-CONSTRAINT fk_Estado FOREIGN KEY (idEstado) REFERENCES Estados (idEstado),
-CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
-CONSTRAINT fk_EstadoOperacionComprobantes FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion)
-)
-
-
---Planillas de Polizas por cliente DROP TABLE Planillas
-CREATE TABLE Planillas 
-(
-idCliente SMALLINT NOT NULL,
-f DATE NOT NULL,
-idUsuario tinyint NOT NULL,
-idEstadoOperacion tinyint NOT NULL,
-PRIMARY KEY (idCliente,f),
-CONSTRAINT fk_ClientePlanilla FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
-CONSTRAINT fk_UsuarioPlanilla FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
-CONSTRAINT fk_EstadoOperacionPlanillas FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion),
-)
-
-CREATE TABLE PlanillasComprobantes 
-(
-idCliente SMALLINT NOT NULL,
-f DATE NOT NULL,
-idAlta INT,
-Tomador VARCHAR(25),
-Ref VARCHAR (25), 
-idCompania INT,
-Detalle VARCHAR(50) ,
-Patente VARCHAR(20),
-FVencimiento DATE,
-Importe money
-PRIMARY KEY (idCliente,f,idAlta),
-CONSTRAINT fk_PlanillaCliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
-CONSTRAINT fk_idAltaPlanilla FOREIGN KEY (idAlta) REFERENCES Comprobantes (idAlta)
 )
 
 CREATE TABLE Roles 
@@ -130,6 +69,60 @@ CREATE TABLE Roles
 idRol tinyint IDENTITY (1,1) PRIMARY KEY,
 nombreRol  varchar(20) NOT NULL
 )
+
+----------------------------------------------------------------------------
+
+--DROP TABLE Planillas
+--DROP TABLE Comprobantes
+--Planillas de Polizas por cliente DROP TABLE Planillas
+CREATE TABLE Planillas 
+(
+idPlanilla INT IDENTITY(1,1),
+idCliente SMALLINT NOT NULL,
+fPlanilla INT NOT NULL,
+idUsuario TINYINT NOT NULL,
+idEstadoOperacion tinyint NOT NULL,
+PRIMARY KEY (idPlanilla),
+CONSTRAINT fk_ClientePlanilla FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
+CONSTRAINT fk_UsuarioPlanilla FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
+CONSTRAINT fk_EstadoOperacionPlanillas FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion),
+)
+
+
+CREATE TABLE Comprobantes 
+(
+idAlta INT IDENTITY(1,1) PRIMARY KEY,
+idTipoComprobante TINYINT NOT NULL,
+fIngreso INT NOT NULL,
+idCliente SMALLINT NOT NULL,
+importe money NOT NULL,
+idEstado tinyint NOT NULL,
+idUsuario tinyint NOT NULL,
+idEstadoOperacion tinyint NOT NULL,
+idCompania SMALLINT NOT NULL, --No puede ser nula ya que es clave foranea, pero no siempre va a estar (aca voy a poner el valor 0)
+idBanco INT NOT NULL, --No puede ser nula ya que es clave foranea, pero no siempre va a estar (aca voy a poner el valor 0)
+
+fPago INT NULL,
+numero varchar(25) NULL,
+obs varchar(100) NULL,
+obsBaja varchar(100) NULL,
+Tomador VARCHAR(25) NULL,
+Ref VARCHAR (25) NULL, 
+Detalle VARCHAR(50) NULL ,
+Patente VARCHAR(20) NULL,
+FVencimiento INT NULL,
+idPlanilla INT NULL,
+CONSTRAINT fk_TipoComprobante FOREIGN KEY (idTipoComprobante) REFERENCES TipoComprobantes (idTipoComprobante),
+CONSTRAINT fk_Cliente FOREIGN KEY (IdCliente) REFERENCES Clientes (idCliente),
+CONSTRAINT fk_Compania FOREIGN KEY (IdCompania) REFERENCES Companias (idCompania),
+CONSTRAINT fk_Banco FOREIGN KEY (idBanco) REFERENCES Bancos (idBanco),
+CONSTRAINT fk_Estado FOREIGN KEY (idEstado) REFERENCES Estados (idEstado),
+CONSTRAINT fk_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuarios (idUsuario),
+CONSTRAINT fk_Planilla FOREIGN KEY (idPlanilla) REFERENCES Planillas (idPlanilla),
+CONSTRAINT fk_EstadoOperacionComprobantes FOREIGN KEY (idEstadoOperacion) REFERENCES EstadosOperacion (idEstadoOperacion)
+)
+
+
 
 --DATOS POR DEFECTO
 INSERT INTO Companias (nombreCompania,cuitCompania) VALUES ('N', '')
@@ -149,7 +142,7 @@ INSERT INTO EstadosOperacion (nombreEstadoOperacion) VALUES ('RECHAZADO')
 
 INSERT INTO Estados(idEstado,nombreEstado) VALUES (1,'En Cartera')
 INSERT INTO Estados(idEstado,nombreEstado) VALUES (2,'Depositado')
-INSERT INTO Estados(idEstado,nombreEstado) VALUES (3,'Enviado CompaÒia')
+INSERT INTO Estados(idEstado,nombreEstado) VALUES (3,'Enviado Compa√±ia')
 INSERT INTO Estados(idEstado,nombreEstado) VALUES (4,'Rechazado')
 INSERT INTO Estados(idEstado,nombreEstado) VALUES (5,'Repuesto')
 
@@ -177,9 +170,9 @@ INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00065,	'BANCO MUNICIPAL DE ROSA
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00072,	'BANCO SANTANDER RIO S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00083,	'BANCO DEL CHUBUT S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00086,	'BANCO DE SANTA CRUZ S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00093,	'BANCO DE LA PAMPA SOCIEDAD DE ECONOMÕA M')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00093,	'BANCO DE LA PAMPA SOCIEDAD DE ECONOM√çA M')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00094,	'BANCO DE CORRIENTES S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00097,	'BANCO PROVINCIA DEL NEUQU…N SOCIEDAD AN”')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00097,	'BANCO PROVINCIA DEL NEUQU√âN SOCIEDAD AN√ì')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00143,	'BRUBANK S.A.U.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00147,	'BANCO INTERFINANZAS S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00150,	'HSBC BANK ARGENTINA S.A.')
@@ -217,7 +210,7 @@ INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00339,	'RCI BANQUE S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00340,	'BACS BANCO DE CREDITO Y SECURITIZACION S')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00341,	'BANCO MASVENTAS S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00384,	'WILOBANK S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00386,	'NUEVO BANCO DE ENTRE RÕOS S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00386,	'NUEVO BANCO DE ENTRE R√çOS S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00389,	'BANCO COLUMBIA S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00426,	'BANCO BICA S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00431,	'BANCO COINAG S.A.')
@@ -225,17 +218,17 @@ INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00432,	'BANCO DE COMERCIO S.A.'
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00435,	'BANCO SUCREDITO REGIONAL S.A.U.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00448,	'BANCO DINO S.A.')
 INSERT INTO Bancos (idBanco,nombreBanco) VALUES (00515,	'BANK OF CHINA LIMITED SUCURSAL BUENOS AI')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44059,	'FORD CREDIT COMPA—IA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44077,	'COMPA—IA FINANCIERA ARGENTINA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44088,	'VOLKSWAGEN FINANCIAL SERVICES COMPA—IA F')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44090,	'CORDIAL COMPA—ÕA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44092,	'FCA COMPA—IA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44093,	'GPAT COMPA—IA FINANCIERA S.A.U.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44094,	'MERCEDES-BENZ COMPA—ÕA FINANCIERA ARGENT')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44095,	'ROMBO COMPA—ÕA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44096,	'JOHN DEERE CREDIT COMPA—ÕA FINANCIERA S.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44098,	'PSA FINANCE ARGENTINA COMPA—ÕA FINANCIER')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44099,	'TOYOTA COMPA—ÕA FINANCIERA DE ARGENTINA')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (45056,	'MONTEMAR COMPA—IA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (45072,	'TRANSATLANTICA COMPA—IA FINANCIERA S.A.')
-INSERT INTO Bancos (idBanco,nombreBanco) VALUES (65203,	'CREDITO REGIONAL COMPA—IA FINANCIERA S.A')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44059,	'FORD CREDIT COMPA√ëIA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44077,	'COMPA√ëIA FINANCIERA ARGENTINA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44088,	'VOLKSWAGEN FINANCIAL SERVICES COMPA√ëIA F')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44090,	'CORDIAL COMPA√ë√çA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44092,	'FCA COMPA√ëIA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44093,	'GPAT COMPA√ëIA FINANCIERA S.A.U.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44094,	'MERCEDES-BENZ COMPA√ë√çA FINANCIERA ARGENT')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44095,	'ROMBO COMPA√ë√çA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44096,	'JOHN DEERE CREDIT COMPA√ë√çA FINANCIERA S.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44098,	'PSA FINANCE ARGENTINA COMPA√ë√çA FINANCIER')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (44099,	'TOYOTA COMPA√ë√çA FINANCIERA DE ARGENTINA')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (45056,	'MONTEMAR COMPA√ëIA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (45072,	'TRANSATLANTICA COMPA√ëIA FINANCIERA S.A.')
+INSERT INTO Bancos (idBanco,nombreBanco) VALUES (65203,	'CREDITO REGIONAL COMPA√ëIA FINANCIERA S.A')

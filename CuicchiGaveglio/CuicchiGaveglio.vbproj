@@ -86,6 +86,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Pantallas\Altas\frmAltaCobradores.Designer.vb">
+      <DependentUpon>frmAltaCobradores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Altas\frmAltaCobradores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Pantallas\Altas\frmAltaCompania.Designer.vb">
       <DependentUpon>frmAltaCompania.vb</DependentUpon>
     </Compile>
@@ -151,11 +157,20 @@
     <Compile Include="Pantallas\Principal\frmPrincipal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pantallas\SQL\frmSQL.Designer.vb">
+      <DependentUpon>frmSQL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\SQL\frmSQL.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LocalReports\Planilla.rdlc" />
     <EmbeddedResource Include="LocalReports\ReporteComprobantes.rdlc" />
     <EmbeddedResource Include="LocalReports\ReporteRecibos.rdlc" />
+    <EmbeddedResource Include="Pantallas\Altas\frmAltaCobradores.resx">
+      <DependentUpon>frmAltaCobradores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Altas\frmAltaCompania.resx">
       <DependentUpon>frmAltaCompania.vb</DependentUpon>
     </EmbeddedResource>
@@ -188,6 +203,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Principal\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\SQL\frmSQL.resx">
+      <DependentUpon>frmSQL.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

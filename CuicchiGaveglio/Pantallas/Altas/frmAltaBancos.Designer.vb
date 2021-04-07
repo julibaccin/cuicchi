@@ -31,6 +31,7 @@ Partial Class frmAltaBancos
         Me.Label8 = New System.Windows.Forms.Label()
         Me.btnModificarBanco = New System.Windows.Forms.Button()
         Me.btnCargarBanco = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'Label1
@@ -109,12 +110,22 @@ Partial Class frmAltaBancos
         Me.btnCargarBanco.Text = "Cargar"
         Me.btnCargarBanco.UseVisualStyleBackColor = False
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(19, 209)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(307, 36)
+        Me.Label3.TabIndex = 22
+        Me.Label3.Text = "Solo podrá modificar el nombre del banco, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "según el número que ingrese"
+        '
         'frmAltaBancos
         '
         Me.AcceptButton = Me.btnCargarBanco
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(455, 204)
+        Me.ClientSize = New System.Drawing.Size(455, 258)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnCargarBanco)
         Me.Controls.Add(Me.btnModificarBanco)
         Me.Controls.Add(Me.Label8)
@@ -138,4 +149,5 @@ Partial Class frmAltaBancos
     Friend WithEvents Label8 As Label
     Friend WithEvents btnModificarBanco As Button
     Friend WithEvents btnCargarBanco As Button
+    Friend WithEvents Label3 As Label
 End Class
