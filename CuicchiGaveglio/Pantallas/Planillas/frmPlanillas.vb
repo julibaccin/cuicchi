@@ -183,20 +183,21 @@ Public Class FrmPlanillas
         'EXTRAIGO TIPO DE COMPROBANTE
         Dim tComp = ExtraerNumeros(cmbTipoComprobante.Text)
 
-        'CHEQUEO CAMPOS OBLIGATORIOS SEGUN TIPO COMPROBANTE
-        If tComp = 1 And (cmbClienteP.Text = "") Then
-            MsgBox("Falta Ingresar Cliente")
+        If tComp = 1 And (cmbClienteP.Text = "") Then 'EFECTIVO
+            MsgBox("Falta ingresar algun dato")
+        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then 'TRANSFERENCIA
+            MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then
-            MsgBox("Falta Ingresar Banco o Compañia")
+        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then 'CHEQUE
+            MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then
-            MsgBox("Falta Ingresar Numero o Banco")
+        ElseIf tComp = 4 And (cmbCompania.Text = "" Or ExtraerNumeros(cmbCompania.Text) = "0") Then 'RECIBO
+            MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 4 And (cmbCompania.Text = "") Then
-            MsgBox("Falta Ingresar Compañia")
+        ElseIf tComp = 5 Then 'COMPROBANTE RETENCION
+        ElseIf tComp = 6 And (txtNumero.Text = "" Or cmbBanco.Text = "" Or cmbCompania.Text = "") Then 'ECHEQ
+            MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 5 Then
         End If
 
         'LLENO UNA LISTA CON LOS DATOS QUE TENGA LA GRID PAGOS **********
@@ -515,23 +516,23 @@ Public Class FrmPlanillas
     End Sub
 
     Private Sub PDF_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        With frmReportes
-            .panelReportes.Controls.Clear()
-            .reporteActivo = New ReportViewer()
-            .panelReportes.Controls.Add(.reporteActivo)
-            .reporteActivo.Dock = Windows.Forms.DockStyle.Fill
-            .reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.Planilla.rdlc"
-            Dim datos As New CapaDatos.ClsReportes()
-            Dim dataTable As DataTable = datos.ReportePlanilla(ExtraerNumeros(txtIdPlanilla.Text))
-            Dim Cliente As New ReportParameter("Cliente", ExtraerLetras(cmbClienteP.Text))
-            Dim Fecha_Planilla As New ReportParameter("Fecha_Planilla", cmbFechaP.Text)
-            .reporteActivo.LocalReport.SetParameters(Cliente)
-            .reporteActivo.LocalReport.SetParameters(Fecha_Planilla)
-            .reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSPlanillas", dataTable))
-            .reporteActivo.RefreshReport()
-            .Show()
-            .reporteActivo.Show()
-        End With
+        'With frmReportes
+        '    .panelReportes.Controls.Clear()
+        '    .reporteActivo = New ReportViewer()
+        '    .panelReportes.Controls.Add(.reporteActivo)
+        '    .reporteActivo.Dock = Windows.Forms.DockStyle.Fill
+        '    .reporteActivo.LocalReport.ReportEmbeddedResource = "CuicchiGaveglio.Planilla.rdlc"
+        '    Dim datos As New CapaDatos.ClsReportes()
+        '    'Dim dataTable As DataTable = datos.ReportePlanilla(ExtraerNumeros(txtIdPlanilla.Text))
+        '    Dim Cliente As New ReportParameter("Cliente", ExtraerLetras(cmbClienteP.Text))
+        '    Dim Fecha_Planilla As New ReportParameter("Fecha_Planilla", cmbFechaP.Text)
+        '    .reporteActivo.LocalReport.SetParameters(Cliente)
+        '    .reporteActivo.LocalReport.SetParameters(Fecha_Planilla)
+        '    .reporteActivo.LocalReport.DataSources.Add(New ReportDataSource("DSPlanillas", dataTable))
+        '    .reporteActivo.RefreshReport()
+        '    .Show()
+        '    .reporteActivo.Show()
+        'End With
 
 
     End Sub

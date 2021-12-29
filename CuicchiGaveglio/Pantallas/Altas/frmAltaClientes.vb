@@ -52,7 +52,7 @@ Public Class frmAltaClientes
             Dim NuevoCliente As New ModeloCliente
 
             With NuevoCliente
-                .idCliente = ExtraerIdCliente(txtIdCliente.Text)
+                .idCliente = ExtraerNumeros(txtIdCliente.Text)
                 .nombreCliente = txtNombreCliente.Text
                 .dni = txtDni.Text
                 .telefono = txtTelefono.Text

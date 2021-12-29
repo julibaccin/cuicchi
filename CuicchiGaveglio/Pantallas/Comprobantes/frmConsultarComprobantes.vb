@@ -3,23 +3,20 @@ Imports System.Windows.Forms
 Imports CapaDatos
 
 Public Class FrmConsultarComprobantes
-
     ReadOnly Control As New ClsComprobantes()
-
     Private Sub FrmConsultarComprobantes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        setearValoresCombo()
+        SetearValoresCombo()
     End Sub
-
     Private Sub Cerrar_Form(sender As Object, e As EventArgs) Handles Me.Closed
         FrmPrincipal.LlenarDatos()
     End Sub
-
     Public Sub SetearValoresCombo()
-        DFIngresoHastaFiltro.Value = Date.Now()
-        DFIngresoDesdeFiltro.Value = DFIngresoHastaFiltro.Value.AddDays(-30)
+        txtImporteFiltro.Text = "0"
+        txtTotalBaja.Text = "0"
+        DFIngresoHastaFiltro.Value = New Date(2099, 1, 1)
+        DFIngresoDesdeFiltro.Value = New Date(2000, 1, 1)
         DFechaIngreso.Value = Date.Now()
         DFechaPago.Value = Date.Now()
-        txtImporteFiltro.Text = -999999
         LlenarComboTipoComprobantes(cmbTipoComprobanteFiltro)
         LlenarComboClientes(cmbCliente)
         LlenarComboTipoComprobantes(cmbTipoComprobante)
@@ -31,7 +28,6 @@ Public Class FrmConsultarComprobantes
         LlenarComboEstados(cmbEstadoFiltro)
         LlenarComboCompanias(cmbCompaniaCambioEstado)
     End Sub
-
     Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Dim Respuesta = Control.ConsultarComprobantes(DComprobantes, ExtraerLetras(cmbTipoComprobanteFiltro.Text),
                                                           FormatearFecha(DFIngresoDesdeFiltro.Value),
@@ -44,7 +40,6 @@ Public Class FrmConsultarComprobantes
                                                           ExtraerLetras(cmbEstadoFiltro.Text))
         CambiarColorFilas()
     End Sub
-
     Public Sub CambiarColorFilas()
         'Cambiar los colores de las filas
         For Each fila As DataGridViewRow In DComprobantes.Rows
@@ -58,14 +53,16 @@ Public Class FrmConsultarComprobantes
                Or fila.Cells.Item("Tipo_Comprobante").Value = "Recibo") _
                And fila.Cells.Item("Importe").Value < 0 Then
                 fila.DefaultCellStyle.BackColor = Color.LightSalmon
-                ' Si el Cheque/Transferencia/Comprobante de Retencion están en cartera
+                ' Si el Cheque/Transferencia/Comprobante/Echeq de Retencion están en cartera
             ElseIf (fila.Cells.Item("Tipo_Comprobante").Value = "Cheque" _
+                    Or fila.Cells.Item("Tipo_Comprobante").Value = "ECheq" _
                 Or fila.Cells.Item("Tipo_Comprobante").Value = "Transferencia") _
                 And (fila.Cells.Item("Estado").Value <> "En Cartera" And
                 fila.Cells.Item("Estado").Value <> "Rechazado") Then
                 fila.DefaultCellStyle.BackColor = Color.LightSalmon
-                ' Si el cheque está rechazado
-            ElseIf fila.Cells.Item("Tipo_Comprobante").Value = "Cheque" And
+                ' Si el cheque está rechazado/Echeq
+            ElseIf (fila.Cells.Item("Tipo_Comprobante").Value = "Cheque" And
+                    fila.Cells.Item("Tipo_Comprobante").Value = "ECheq") Or
                     fila.Cells.Item("Estado").Value = "Rechazado" Then
                 fila.DefaultCellStyle.BackColor = Color.Red
             Else
@@ -73,7 +70,6 @@ Public Class FrmConsultarComprobantes
             End If
         Next
     End Sub
-
     Public Sub CopiarHeader()
         DComprobantesBaja.Columns.Clear()
         Dim CheckColum As New DataGridViewCheckBoxColumn()
@@ -82,7 +78,6 @@ Public Class FrmConsultarComprobantes
             DComprobantesBaja.Columns.Add(DirectCast(col.Clone(), DataGridViewColumn))
         Next
     End Sub
-
     Public Sub CopiarFila(pFila As Int16)
         DComprobantesBaja.Rows.Add(True,
                                    DComprobantes.Rows(pFila).Cells(0).Value,
@@ -98,16 +93,14 @@ Public Class FrmConsultarComprobantes
                                    DComprobantes.Rows(pFila).Cells(10).Value,
                                    DComprobantes.Rows(pFila).Cells(11).Value,
                                    DComprobantes.Rows(pFila).Cells(12).Value)
-
     End Sub
-
     Private Sub DComprobantesBaja_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DComprobantesBaja.CellContentClick
         If e.ColumnIndex = 0 Then
+            txtTotalBaja.Text = CDbl(txtTotalBaja.Text) - CDbl(DComprobantesBaja.Item("Importe", e.RowIndex).Value)
             DComprobantesBaja.Rows.Remove(DComprobantesBaja.Rows(e.RowIndex))
         End If
 
     End Sub
-
     Private Sub DComprobantes_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DComprobantes.CellDoubleClick
         'Aca van a ir las validaciones de que si se encuentra entre los 3 comprobantes y esta
         'en un estado que se pueda dar de baja
@@ -115,15 +108,17 @@ Public Class FrmConsultarComprobantes
             Return
         End If
 
-        If DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Cheque" Or DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Transferencia" Or DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Comprobante de Retencion" Then
-                CopiarFila(e.RowIndex)
-            End If
+        If DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Cheque" _
+           Or DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "ECheq" _
+           Or DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Transferencia" _
+           Or DComprobantes.Item("Tipo_Comprobante", e.RowIndex).Value = "Comprobante de Retencion" Then
+            CopiarFila(e.RowIndex)
+            txtTotalBaja.Text = CDbl(txtTotalBaja.Text) + CDbl(DComprobantes.Item("Importe", e.RowIndex).Value)
+        End If
     End Sub
-
     Public Sub LimpiarCampos()
         txtImporte.Text = ""
         txtNumero.Text = ""
-        txtObservaciones.Text = ""
         cmbBanco.Text = ""
         cmbTipoComprobante.Text = ""
         cmbCompania.Text = ""
@@ -133,7 +128,6 @@ Public Class FrmConsultarComprobantes
         txtNumero.Enabled = True
         DFechaPago.Enabled = True
     End Sub
-
     Public Sub HabilitarDesabilitarCamposSegunTipoComprobante()
         Dim tComprobante = ExtraerLetras(cmbTipoComprobante.Text)
         If tComprobante = "Efectivo" Then
@@ -151,6 +145,11 @@ Public Class FrmConsultarComprobantes
             txtNumero.Visible = True
             cmbBanco.Visible = True
             cmbCompania.Visible = False
+        ElseIf tComprobante = "ECheq" Then
+            DFechaPago.Visible = True
+            txtNumero.Visible = True
+            cmbBanco.Visible = True
+            cmbCompania.Visible = True
         ElseIf tComprobante = "Comprobante de Retencion" Then
 
         ElseIf tComprobante = "Transferencia" Then
@@ -160,18 +159,14 @@ Public Class FrmConsultarComprobantes
             cmbCompania.Visible = True
         End If
     End Sub
-
-
     Private Sub TxtImporte_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtImporte.KeyPress
         SoloImporte(e)
     End Sub
-
     Private Sub TxtNumero_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumero.KeyPress
         SoloNumero(e)
     End Sub
-
     Private Sub CmbTipoComprobante_Validated(sender As Object, e As EventArgs) Handles cmbTipoComprobante.Validated
-        If (ExtraerNumeros(cmbTipoComprobante.Text) >= 1 And ExtraerNumeros(cmbTipoComprobante.Text)) <= 5 Or cmbTipoComprobante.Text = "" Then
+        If (ExtraerNumeros(cmbTipoComprobante.Text) >= 1 And ExtraerNumeros(cmbTipoComprobante.Text)) <= 6 Or cmbTipoComprobante.Text = "" Then
         Else
             MsgBox("Ingresó un Tipo de Comprobante inexistente")
             cmbTipoComprobante.Text = ""
@@ -181,30 +176,24 @@ Public Class FrmConsultarComprobantes
         HabilitarDesabilitarCamposSegunTipoComprobante()
 
     End Sub
-
     Private Sub BtnCargaCliente_Click(sender As Object, e As EventArgs) Handles btnCargaCliente.Click
         frmAltaClientes.ShowDialog()
     End Sub
-
     Private Sub BtnCargaCompania_Click(sender As Object, e As EventArgs) Handles btnCargaCompania.Click
         frmAltaCompania.ShowDialog()
     End Sub
-
     Private Sub BtnCargaBanco_Click(sender As Object, e As EventArgs) Handles btnCargaBanco.Click
         frmAltaBancos.ShowDialog()
     End Sub
-
     Private Sub FrmConsultarComprobantes_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         BtnBuscar_Click(sender, e)
         CopiarHeader()
     End Sub
-
-    Private Sub TxtImporteFiltro_Validated(sender As Object, e As EventArgs) Handles txtImporteFiltro.Validated
+    Private Sub TxtImporteFiltro_Validated(sender As Object, e As EventArgs)
         If txtImporteFiltro.Text = "" Then
             txtImporteFiltro.Text = 0
         End If
     End Sub
-
     Private Sub BtnPreCargar_Click_1(sender As Object, e As EventArgs) Handles btnPreCargar.Click
         If cmbTipoComprobante.Text = "" Or cmbCliente.Text = "" Or txtImporte.Text = "" Then
             MsgBox("Ingrese los campos obligatorios")
@@ -213,19 +202,21 @@ Public Class FrmConsultarComprobantes
 
         Dim tComp = ExtraerNumeros(cmbTipoComprobante.Text)
 
-        If tComp = 1 And (cmbCliente.Text = "") Then
+        If tComp = 1 And (cmbCliente.Text = "") Then 'EFECTIVO
             MsgBox("Falta ingresar algun dato")
-        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then
-            MsgBox("Falta ingresar algun dato")
-            Return
-        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then
+        ElseIf tComp = 2 And (cmbBanco.Text = "" Or cmbCompania.Text = "") Then 'TRANSFERENCIA
             MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 4 And (cmbCompania.Text = "") Then
+        ElseIf tComp = 3 And (txtNumero.Text = "" Or cmbBanco.Text = "") Then 'CHEQUE
             MsgBox("Falta ingresar algun dato")
             Return
-        ElseIf tComp = 5 Then
-
+        ElseIf tComp = 4 And (cmbCompania.Text = "" Or ExtraerNumeros(cmbCompania.Text) = "0") Then 'RECIBO
+            MsgBox("Falta ingresar algun dato")
+            Return
+        ElseIf tComp = 5 Then 'COMPROBANTE RETENCION
+        ElseIf tComp = 6 And (txtNumero.Text = "" Or cmbBanco.Text = "" Or cmbCompania.Text = "") Then 'ECHEQ
+            MsgBox("Falta ingresar algun dato")
+            Return
         End If
 
         DPreviaACargar.Rows.Add(cmbTipoComprobante.Text, FormatearFecha(DFechaIngreso.Value),
@@ -243,12 +234,17 @@ Public Class FrmConsultarComprobantes
             Else
                 txtTotalPrecarga.Text = CDbl(txtTotalPrecarga.Text) + CDbl(txtImporte.Text)
             End If
+        Else
+            If txtTotalPrecargaRecibos.Text = "" Then
+                txtTotalPrecargaRecibos.Text = CDbl(txtImporte.Text)
+            Else
+                txtTotalPrecargaRecibos.Text = CDbl(txtTotalPrecargaRecibos.Text) + CDbl(txtImporte.Text)
+            End If
         End If
 
         LimpiarCampos()
 
     End Sub
-
     Private Sub BtnCargar_Click_1(sender As Object, e As EventArgs) Handles btnCargar.Click
         Dim Respuesta As Int16
         If DPreviaACargar.Rows.Count > 0 Then
@@ -282,10 +278,10 @@ Public Class FrmConsultarComprobantes
             MsgBox("No hay nada PreCargado")
         End If
         txtTotalPrecarga.Text = ""
+        txtTotalPrecargaRecibos.Text = ""
         LimpiarCampos()
-        frmConsultarComprobantes_Shown(sender, e)
+        FrmConsultarComprobantes_Shown(sender, e)
     End Sub
-
     Private Sub BtnCambiarEstado_Click(sender As Object, e As EventArgs) Handles btnCambiarEstado.Click
         If cmbEstadosCambioEstado.Text = "" Then
             MsgBox("Porfavor ingrese un estado")
@@ -293,7 +289,13 @@ Public Class FrmConsultarComprobantes
         End If
 
         For Each item As DataGridViewRow In DComprobantesBaja.Rows
-            If Control.CambiarEstado(item.Cells("idAlta").Value, txtObsBajaCambioEstado.Text, ExtraerNumeros(cmbEstadosCambioEstado.Text), ExtraerIdCliente(cmbCompaniaCambioEstado.Text)) = 0 Then
+            If Control.CambiarEstado(
+                                     item.Cells("idAlta").Value,
+                                     txtObsBajaCambioEstado.Text,
+                                     ExtraerNumeros(cmbEstadosCambioEstado.Text),
+                                     ExtraerIdCliente(cmbCompaniaCambioEstado.Text),
+                                     frmLogin.IdUsuario
+                                     ) = 0 Then
                 MsgBox("Ocurrio un error")
                 Return
             End If
@@ -301,13 +303,12 @@ Public Class FrmConsultarComprobantes
         MsgBox("Se dio correctamente de baja")
         DComprobantesBaja.Rows.Clear()
         txtObsBajaCambioEstado.Text = ""
-        frmConsultarComprobantes_Shown(sender, e)
+        txtTotalBaja.Text = "0"
+        FrmConsultarComprobantes_Shown(sender, e)
     End Sub
-
     Private Sub DComprobantesBaja_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DComprobantesBaja.CellMouseClick
-        EliminarFilaDataGridClickDerecho(e, DComprobantesBaja)
+        txtTotalBaja.Text = CDbl(txtTotalBaja.Text) - EliminarFilaDataGridClickDerecho(e, DComprobantesBaja)
     End Sub
-
     Private Sub DPreviaACargar_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DPreviaACargar.CellMouseClick
         If e.RowIndex = -1 Then
             Return
@@ -316,29 +317,25 @@ Public Class FrmConsultarComprobantes
         Dim resp = EliminarFilaDataGridClickDerecho(e, DPreviaACargar)
         If variable = False Then
             If resp <> 0 Then txtTotalPrecarga.Text = txtTotalPrecarga.Text - resp
+        Else
+            If resp <> 0 Then txtTotalPrecargaRecibos.Text = txtTotalPrecargaRecibos.Text - resp
         End If
     End Sub
-
     Private Sub CmbBanco_KeyPress(sender As Object, e As EventArgs) Handles cmbBanco.KeyPress
         SoloNumero(e)
     End Sub
-
     Private Sub CmbTipoComprobante_KeyPress(sender As Object, e As EventArgs) Handles cmbTipoComprobante.KeyPress
         SoloNumero(e)
     End Sub
-
     Private Sub CmbEstadosCambioEstado_KeyPress(sender As Object, e As EventArgs) Handles cmbEstadosCambioEstado.KeyPress
         SoloNumero(e)
     End Sub
-
     Private Sub CmbCompaniaCambioEstado_KeyPress(sender As Object, e As EventArgs) Handles cmbCompaniaCambioEstado.KeyPress
         SoloLetra(e)
     End Sub
-
     Private Sub CmbCompania_keypress(sender As Object, e As EventArgs) Handles cmbCompania.KeyPress
         SoloLetra(e)
     End Sub
-
     Private Sub DPreviaACargar_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DPreviaACargar.CellContentDoubleClick
         If e.RowIndex = -1 Then
             Return
@@ -351,5 +348,4 @@ Public Class FrmConsultarComprobantes
             cmbTipoComprobante.Focus()
         End With
     End Sub
-
 End Class

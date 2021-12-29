@@ -4,12 +4,10 @@ Imports System.Windows.Forms
 
 Public Class ClsComprobantes
     Inherits Conn
-
     ReadOnly mCon As SqlConnection
     Public Sub New()
         mCon = ObtenerConexion()
     End Sub
-
     Public Function CrearMovimiento(pAlta As ModeloComprobante) As Int16
 
         Try
@@ -129,17 +127,33 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-
-    Public Function CambiarEstado(pIdAlta As Integer, pObsBaja As String, pIdEstado As Integer, pIdCompania As Integer) As Int16
+    Public Function CambiarEstado(
+                                  pIdAlta As Integer,
+                                  pObsBaja As String,
+                                  pIdEstado As Integer,
+                                  pIdCompania As Integer,
+                                  pModificadoPorIdUsuario As Integer
+                                  ) As Int16
 
         Try
-            Dim cadena As String = "UPDATE Comprobantes SET idEstado=@idEstado, obsBaja = @obsBaja, idCompania = @idCompania WHERE idAlta = @idAlta"
+            Dim cadena As String =
+                "
+                UPDATE Comprobantes 
+                SET 
+                idEstado=@idEstado,
+                obsBaja = @obsBaja,
+                idCompania = @idCompania,
+                modificadoPorIdUsuario = @modificadoPorIdUsuario,
+                fechaModifico = GETDATE()
+                WHERE idAlta = @idAlta
+                "
             Dim query As New SqlCommand(cadena, mCon)
             With query.Parameters
                 .AddWithValue("idAlta", pIdAlta)
                 .AddWithValue("idEstado", pIdEstado)
                 .AddWithValue("ObsBaja", pObsBaja)
                 .AddWithValue("idCompania", pIdCompania)
+                .AddWithValue("modificadoPorIdUsuario", pModificadoPorIdUsuario)
             End With
 
             mCon.Open()
@@ -172,39 +186,50 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-
     Public Function ConsultarComprobantes(pTabla As DataGridView, pTipoComprobante As String,
                                               pFechaDesde As Integer, pFechaHasta As Integer,
                                               pNumero As String, pNombreUsuario As String,
-                                              pFechaPago As Integer, pImporte As Integer,
+                                              pFechaPago As Integer, pImporte As String,
                                               pNombreCliente As String, pNombreCompania As String,
                                               pNombreEstado As String
                                               ) As Int16
 
+        'Ajuste de importe
+        Dim condicionImporte = ""
+        If pImporte <> 0 Then
+            condicionImporte = $"AND (importe = {pImporte.Replace(",", ".")}) "
+        End If
+
         Try
-            Dim cadena As String = "SELECT fIngreso as fIngreso, Clientes.nombreCliente, 
+            Dim cadena As String = $"SELECT fIngreso as fIngreso, Clientes.nombreCliente, 
 			                        TipoComprobantes.nombreTipoComprobante AS Tipo_Comprobante,
 			                        importe, Companias.nombreCompania,
 			                        Estados.nombreEstado AS Estado,
 			                        fPago, numero, Bancos.nombreBanco,
-			                        C.obs, obsBaja, Usuarios.nombreUsuario, idAlta
+			                        C.obs, obsBaja, a.nombreUsuario, idAlta,
+                                    CASE   
+									WHEN C.modificadoPorIdUsuario IS NULL THEN ''   
+									ELSE b.nombreUsuario  
+									END UsuarioModifico,
+                                    FechaModifico fecModificacion
 		                            FROM Comprobantes C
-		        INNER JOIN TipoComprobantes ON C.idTipoComprobante = TipoComprobantes.idTipoComprobante
-		        INNER JOIN Clientes ON Clientes.idCliente = C.idCliente
-		        INNER JOIN Companias ON Companias.idCompania = C.idCompania
-		        INNER JOIN Bancos ON Bancos.idBanco = C.idBanco
-		        INNER JOIN Estados ON Estados.idEstado = C.idEstado
-		        INNER JOIN Usuarios ON Usuarios.idUsuario = C.idUsuario
-		        WHERE
-                    fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta AND	            
-		            (numero LIKE '%' + @numero + '%') AND
-		            (importe >= @importe) AND
-		            (Estados.nombreEstado LIKE '%' + @NombreEstado + '%') AND
-		            (Clientes.nombreCliente LIKE '%'+ @NombreCliente +'%' ) AND
-		            (Companias.nombreCompania LIKE '%'+ @NombreCompania +'%' ) AND
-		            (TipoComprobantes.nombreTipoComprobante LIKE '%'+ @NombreTipoComprobante +'%') AND
-		            (Usuarios.nombreUsuario LIKE  '%'+ @NombreUsuario +'%') AND
-                    idEstadoOperacion = 1"
+		            INNER JOIN TipoComprobantes ON C.idTipoComprobante = TipoComprobantes.idTipoComprobante
+		            INNER JOIN Clientes ON Clientes.idCliente = C.idCliente
+		            INNER JOIN Companias ON Companias.idCompania = C.idCompania
+		            INNER JOIN Bancos ON Bancos.idBanco = C.idBanco
+		            INNER JOIN Estados ON Estados.idEstado = C.idEstado
+		            INNER JOIN Usuarios a ON a.idUsuario = C.idUsuario
+				    LEFT JOIN Usuarios b ON b.idUsuario = C.modificadoPorIdUsuario
+		            WHERE
+                    fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta 
+                    AND (numero LIKE '%' + @numero + '%') 
+		            {condicionImporte} 
+		            AND (Estados.nombreEstado LIKE '%' + @NombreEstado + '%')
+		            AND (Clientes.nombreCliente LIKE '%'+ @NombreCliente +'%' )
+		            AND (Companias.nombreCompania LIKE '%'+ @NombreCompania +'%' )
+		            AND (TipoComprobantes.nombreTipoComprobante LIKE '%'+ @NombreTipoComprobante +'%')
+		            AND (a.nombreUsuario LIKE  '%'+ @NombreUsuario +'%')
+                    AND idEstadoOperacion = 1"
             '(fIngreso >= @fechaDesde AND fIngreso <= @fechaHasta) AND
             Dim query As New SqlCommand(cadena, mCon)
             query.Parameters.AddWithValue("NombreTipoComprobante", pTipoComprobante)
@@ -234,7 +259,6 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-
     Public Function EliminarComprobante(pIdAlta As Integer) As Int16
 
         Try
@@ -256,7 +280,6 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-
     Public Function ConsultarIdCompania(pNombreCompania As String) As Integer
 
         Try
@@ -286,5 +309,4 @@ Public Class ClsComprobantes
         End Try
 
     End Function
-
 End Class

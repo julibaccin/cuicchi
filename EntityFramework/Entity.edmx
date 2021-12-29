@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CuicchiGaveglioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="int" Nullable="false" />
+          <Property Name="nombreBanco" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCliente" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="telefono" Type="varchar" MaxLength="20" />
+          <Property Name="cuit" Type="varchar" MaxLength="11" />
+          <Property Name="dni" Type="varchar" MaxLength="8" />
+          <Property Name="email" Type="varchar" MaxLength="60" />
+          <Property Name="domicilio" Type="varchar" MaxLength="60" />
+          <Property Name="cbu" Type="varchar" MaxLength="22" />
+          <Property Name="obs" Type="varchar(max)" />
+          <Property Name="idCobrador" Type="smallint" />
+        </EntityType>
+        <EntityType Name="Cobradores">
+          <Key>
+            <PropertyRef Name="idCobrador" />
+          </Key>
+          <Property Name="idCobrador" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCobrador" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Companias">
+          <Key>
+            <PropertyRef Name="idCompania" />
+          </Key>
+          <Property Name="idCompania" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreCompania" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="cuitCompania" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="Comprobantes">
+          <Key>
+            <PropertyRef Name="idAlta" />
+          </Key>
+          <Property Name="idAlta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipoComprobante" Type="tinyint" Nullable="false" />
+          <Property Name="fIngreso" Type="int" Nullable="false" />
+          <Property Name="idCliente" Type="smallint" Nullable="false" />
+          <Property Name="importe" Type="money" Nullable="false" />
+          <Property Name="idEstado" Type="tinyint" Nullable="false" />
+          <Property Name="idUsuario" Type="tinyint" Nullable="false" />
+          <Property Name="idEstadoOperacion" Type="tinyint" Nullable="false" />
+          <Property Name="idCompania" Type="smallint" Nullable="false" />
+          <Property Name="idBanco" Type="int" Nullable="false" />
+          <Property Name="fPago" Type="int" />
+          <Property Name="numero" Type="varchar" MaxLength="25" />
+          <Property Name="obs" Type="varchar" MaxLength="100" />
+          <Property Name="obsBaja" Type="varchar" MaxLength="100" />
+          <Property Name="Tomador" Type="varchar" MaxLength="25" />
+          <Property Name="Ref" Type="varchar" MaxLength="25" />
+          <Property Name="Detalle" Type="varchar" MaxLength="50" />
+          <Property Name="Patente" Type="varchar" MaxLength="20" />
+          <Property Name="FVencimiento" Type="int" />
+          <Property Name="idPlanilla" Type="int" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="tinyint" Nullable="false" />
+          <Property Name="nombreEstado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EstadosOperacion">
+          <Key>
+            <PropertyRef Name="idEstadoOperacion" />
+          </Key>
+          <Property Name="idEstadoOperacion" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreEstadoOperacion" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Planillas">
+          <Key>
+            <PropertyRef Name="idPlanilla" />
+          </Key>
+          <Property Name="idPlanilla" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idCliente" Type="smallint" Nullable="false" />
+          <Property Name="fPlanilla" Type="int" Nullable="false" />
+          <Property Name="idUsuario" Type="tinyint" Nullable="false" />
+          <Property Name="idEstadoOperacion" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreRol" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoComprobantes">
+          <Key>
+            <PropertyRef Name="idTipoComprobante" />
+          </Key>
+          <Property Name="idTipoComprobante" Type="tinyint" Nullable="false" />
+          <Property Name="nombreTipoComprobante" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreUsuario" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="idRol" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Banco">
+          <End Role="Bancos" Type="Self.Bancos" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bancos">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ClienteCobrador">
+          <End Role="Cobradores" Type="Self.Cobradores" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobradores">
+              <PropertyRef Name="idCobrador" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idCobrador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ClientePlanilla">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Compania">
+          <End Role="Companias" Type="Self.Companias" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="idCompania" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idCompania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estado">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EstadoOperacionComprobantes">
+          <End Role="EstadosOperacion" Type="Self.EstadosOperacion" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosOperacion">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EstadoOperacionPlanillas">
+          <End Role="EstadosOperacion" Type="Self.EstadosOperacion" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosOperacion">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Planilla">
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="0..1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planillas">
+              <PropertyRef Name="idPlanilla" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoComprobante">
+          <End Role="TipoComprobantes" Type="Self.TipoComprobantes" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComprobantes">
+              <PropertyRef Name="idTipoComprobante" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioPlanilla">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CuicchiGaveglioModelStoreContainer">
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cobradores" EntityType="Self.Cobradores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Companias" EntityType="Self.Companias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comprobantes" EntityType="Self.Comprobantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosOperacion" EntityType="Self.EstadosOperacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planillas" EntityType="Self.Planillas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoComprobantes" EntityType="Self.TipoComprobantes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Banco" Association="Self.fk_Banco">
+            <End Role="Bancos" EntitySet="Bancos" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Cliente" Association="Self.fk_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ClienteCobrador" Association="Self.fk_ClienteCobrador">
+            <End Role="Cobradores" EntitySet="Cobradores" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ClientePlanilla" Association="Self.fk_ClientePlanilla">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Compania" Association="Self.fk_Compania">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estado" Association="Self.fk_Estado">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EstadoOperacionComprobantes" Association="Self.fk_EstadoOperacionComprobantes">
+            <End Role="EstadosOperacion" EntitySet="EstadosOperacion" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EstadoOperacionPlanillas" Association="Self.fk_EstadoOperacionPlanillas">
+            <End Role="EstadosOperacion" EntitySet="EstadosOperacion" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Planilla" Association="Self.fk_Planilla">
+            <End Role="Planillas" EntitySet="Planillas" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoComprobante" Association="Self.fk_TipoComprobante">
+            <End Role="TipoComprobantes" EntitySet="TipoComprobantes" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usuario" Association="Self.fk_Usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioPlanilla" Association="Self.fk_UsuarioPlanilla">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CuicchiGaveglioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bancos">
+          <Key>
+            <PropertyRef Name="idBanco" />
+          </Key>
+          <Property Name="idBanco" Type="Int32" Nullable="false" />
+          <Property Name="nombreBanco" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Banco" FromRole="Bancos" ToRole="Comprobantes" />
+        </EntityType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="idCliente" />
+          </Key>
+          <Property Name="idCliente" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCliente" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="cuit" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="dni" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="domicilio" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="cbu" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="obs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="idCobrador" Type="Int16" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Cliente" FromRole="Clientes" ToRole="Comprobantes" />
+          <NavigationProperty Name="Cobradores" Relationship="Self.fk_ClienteCobrador" FromRole="Clientes" ToRole="Cobradores" />
+          <NavigationProperty Name="Planillas" Relationship="Self.fk_ClientePlanilla" FromRole="Clientes" ToRole="Planillas" />
+        </EntityType>
+        <EntityType Name="Cobradores">
+          <Key>
+            <PropertyRef Name="idCobrador" />
+          </Key>
+          <Property Name="idCobrador" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCobrador" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.fk_ClienteCobrador" FromRole="Cobradores" ToRole="Clientes" />
+        </EntityType>
+        <EntityType Name="Companias">
+          <Key>
+            <PropertyRef Name="idCompania" />
+          </Key>
+          <Property Name="idCompania" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreCompania" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cuitCompania" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Compania" FromRole="Companias" ToRole="Comprobantes" />
+        </EntityType>
+        <EntityType Name="Comprobantes">
+          <Key>
+            <PropertyRef Name="idAlta" />
+          </Key>
+          <Property Name="idAlta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipoComprobante" Type="Byte" Nullable="false" />
+          <Property Name="fIngreso" Type="Int32" Nullable="false" />
+          <Property Name="idCliente" Type="Int16" Nullable="false" />
+          <Property Name="importe" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="idEstado" Type="Byte" Nullable="false" />
+          <Property Name="idUsuario" Type="Byte" Nullable="false" />
+          <Property Name="idEstadoOperacion" Type="Byte" Nullable="false" />
+          <Property Name="idCompania" Type="Int16" Nullable="false" />
+          <Property Name="idBanco" Type="Int32" Nullable="false" />
+          <Property Name="fPago" Type="Int32" />
+          <Property Name="numero" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="obs" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="obsBaja" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tomador" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Ref" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Detalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FVencimiento" Type="Int32" />
+          <Property Name="idPlanilla" Type="Int32" />
+          <NavigationProperty Name="Bancos" Relationship="Self.fk_Banco" FromRole="Comprobantes" ToRole="Bancos" />
+          <NavigationProperty Name="Clientes" Relationship="Self.fk_Cliente" FromRole="Comprobantes" ToRole="Clientes" />
+          <NavigationProperty Name="Companias" Relationship="Self.fk_Compania" FromRole="Comprobantes" ToRole="Companias" />
+          <NavigationProperty Name="Estados" Relationship="Self.fk_Estado" FromRole="Comprobantes" ToRole="Estados" />
+          <NavigationProperty Name="EstadosOperacion" Relationship="Self.fk_EstadoOperacionComprobantes" FromRole="Comprobantes" ToRole="EstadosOperacion" />
+          <NavigationProperty Name="Planillas" Relationship="Self.fk_Planilla" FromRole="Comprobantes" ToRole="Planillas" />
+          <NavigationProperty Name="TipoComprobantes" Relationship="Self.fk_TipoComprobante" FromRole="Comprobantes" ToRole="TipoComprobantes" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Usuario" FromRole="Comprobantes" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Estados">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="Byte" Nullable="false" />
+          <Property Name="nombreEstado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Estado" FromRole="Estados" ToRole="Comprobantes" />
+        </EntityType>
+        <EntityType Name="EstadosOperacion">
+          <Key>
+            <PropertyRef Name="idEstadoOperacion" />
+          </Key>
+          <Property Name="idEstadoOperacion" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreEstadoOperacion" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_EstadoOperacionComprobantes" FromRole="EstadosOperacion" ToRole="Comprobantes" />
+          <NavigationProperty Name="Planillas" Relationship="Self.fk_EstadoOperacionPlanillas" FromRole="EstadosOperacion" ToRole="Planillas" />
+        </EntityType>
+        <EntityType Name="Planillas">
+          <Key>
+            <PropertyRef Name="idPlanilla" />
+          </Key>
+          <Property Name="idPlanilla" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idCliente" Type="Int16" Nullable="false" />
+          <Property Name="fPlanilla" Type="Int32" Nullable="false" />
+          <Property Name="idUsuario" Type="Byte" Nullable="false" />
+          <Property Name="idEstadoOperacion" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.fk_ClientePlanilla" FromRole="Planillas" ToRole="Clientes" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Planilla" FromRole="Planillas" ToRole="Comprobantes" />
+          <NavigationProperty Name="EstadosOperacion" Relationship="Self.fk_EstadoOperacionPlanillas" FromRole="Planillas" ToRole="EstadosOperacion" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_UsuarioPlanilla" FromRole="Planillas" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="idRol" />
+          </Key>
+          <Property Name="idRol" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreRol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoComprobantes">
+          <Key>
+            <PropertyRef Name="idTipoComprobante" />
+          </Key>
+          <Property Name="idTipoComprobante" Type="Byte" Nullable="false" />
+          <Property Name="nombreTipoComprobante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_TipoComprobante" FromRole="TipoComprobantes" ToRole="Comprobantes" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreUsuario" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idRol" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Comprobantes" Relationship="Self.fk_Usuario" FromRole="Usuarios" ToRole="Comprobantes" />
+          <NavigationProperty Name="Planillas" Relationship="Self.fk_UsuarioPlanilla" FromRole="Usuarios" ToRole="Planillas" />
+        </EntityType>
+        <Association Name="fk_Banco">
+          <End Role="Bancos" Type="Self.Bancos" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bancos">
+              <PropertyRef Name="idBanco" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idBanco" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Cliente">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ClienteCobrador">
+          <End Role="Cobradores" Type="Self.Cobradores" Multiplicity="0..1" />
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobradores">
+              <PropertyRef Name="idCobrador" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="idCobrador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ClientePlanilla">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="idCliente" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Compania">
+          <End Role="Companias" Type="Self.Companias" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Companias">
+              <PropertyRef Name="idCompania" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idCompania" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Estado">
+          <End Role="Estados" Type="Self.Estados" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estados">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EstadoOperacionComprobantes">
+          <End Role="EstadosOperacion" Type="Self.EstadosOperacion" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosOperacion">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Planilla">
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="0..1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planillas">
+              <PropertyRef Name="idPlanilla" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idPlanilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_TipoComprobante">
+          <End Role="TipoComprobantes" Type="Self.TipoComprobantes" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoComprobantes">
+              <PropertyRef Name="idTipoComprobante" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idTipoComprobante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Usuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Comprobantes" Type="Self.Comprobantes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Comprobantes">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_EstadoOperacionPlanillas">
+          <End Role="EstadosOperacion" Type="Self.EstadosOperacion" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosOperacion">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idEstadoOperacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_UsuarioPlanilla">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Planillas" Type="Self.Planillas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="Planillas">
+              <PropertyRef Name="idUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CuicchiGaveglioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bancos" EntityType="Self.Bancos" />
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Cobradores" EntityType="Self.Cobradores" />
+          <EntitySet Name="Companias" EntityType="Self.Companias" />
+          <EntitySet Name="Comprobantes" EntityType="Self.Comprobantes" />
+          <EntitySet Name="Estados" EntityType="Self.Estados" />
+          <EntitySet Name="EstadosOperacion" EntityType="Self.EstadosOperacion" />
+          <EntitySet Name="Planillas" EntityType="Self.Planillas" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="TipoComprobantes" EntityType="Self.TipoComprobantes" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="fk_Banco" Association="Self.fk_Banco">
+            <End Role="Bancos" EntitySet="Bancos" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Cliente" Association="Self.fk_Cliente">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ClienteCobrador" Association="Self.fk_ClienteCobrador">
+            <End Role="Cobradores" EntitySet="Cobradores" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ClientePlanilla" Association="Self.fk_ClientePlanilla">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Compania" Association="Self.fk_Compania">
+            <End Role="Companias" EntitySet="Companias" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Estado" Association="Self.fk_Estado">
+            <End Role="Estados" EntitySet="Estados" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EstadoOperacionComprobantes" Association="Self.fk_EstadoOperacionComprobantes">
+            <End Role="EstadosOperacion" EntitySet="EstadosOperacion" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Planilla" Association="Self.fk_Planilla">
+            <End Role="Planillas" EntitySet="Planillas" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_TipoComprobante" Association="Self.fk_TipoComprobante">
+            <End Role="TipoComprobantes" EntitySet="TipoComprobantes" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Usuario" Association="Self.fk_Usuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Comprobantes" EntitySet="Comprobantes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_EstadoOperacionPlanillas" Association="Self.fk_EstadoOperacionPlanillas">
+            <End Role="EstadosOperacion" EntitySet="EstadosOperacion" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+          <AssociationSet Name="fk_UsuarioPlanilla" Association="Self.fk_UsuarioPlanilla">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Planillas" EntitySet="Planillas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CuicchiGaveglioModelStoreContainer" CdmEntityContainer="CuicchiGaveglioEntities">
+          <EntitySetMapping Name="Bancos">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Bancos">
+              <MappingFragment StoreEntitySet="Bancos">
+                <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+                <ScalarProperty Name="nombreBanco" ColumnName="nombreBanco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="nombreCliente" ColumnName="nombreCliente" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="cuit" ColumnName="cuit" />
+                <ScalarProperty Name="dni" ColumnName="dni" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="domicilio" ColumnName="domicilio" />
+                <ScalarProperty Name="cbu" ColumnName="cbu" />
+                <ScalarProperty Name="obs" ColumnName="obs" />
+                <ScalarProperty Name="idCobrador" ColumnName="idCobrador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cobradores">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Cobradores">
+              <MappingFragment StoreEntitySet="Cobradores">
+                <ScalarProperty Name="idCobrador" ColumnName="idCobrador" />
+                <ScalarProperty Name="nombreCobrador" ColumnName="nombreCobrador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companias">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Companias">
+              <MappingFragment StoreEntitySet="Companias">
+                <ScalarProperty Name="idCompania" ColumnName="idCompania" />
+                <ScalarProperty Name="nombreCompania" ColumnName="nombreCompania" />
+                <ScalarProperty Name="cuitCompania" ColumnName="cuitCompania" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comprobantes">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Comprobantes">
+              <MappingFragment StoreEntitySet="Comprobantes">
+                <ScalarProperty Name="idAlta" ColumnName="idAlta" />
+                <ScalarProperty Name="idTipoComprobante" ColumnName="idTipoComprobante" />
+                <ScalarProperty Name="fIngreso" ColumnName="fIngreso" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="importe" ColumnName="importe" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idEstadoOperacion" ColumnName="idEstadoOperacion" />
+                <ScalarProperty Name="idCompania" ColumnName="idCompania" />
+                <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+                <ScalarProperty Name="fPago" ColumnName="fPago" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="obs" ColumnName="obs" />
+                <ScalarProperty Name="obsBaja" ColumnName="obsBaja" />
+                <ScalarProperty Name="Tomador" ColumnName="Tomador" />
+                <ScalarProperty Name="Ref" ColumnName="Ref" />
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Patente" ColumnName="Patente" />
+                <ScalarProperty Name="FVencimiento" ColumnName="FVencimiento" />
+                <ScalarProperty Name="idPlanilla" ColumnName="idPlanilla" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estados">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Estados">
+              <MappingFragment StoreEntitySet="Estados">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="nombreEstado" ColumnName="nombreEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstadosOperacion">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.EstadosOperacion">
+              <MappingFragment StoreEntitySet="EstadosOperacion">
+                <ScalarProperty Name="idEstadoOperacion" ColumnName="idEstadoOperacion" />
+                <ScalarProperty Name="nombreEstadoOperacion" ColumnName="nombreEstadoOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planillas">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Planillas">
+              <MappingFragment StoreEntitySet="Planillas">
+                <ScalarProperty Name="idPlanilla" ColumnName="idPlanilla" />
+                <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+                <ScalarProperty Name="fPlanilla" ColumnName="fPlanilla" />
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="idEstadoOperacion" ColumnName="idEstadoOperacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+                <ScalarProperty Name="nombreRol" ColumnName="nombreRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoComprobantes">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.TipoComprobantes">
+              <MappingFragment StoreEntitySet="TipoComprobantes">
+                <ScalarProperty Name="idTipoComprobante" ColumnName="idTipoComprobante" />
+                <ScalarProperty Name="nombreTipoComprobante" ColumnName="nombreTipoComprobante" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="CuicchiGaveglioModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="idRol" ColumnName="idRol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

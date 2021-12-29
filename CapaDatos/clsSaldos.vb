@@ -81,7 +81,7 @@ Public Class ClsSaldos
         Try
             Dim cadena = "SELECT numero as Numero_Cheque, DATEADD(DAY,30,CONVERT(dateTIME,convert(char(8),CONVERT(VARCHAR(8),fPago)))) as Fecha_de_Vencimiento from Comprobantes AC
                           INNER JOIN Estados ON AC.idEstado = Estados.idEstado
-                          WHERE (idTipoComprobante = 3 and AC.idEstado = 1) AND DATEDIFF(DAY, GETDATE(), DATEADD(DAY,30,CONVERT(dateTIME,convert(char(8),CONVERT(VARCHAR(8),fPago))))) <= 5"
+                          WHERE ((idTipoComprobante = 3 OR idTipoComprobante = 6) and AC.idEstado = 1) AND DATEDIFF(DAY, GETDATE(), DATEADD(DAY,30,CONVERT(dateTIME,convert(char(8),CONVERT(VARCHAR(8),fPago))))) <= 5"
             Dim query As New SqlCommand(cadena, mCon)
             Dim adaptador As New SqlDataAdapter()
             Dim tabla As New DataTable()

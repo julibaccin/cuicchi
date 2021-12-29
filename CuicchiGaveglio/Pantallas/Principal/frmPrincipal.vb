@@ -107,4 +107,8 @@ Public Class FrmPrincipal
     Private Sub CobradoresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CobradoresToolStripMenuItem.Click
         frmAltaCobradores.ShowDialog()
     End Sub
+
+    Private Sub MODIFICACIONToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles MODIFICACIONToolStripMenuItem.Click
+
+    End Sub
 End Class

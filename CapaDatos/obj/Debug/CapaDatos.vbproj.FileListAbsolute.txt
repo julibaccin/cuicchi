@@ -24,10 +24,10 @@ C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\bin\Debug\Capa
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\bin\Debug\CapaDatos.dll
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\bin\Debug\CapaDatos.pdb
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\bin\Debug\CapaDatos.xml
-C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.vbprojAssemblyReference.cache
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.Resources.resources
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.vbproj.GenerateResource.cache
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.vbproj.CoreCompileInputs.cache
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.dll
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.xml
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.pdb
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CapaDatos\obj\Debug\CapaDatos.vbprojAssemblyReference.cache

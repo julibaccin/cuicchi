@@ -83,8 +83,9 @@
     <Compile Include="Models\ModeloCliente.vb" />
     <Compile Include="Models\ModeloPlanilla.vb" />
     <Compile Include="Models\ModeloReporteComprobantes.vb" />
-    <Compile Include="Models\ModeloReporteRecibos.vb" />
-    <Compile Include="Models\TotalGeneral.vb" />
+    <Compile Include="Models\Reports\RecibosPorCompania.vb" />
+    <Compile Include="Models\Reports\TotalPorTipoComprobanteEfectivo.vb" />
+    <Compile Include="Models\Reports\TotalPorTipoComprobanteOtros.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

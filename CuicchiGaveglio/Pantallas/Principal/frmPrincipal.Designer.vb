@@ -39,6 +39,7 @@ Partial Class FrmPrincipal
         Me.ComprobantesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PLANILLASToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.COMPROBANTESToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MODIFICACIONToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.REPORTESToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EliiminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -163,7 +164,7 @@ Partial Class FrmPrincipal
         '
         'ComprobantesToolStripMenuItem
         '
-        Me.ComprobantesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PLANILLASToolStripMenuItem, Me.COMPROBANTESToolStripMenuItem1})
+        Me.ComprobantesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PLANILLASToolStripMenuItem, Me.COMPROBANTESToolStripMenuItem1, Me.MODIFICACIONToolStripMenuItem})
         Me.ComprobantesToolStripMenuItem.Name = "ComprobantesToolStripMenuItem"
         Me.ComprobantesToolStripMenuItem.Size = New System.Drawing.Size(145, 25)
         Me.ComprobantesToolStripMenuItem.Text = "COMPROBANTES"
@@ -179,6 +180,12 @@ Partial Class FrmPrincipal
         Me.COMPROBANTESToolStripMenuItem1.Name = "COMPROBANTESToolStripMenuItem1"
         Me.COMPROBANTESToolStripMenuItem1.Size = New System.Drawing.Size(203, 26)
         Me.COMPROBANTESToolStripMenuItem1.Text = "COMPROBANTES"
+        '
+        'MODIFICACIONToolStripMenuItem
+        '
+        Me.MODIFICACIONToolStripMenuItem.Name = "MODIFICACIONToolStripMenuItem"
+        Me.MODIFICACIONToolStripMenuItem.Size = New System.Drawing.Size(203, 26)
+        Me.MODIFICACIONToolStripMenuItem.Text = "MODIFICACION"
         '
         'REPORTESToolStripMenuItem
         '
@@ -295,9 +302,9 @@ Partial Class FrmPrincipal
         Me.Label4.Location = New System.Drawing.Point(588, 22)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 18)
+        Me.Label4.Size = New System.Drawing.Size(109, 18)
         Me.Label4.TabIndex = 14
-        Me.Label4.Text = "Versión: 1.0.0"
+        Me.Label4.Text = "Versión: 07.06"
         '
         'BottomToolStripPanel
         '
@@ -451,4 +458,5 @@ Partial Class FrmPrincipal
     Friend WithEvents Label4 As Label
     Friend WithEvents SQLToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CobradoresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents MODIFICACIONToolStripMenuItem As ToolStripMenuItem
 End Class

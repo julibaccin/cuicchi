@@ -254,3 +254,8 @@ C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debu
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.exe
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.xml
 C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.pdb
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\bin\Debug\CuicchiGaveglio.exe.manifest
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\bin\Debug\CuicchiGaveglio.application
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.exe.manifest
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.application
+C:\Users\Administrador\Desktop\Trabajos\CuicchiGaveglio\CuicchiGaveglio\obj\Debug\CuicchiGaveglio.frmModificacion.resources

@@ -28,7 +28,6 @@ Partial Class FrmConsultarComprobantes
         Me.cmbUsuarioFiltro = New System.Windows.Forms.TextBox()
         Me.btnCambiarEstado = New System.Windows.Forms.Button()
         Me.btnBuscar = New System.Windows.Forms.Button()
-        Me.txtImporteFiltro = New System.Windows.Forms.TextBox()
         Me.DComprobantes = New System.Windows.Forms.DataGridView()
         Me.cmbCompaniaCambioEstado = New System.Windows.Forms.ComboBox()
         Me.txtNumeroFiltro = New System.Windows.Forms.TextBox()
@@ -53,6 +52,8 @@ Partial Class FrmConsultarComprobantes
         Me.Label13 = New System.Windows.Forms.Label()
         Me.DFIngresoHastaFiltro = New System.Windows.Forms.DateTimePicker()
         Me.GrupoComprobantes = New System.Windows.Forms.GroupBox()
+        Me.txtTotalPrecargaRecibos = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.txtTotalPrecarga = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnPreCargar = New System.Windows.Forms.Button()
@@ -89,6 +90,9 @@ Partial Class FrmConsultarComprobantes
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtTotalBaja = New System.Windows.Forms.TextBox()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.txtImporteFiltro = New System.Windows.Forms.TextBox()
         CType(Me.DComprobantes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DComprobantesBaja, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
@@ -136,14 +140,6 @@ Partial Class FrmConsultarComprobantes
         Me.btnBuscar.TabIndex = 82
         Me.btnBuscar.Text = "ßuscar"
         Me.btnBuscar.UseVisualStyleBackColor = False
-        '
-        'txtImporteFiltro
-        '
-        Me.txtImporteFiltro.Location = New System.Drawing.Point(158, 36)
-        Me.txtImporteFiltro.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtImporteFiltro.Name = "txtImporteFiltro"
-        Me.txtImporteFiltro.Size = New System.Drawing.Size(95, 20)
-        Me.txtImporteFiltro.TabIndex = 102
         '
         'DComprobantes
         '
@@ -381,6 +377,8 @@ Partial Class FrmConsultarComprobantes
         '
         Me.GrupoComprobantes.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GrupoComprobantes.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.GrupoComprobantes.Controls.Add(Me.txtTotalPrecargaRecibos)
+        Me.GrupoComprobantes.Controls.Add(Me.Label23)
         Me.GrupoComprobantes.Controls.Add(Me.txtTotalPrecarga)
         Me.GrupoComprobantes.Controls.Add(Me.Label1)
         Me.GrupoComprobantes.Controls.Add(Me.btnPreCargar)
@@ -415,6 +413,22 @@ Partial Class FrmConsultarComprobantes
         Me.GrupoComprobantes.TabIndex = 107
         Me.GrupoComprobantes.TabStop = False
         Me.GrupoComprobantes.Text = "Ingrese un comprobante"
+        '
+        'txtTotalPrecargaRecibos
+        '
+        Me.txtTotalPrecargaRecibos.Location = New System.Drawing.Point(660, 269)
+        Me.txtTotalPrecargaRecibos.Name = "txtTotalPrecargaRecibos"
+        Me.txtTotalPrecargaRecibos.Size = New System.Drawing.Size(131, 24)
+        Me.txtTotalPrecargaRecibos.TabIndex = 54
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(515, 272)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(139, 18)
+        Me.Label23.TabIndex = 53
+        Me.Label23.Text = "TOTAL RECIBOS"
         '
         'txtTotalPrecarga
         '
@@ -757,6 +771,7 @@ Partial Class FrmConsultarComprobantes
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtImporteFiltro)
         Me.GroupBox1.Controls.Add(Me.Label20)
         Me.GroupBox1.Controls.Add(Me.DFIngresoHastaFiltro)
         Me.GroupBox1.Controls.Add(Me.Label21)
@@ -766,7 +781,6 @@ Partial Class FrmConsultarComprobantes
         Me.GroupBox1.Controls.Add(Me.DFIngresoDesdeFiltro)
         Me.GroupBox1.Controls.Add(Me.Label14)
         Me.GroupBox1.Controls.Add(Me.cmbTipoComprobanteFiltro)
-        Me.GroupBox1.Controls.Add(Me.txtImporteFiltro)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label18)
         Me.GroupBox1.Controls.Add(Me.cmbClienteFiltro)
@@ -784,12 +798,38 @@ Partial Class FrmConsultarComprobantes
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTROS"
         '
+        'txtTotalBaja
+        '
+        Me.txtTotalBaja.Location = New System.Drawing.Point(978, 401)
+        Me.txtTotalBaja.Name = "txtTotalBaja"
+        Me.txtTotalBaja.Size = New System.Drawing.Size(131, 20)
+        Me.txtTotalBaja.TabIndex = 110
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(899, 403)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(71, 13)
+        Me.Label24.TabIndex = 109
+        Me.Label24.Text = "TOTAL BAJA"
+        '
+        'txtImporteFiltro
+        '
+        Me.txtImporteFiltro.Location = New System.Drawing.Point(158, 38)
+        Me.txtImporteFiltro.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtImporteFiltro.Name = "txtImporteFiltro"
+        Me.txtImporteFiltro.Size = New System.Drawing.Size(97, 20)
+        Me.txtImporteFiltro.TabIndex = 107
+        '
         'FrmConsultarComprobantes
         '
         Me.AcceptButton = Me.btnPreCargar
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1339, 749)
+        Me.Controls.Add(Me.txtTotalBaja)
+        Me.Controls.Add(Me.Label24)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.GrupoComprobantes)
         Me.Controls.Add(Me.btnCambiarEstado)
@@ -821,7 +861,6 @@ Partial Class FrmConsultarComprobantes
     Friend WithEvents cmbUsuarioFiltro As TextBox
     Friend WithEvents btnCambiarEstado As Button
     Friend WithEvents btnBuscar As Button
-    Friend WithEvents txtImporteFiltro As TextBox
     Friend WithEvents DComprobantes As DataGridView
     Friend WithEvents cmbCompaniaCambioEstado As ComboBox
     Friend WithEvents txtNumeroFiltro As TextBox
@@ -882,4 +921,9 @@ Partial Class FrmConsultarComprobantes
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtTotalPrecarga As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents txtTotalPrecargaRecibos As TextBox
+    Friend WithEvents Label23 As Label
+    Friend WithEvents txtTotalBaja As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents txtImporteFiltro As TextBox
 End Class

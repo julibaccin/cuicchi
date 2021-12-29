@@ -16,7 +16,7 @@
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>C:\Users\Administrador\Desktop\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,9 +26,10 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -67,6 +68,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>43490B1C17CD9D55E016946AEFBFD86DD91B5BBB</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>CuicchiGaveglio_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Import Include="CuicchiGaveglio" />
@@ -116,6 +129,12 @@
     <Compile Include="Pantallas\Comprobantes\frmConsultarComprobantes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pantallas\Modificacion\frmModificacion.Designer.vb">
+      <DependentUpon>frmModificacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Pantallas\Modificacion\frmModificacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Pantallas\Planillas\frmPlanillas.Designer.vb">
       <DependentUpon>frmPlanillas.vb</DependentUpon>
     </Compile>
@@ -145,6 +164,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -183,6 +203,9 @@
     <EmbeddedResource Include="Pantallas\Comprobantes\frmConsultarComprobantes.resx">
       <DependentUpon>frmConsultarComprobantes.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Pantallas\Modificacion\frmModificacion.resx">
+      <DependentUpon>frmModificacion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Planillas\frmPlanillas.resx">
       <DependentUpon>frmPlanillas.vb</DependentUpon>
     </EmbeddedResource>
@@ -210,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="CuicchiGaveglio_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -221,7 +245,10 @@
     <None Include="My Project\DataSources\CapaDatos.ModeloReporteRecibos.datasource" />
     <None Include="My Project\DataSources\CapaDatos.ModeloReportes.datasource" />
     <None Include="My Project\DataSources\CapaDatos.MovimientoComprobantes.datasource" />
+    <None Include="My Project\DataSources\CapaDatos.RecibosPorCompania.datasource" />
     <None Include="My Project\DataSources\CapaDatos.TotalGeneral.datasource" />
+    <None Include="My Project\DataSources\CapaDatos.TotalPorTipoComprobanteEfectivo.datasource" />
+    <None Include="My Project\DataSources\CapaDatos.TotalPorTipoComprobanteOtros.datasource" />
     <None Include="My Project\DataSources\ControladorReportes.datasource" />
     <None Include="My Project\DataSources\frmLogin.datasource" />
     <None Include="My Project\DataSources\MovimientoComprobantes.datasource" />
