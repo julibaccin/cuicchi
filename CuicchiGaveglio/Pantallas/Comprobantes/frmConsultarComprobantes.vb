@@ -1,4 +1,5 @@
-﻿Imports System.Drawing
+﻿Imports System.Data
+Imports System.Drawing
 Imports System.Windows.Forms
 Imports CapaDatos
 
@@ -13,8 +14,8 @@ Public Class FrmConsultarComprobantes
     Public Sub SetearValoresCombo()
         txtImporteFiltro.Text = "0"
         txtTotalBaja.Text = "0"
-        DFIngresoHastaFiltro.Value = New Date(2099, 1, 1)
-        DFIngresoDesdeFiltro.Value = New Date(2000, 1, 1)
+        DFIngresoHastaFiltro.Value = Date.Now()
+        DFIngresoDesdeFiltro.Value = Date.Now().AddDays(-5)
         DFechaIngreso.Value = Date.Now()
         DFechaPago.Value = Date.Now()
         LlenarComboTipoComprobantes(cmbTipoComprobanteFiltro)
@@ -347,5 +348,16 @@ Public Class FrmConsultarComprobantes
             txtObservaciones.Text = .Item("Obs", e.RowIndex).Value()
             cmbTipoComprobante.Focus()
         End With
+    End Sub
+
+    Private Sub ExportarCartera_Click(sender As Object, e As EventArgs) Handles btnExportarCartera.Click
+        Dim vista As DataView = CType(DComprobantes.DataSource, DataTable).DefaultView
+        vista.RowFilter = "Tipo_Comprobante = 'Cheque' and Estado = 'En Cartera'"
+        Dim datosFiltrados As DataTable = vista.ToTable()
+        Dim dtsFiltradosdgv As New DataGridView()
+
+        dtsFiltradosdgv.DataSource = datosFiltrados
+
+        ExportarExcel(dtsFiltradosdgv)
     End Sub
 End Class
