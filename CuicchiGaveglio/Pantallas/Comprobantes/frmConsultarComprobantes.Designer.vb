@@ -90,9 +90,10 @@ Partial Class FrmConsultarComprobantes
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnExportarCartera = New System.Windows.Forms.Button()
+        Me.txtImporteFiltro = New System.Windows.Forms.TextBox()
         Me.txtTotalBaja = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.txtImporteFiltro = New System.Windows.Forms.TextBox()
         CType(Me.DComprobantes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DComprobantesBaja, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrupoComprobantes.SuspendLayout()
@@ -106,7 +107,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label21.Location = New System.Drawing.Point(673, 37)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(69, 16)
+        Me.Label21.Size = New System.Drawing.Size(68, 16)
         Me.Label21.TabIndex = 106
         Me.Label21.Text = "USUARIO"
         '
@@ -180,7 +181,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label22.Location = New System.Drawing.Point(1123, 329)
         Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(70, 16)
+        Me.Label22.Size = New System.Drawing.Size(69, 16)
         Me.Label22.TabIndex = 104
         Me.Label22.Text = "Compañia"
         '
@@ -190,7 +191,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.Location = New System.Drawing.Point(86, 38)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(69, 16)
+        Me.Label19.Size = New System.Drawing.Size(68, 16)
         Me.Label19.TabIndex = 100
         Me.Label19.Text = "IMPORTE"
         '
@@ -200,7 +201,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(1123, 274)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(67, 16)
+        Me.Label2.Size = New System.Drawing.Size(66, 16)
         Me.Label2.TabIndex = 90
         Me.Label2.Text = "Obs. Baja"
         '
@@ -210,7 +211,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.Location = New System.Drawing.Point(86, 16)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(68, 16)
+        Me.Label20.Size = New System.Drawing.Size(67, 16)
         Me.Label20.TabIndex = 99
         Me.Label20.Text = "NÚMERO"
         '
@@ -220,7 +221,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(1123, 302)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(51, 16)
+        Me.Label15.Size = New System.Drawing.Size(50, 16)
         Me.Label15.TabIndex = 91
         Me.Label15.Text = "Estado"
         '
@@ -270,7 +271,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.Location = New System.Drawing.Point(466, 36)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(64, 16)
+        Me.Label16.Size = New System.Drawing.Size(63, 16)
         Me.Label16.TabIndex = 96
         Me.Label16.Text = "ESTADO"
         '
@@ -280,7 +281,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.Location = New System.Drawing.Point(466, 14)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(78, 16)
+        Me.Label17.Size = New System.Drawing.Size(77, 16)
         Me.Label17.TabIndex = 95
         Me.Label17.Text = "COMPAÑIA"
         '
@@ -313,7 +314,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.Location = New System.Drawing.Point(261, 16)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(64, 16)
+        Me.Label18.Size = New System.Drawing.Size(63, 16)
         Me.Label18.TabIndex = 93
         Me.Label18.Text = "CLIENTE"
         '
@@ -323,7 +324,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.Location = New System.Drawing.Point(260, 38)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(39, 16)
+        Me.Label5.Size = New System.Drawing.Size(38, 16)
         Me.Label5.TabIndex = 80
         Me.Label5.Text = "TIPO"
         '
@@ -343,7 +344,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label14.Location = New System.Drawing.Point(850, 12)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(54, 16)
+        Me.Label14.Size = New System.Drawing.Size(53, 16)
         Me.Label14.TabIndex = 89
         Me.Label14.Text = "HASTA"
         '
@@ -361,7 +362,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(673, 14)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(58, 16)
+        Me.Label13.Size = New System.Drawing.Size(57, 16)
         Me.Label13.TabIndex = 88
         Me.Label13.Text = "DESDE:"
         '
@@ -487,7 +488,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label4.Location = New System.Drawing.Point(7, 238)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(70, 16)
+        Me.Label4.Size = New System.Drawing.Size(69, 16)
         Me.Label4.TabIndex = 46
         Me.Label4.Text = "Compañia"
         '
@@ -599,7 +600,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label10.Location = New System.Drawing.Point(4, 208)
         Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(100, 16)
+        Me.Label10.Size = New System.Drawing.Size(99, 16)
         Me.Label10.TabIndex = 43
         Me.Label10.Text = "Observaciones"
         '
@@ -610,7 +611,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label8.Location = New System.Drawing.Point(4, 30)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(113, 16)
+        Me.Label8.Size = New System.Drawing.Size(112, 16)
         Me.Label8.TabIndex = 40
         Me.Label8.Text = "T. Comprobante *"
         '
@@ -621,7 +622,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label7.Location = New System.Drawing.Point(8, 60)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(61, 16)
+        Me.Label7.Size = New System.Drawing.Size(60, 16)
         Me.Label7.TabIndex = 37
         Me.Label7.Text = "Importe *"
         '
@@ -644,7 +645,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label6.Location = New System.Drawing.Point(7, 87)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(56, 16)
+        Me.Label6.Size = New System.Drawing.Size(55, 16)
         Me.Label6.TabIndex = 35
         Me.Label6.Text = "Numero"
         '
@@ -655,7 +656,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label3.Location = New System.Drawing.Point(8, 117)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(96, 16)
+        Me.Label3.Size = New System.Drawing.Size(95, 16)
         Me.Label3.TabIndex = 34
         Me.Label3.Text = "Fecha Cheque"
         '
@@ -666,7 +667,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label9.Location = New System.Drawing.Point(8, 145)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(47, 16)
+        Me.Label9.Size = New System.Drawing.Size(46, 16)
         Me.Label9.TabIndex = 30
         Me.Label9.Text = "Banco"
         '
@@ -754,7 +755,7 @@ Partial Class FrmConsultarComprobantes
         Me.Label11.Location = New System.Drawing.Point(7, 175)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(64, 16)
+        Me.Label11.Size = New System.Drawing.Size(63, 16)
         Me.Label11.TabIndex = 29
         Me.Label11.Text = "Clientes *"
         '
@@ -765,12 +766,13 @@ Partial Class FrmConsultarComprobantes
         Me.Label12.Location = New System.Drawing.Point(7, 267)
         Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(67, 16)
+        Me.Label12.Size = New System.Drawing.Size(66, 16)
         Me.Label12.TabIndex = 27
         Me.Label12.Text = "F. Ingreso"
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnExportarCartera)
         Me.GroupBox1.Controls.Add(Me.txtImporteFiltro)
         Me.GroupBox1.Controls.Add(Me.Label20)
         Me.GroupBox1.Controls.Add(Me.DFIngresoHastaFiltro)
@@ -798,6 +800,25 @@ Partial Class FrmConsultarComprobantes
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTROS"
         '
+        'btnExportarCartera
+        '
+        Me.btnExportarCartera.BackColor = System.Drawing.Color.LightSteelBlue
+        Me.btnExportarCartera.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExportarCartera.Location = New System.Drawing.Point(969, 36)
+        Me.btnExportarCartera.Name = "btnExportarCartera"
+        Me.btnExportarCartera.Size = New System.Drawing.Size(141, 30)
+        Me.btnExportarCartera.TabIndex = 108
+        Me.btnExportarCartera.Text = "Exportar CC"
+        Me.btnExportarCartera.UseVisualStyleBackColor = False
+        '
+        'txtImporteFiltro
+        '
+        Me.txtImporteFiltro.Location = New System.Drawing.Point(158, 38)
+        Me.txtImporteFiltro.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtImporteFiltro.Name = "txtImporteFiltro"
+        Me.txtImporteFiltro.Size = New System.Drawing.Size(97, 20)
+        Me.txtImporteFiltro.TabIndex = 107
+        '
         'txtTotalBaja
         '
         Me.txtTotalBaja.Location = New System.Drawing.Point(978, 401)
@@ -813,14 +834,6 @@ Partial Class FrmConsultarComprobantes
         Me.Label24.Size = New System.Drawing.Size(71, 13)
         Me.Label24.TabIndex = 109
         Me.Label24.Text = "TOTAL BAJA"
-        '
-        'txtImporteFiltro
-        '
-        Me.txtImporteFiltro.Location = New System.Drawing.Point(158, 38)
-        Me.txtImporteFiltro.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtImporteFiltro.Name = "txtImporteFiltro"
-        Me.txtImporteFiltro.Size = New System.Drawing.Size(97, 20)
-        Me.txtImporteFiltro.TabIndex = 107
         '
         'FrmConsultarComprobantes
         '
@@ -926,4 +939,5 @@ Partial Class FrmConsultarComprobantes
     Friend WithEvents txtTotalBaja As TextBox
     Friend WithEvents Label24 As Label
     Friend WithEvents txtImporteFiltro As TextBox
+    Friend WithEvents btnExportarCartera As Button
 End Class
