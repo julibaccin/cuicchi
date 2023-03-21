@@ -79,7 +79,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Import Include="CuicchiGaveglio" />
@@ -214,6 +214,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Eliminar\frmEliminarComprobante.resx">
       <DependentUpon>frmEliminarComprobante.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Pantallas\Login\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
