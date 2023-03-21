@@ -47,11 +47,7 @@ Public Class FrmPrincipal
     End Sub
 
     Private Sub EliminarAltas(sender As Object, e As EventArgs) Handles AltaToolStripMenuItem1.Click
-        If lblUsuario.Text = "eliminar" Then
-            frmEliminarComprobante.ShowDialog()
-        Else
-            MsgBox("No tiene permiso para acceder a esta pantalla, ingrese con el usuario: eliminar")
-        End If
+        FrmEliminarComprobante.ShowDialog()
     End Sub
 
 

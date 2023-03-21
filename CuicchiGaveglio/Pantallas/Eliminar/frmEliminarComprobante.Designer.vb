@@ -44,14 +44,14 @@ Partial Class FrmEliminarComprobante
         Me.txtIdAlta.Size = New System.Drawing.Size(186, 20)
         Me.txtIdAlta.TabIndex = 2
         '
-        'frmEliminarComprobante
+        'FrmEliminarComprobante
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(355, 54)
         Me.Controls.Add(Me.txtIdAlta)
         Me.Controls.Add(Me.btnEliminarAltaComprobante)
-        Me.Name = "frmEliminarComprobante"
+        Me.Name = "FrmEliminarComprobante"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Eliminar"
         Me.ResumeLayout(False)
