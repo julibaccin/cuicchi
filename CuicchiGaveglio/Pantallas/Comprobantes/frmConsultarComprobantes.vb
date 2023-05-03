@@ -223,7 +223,7 @@ Public Class FrmConsultarComprobantes
         DPreviaACargar.Rows.Add(cmbTipoComprobante.Text, FormatearFecha(DFechaIngreso.Value),
                                 cmbCliente.Text,
                                 IIf(cmbCompania.Text <> "", cmbCompania.Text, 0),
-                                txtImporte.Text,
+                                Replace(txtImporte.Text, ".", ","),
                                 IIf(txtNumero.Visible, txtNumero.Text, ""),
                                 IIf(DFechaPago.Visible, FormatearFecha(DFechaPago.Value), 0),
                                 IIf(cmbBanco.Visible, ExtraerNumeros(cmbBanco.Text), 0),
@@ -231,15 +231,15 @@ Public Class FrmConsultarComprobantes
         'Manejar el total de la precarga
         If tComp <> 4 Then
             If txtTotalPrecarga.Text = "" Then
-                txtTotalPrecarga.Text = CDbl(txtImporte.Text)
+                txtTotalPrecarga.Text = CDbl(Replace(txtImporte.Text, ".", ","))
             Else
-                txtTotalPrecarga.Text = CDbl(txtTotalPrecarga.Text) + CDbl(txtImporte.Text)
+                txtTotalPrecarga.Text = CDbl(txtTotalPrecarga.Text) + CDbl(Replace(txtImporte.Text, ".", ","))
             End If
         Else
             If txtTotalPrecargaRecibos.Text = "" Then
-                txtTotalPrecargaRecibos.Text = CDbl(txtImporte.Text)
+                txtTotalPrecargaRecibos.Text = CDbl(Replace(txtImporte.Text, ".", ","))
             Else
-                txtTotalPrecargaRecibos.Text = CDbl(txtTotalPrecargaRecibos.Text) + CDbl(txtImporte.Text)
+                txtTotalPrecargaRecibos.Text = CDbl(txtTotalPrecargaRecibos.Text) + CDbl(Replace(txtImporte.Text, ".", ","))
             End If
         End If
 
